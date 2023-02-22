@@ -35,6 +35,7 @@
     "pages/course/course",
     "pages/article/article"
   ],
+  "requiredPrivateInfos": ["chooseAddress"],
   "window": {
     "navigationBarBackgroundColor": "#108DEE",
     "navigationBarTitleText": "",
@@ -48,6 +49,6 @@
       "desc": "你的位置信息将用于为您提供更合适您的服务"
     }
   },
-  "requiredPrivateInfos": ["chooseAddress"],
+ 
   "sitemapLocation": "sitemap.json"
 }
