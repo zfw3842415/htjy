@@ -1,0 +1,175 @@
+/**
+ * 易优CMS
+ * ============================================================================
+ * 版权所有 2016-2028 海南赞赞网络科技有限公司，并保留所有权利。
+ * 网站地址: http://www.eyoucms.com
+ * ----------------------------------------------------------------------------
+ * 如果商业用途务必到官方购买正版授权, 以免引起不必要的法律纠纷.
+ * ============================================================================
+ * Author: 小虎哥 <1105415366@qq.com>
+ * Date: 2020-1-1
+ */
+
+page {
+  background-color: #f7f7f7;
+  padding-bottom: 100rpx;
+}
+
+/* 顶部选项卡 */
+
+.header {
+  display: flex;
+  /* position: fixed; */
+  top: 0;
+  width: 100%;
+  height: 88rpx;
+  color: #333;
+  font-size: 28rpx;
+  background: #fff;
+  border-bottom: 1rpx solid #e4e4e4;
+  z-index: 100;
+  /* overflow: hidden; */
+  white-space: nowrap;
+  margin-bottom: 20rpx;
+}
+
+.header .cs {
+  display: inline-block;
+  padding: 0 20rpx;
+  text-align: center;
+  height: 84rpx;
+  line-height: 84rpx;
+  box-sizing: border-box;
+}
+
+.header .cs text {
+  display: block;
+  height: 100%;
+}
+
+.header .cs.active text {
+  color: #108DEE;
+  border-bottom: 2px solid #108DEE;
+}
+
+/* 分类下拉导航 */
+
+.navDrop {
+  position: relative;
+}
+
+.navDrop .hidden {
+  display: none;
+}
+
+.navDrop .navScroll {
+  width: 100%;
+  height: 100rpx;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  white-space: nowrap;
+  box-sizing: border-box;
+  overflow: hidden;
+  line-height: 100rpx;
+  border-bottom: 1px solid #eee;
+  background-color: #fff;
+}
+
+.navDrop .navItem {
+  display: inline-block;
+  width: auto;
+  text-align: center;
+  font-size: 28rpx;
+  color: #666;
+  margin-left: 20rpx;
+}
+
+.navDrop .navItem:last-child {
+  margin-right: 20rpx;
+}
+
+.navDrop .isRuleShow {
+  display: block;
+}
+
+.navDrop .isRuleHide {
+  display: none;
+}
+
+.navDrop .navBg {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+  top: 100rpx;
+  left: 0;
+}
+
+.navDrop .navCon {
+  padding: 20rpx;
+  background-color: #fff;
+  white-space: normal;
+}
+
+.navDrop .navItem2 {
+  display: inline-block;
+  margin: 10rpx 20rpx 10rpx 10rpx;
+  font-size: 28rpx;
+  color: #666;
+}
+
+.navDrop .active,
+.navDrop .navItem2 .active {
+  color: #ff8200;
+}
+
+/*文档列表*/
+.list-body {
+}
+
+.block-proList {
+  /* margin-top: 108rpx; */
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 30rpx 0 30rpx;
+}
+
+.block-proList .pro-item {
+  width: 335rpx;
+  margin-top: 8rpx;
+  margin-right: 22rpx;
+  padding: 20rpx 20rpx 20rpx 20rpx;
+  margin-bottom: 20rpx;
+  background-color: #fff;
+  border: 1px solid #f1f1f1;
+  box-sizing: border-box;
+  border-radius: 10rpx;
+  box-shadow: 0 0 14px 0 rgba(0,0,0,.08);
+}
+.block-proList .pro-item:nth-child(2n) {
+  margin-right: 0;
+}
+.block-proList .pro-item image {
+  width: 100%;
+  height: 310rpx;
+  border-radius: 10rpx;
+}
+
+.block-proList .pro-item .title {
+  padding-top: 8rpx;
+  padding-bottom: 10rpx;
+  width: 100%;
+  font-size: 28rpx;
+  color: #333;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.block-proList .pro-item .price {
+  font-size: 24rpx;
+  color: #ff7600;
+}

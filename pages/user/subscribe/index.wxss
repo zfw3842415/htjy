@@ -1,0 +1,75 @@
+.block-subscribeList {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #fff;
+  padding: 0 30rpx;
+  border-top: 1px solid #eee;
+}
+.block-subscribeList .subscribe-item {
+  display: flex;
+  border-bottom: 1px solid #eee;
+  padding: 30rpx 0;
+  align-items: center;
+}
+
+.block-subscribeList .subscribe-item:last-child {
+  border-bottom: 0;
+}
+.block-subscribeList .subscribe-item .subscribe-item-l {
+  width: 140rpx;
+  margin-right: 20rpx;
+}
+.block-subscribeList .subscribe-item .subscribe-item-l image {
+  width: 140rpx;
+  height: 120rpx;
+}
+.block-subscribeList .subscribe-item .subscribe-item-m {
+  width: 400rpx;
+}
+.block-subscribeList .subscribe-item .subscribe-item-m .title {
+  font-size: 32rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #333;
+}
+
+.block-subscribeList .subscribe-item .subscribe-item-m .time {
+  margin-top: 16rpx;
+  font-size: 24rpx;
+  color: #999;
+}
+.block-subscribeList .subscribe-item .subscribe-item-m .time .iconfont {
+  font-size: 24rpx;
+  margin-right: 10rpx;
+}
+.block-subscribeList .subscribe-item .subscribe-item-r .cancel-btn {
+width: 96rpx;
+text-align: center;
+height: 57rpx;
+margin-right: 14rpx;
+font-size: 29rpx;
+line-height: 57rpx;
+border: 1rpx solid #bfbfbf;
+color: #353535;
+border-radius: 7rpx;
+}
+.block-subscribeList .subscribe-item .subscribe-item-r .del-btn {
+width: 155rpx;
+text-align: center;
+height: 57rpx;
+font-size: 29rpx;
+line-height: 57rpx;
+border: 1rpx solid #bfbfbf;
+color: #353535;
+border-radius: 7rpx;
+}
+.block-subscribeList .subscribe-item .subscribe-item-r {
+  margin-left: 10rpx;
+display: flex;
+flex-direction: row;
+align-items: center;
+}
+.block-subscribeList .subscribe-item .subscribe-item-r .del-btn .iconfont {
+  font-size: 36rpx;
+}

@@ -1,0 +1,146 @@
+/* pages/aftersale/apply.wxss */
+.container{
+	height: 100vh;
+}
+.header{
+	position: fixed;
+	top: 0;
+	z-index: 1000;
+	background-color: #f7f7f7;
+}
+.flow-header{
+	background-color: #fff;
+	margin: 30rpx 28rpx;
+	padding:20rpx 90rpx 0 95rpx;
+	white-space: nowrap;
+	color: #7b7b7b;
+	border-radius: 8rpx;
+ 
+} 
+.line{
+	width: 2rpx;
+	height: 30rpx;
+	background-color: rgb(216, 216, 216);
+	margin: 0 120rpx;
+}
+.detail_item{
+	color: #7b7b7b;
+	 display: flex; 
+	 flex-direction: column;
+	 margin-right: 30rpx;
+	 font-size: 26rpx;
+	}
+.detail_item.flow-active{
+	color: #2f2f2f;
+}
+.border_line{
+	width: 40rpx;
+	height: 5rpx;
+	border: 10%;
+	background-color:#ff791c ;
+	margin-top: 15rpx;
+}
+.flowChart{
+	width: 750rpx;
+	height: 156rpx;
+	margin-top: 130rpx;
+	padding-left: 28rpx;
+	padding-top: 25rpx;
+	background-color: #ff791c96;
+}
+.container_list_item{
+	margin-top: 8rpx;
+	width: 685rpx;
+}
+
+.container_line{
+	width: 173rpx;
+	background-color: #fafafa;
+	height: 2rpx;
+	opacity: 0.2;
+	margin-top: 15rpx;
+}
+.container_list span{
+	white-space: nowrap;
+	margin-top: 7rpx;
+}
+.order_message{
+	padding: 30rpx;
+}
+.order_line{
+	width: 690rpx;
+	margin: 20rpx 0;
+	height: 2rpx;
+	background-color: #f3f3f3;
+}
+.img-logo{
+  width: 165rpx;
+  height: 165rpx;
+  border-radius: 10rpx;
+  overflow: hidden;
+  margin-right: 20rpx;
+  margin-top: 10rpx;
+}
+.text-price{
+	/* font-size: 20rpx; */
+	transform: scale(0.83);
+}
+/* 填写邮寄地址 */
+.address-name{
+	width: 120rpx;
+	white-space: nowrap;
+	text-align: left;
+	color: #7f7f7f;
+}
+.address-item{
+	border: 1px solid #f5f5f5;
+	width: 471rpx;
+	padding:0rpx 15rpx 3rpx 15rpx;
+	color: #2b2b2b;
+}
+/* 提交邮寄地址按钮 */
+button{
+	width: 159rpx;
+	background-color: #ff791c;
+	border-radius: 0;
+	margin-left: 121rpx;
+	margin-top: 30rpx;
+}
+.copy_btn{
+  border: 1px solid #f5f5f5;
+  border-radius: 20rpx;
+  padding: 2rpx 25rpx 5rpx 21rpx;
+  transform: scale(0.86);
+  margin-left: 53rpx;
+  margin-top: 5rpx;
+}
+.submit{
+	background-color: #ff8b0e;
+	border-radius: 36.5rpx;
+	width: 1300rpx;
+	justify-content: center;
+	white-space: nowrap;
+	margin: 30rpx 30rpx 30rpx 0rpx;
+	padding:0rpx 20rpx ;
+}
+.cancel{
+	background-color: #53c378;
+	border-radius: 36.5rpx;
+	width: 1300rpx;
+	justify-content: center;
+	white-space: nowrap;
+	margin: 30rpx 30rpx 30rpx 30rpx;
+	padding:0rpx 20rpx ;
+}
+.btn-footer{
+	width: 750rpx;
+
+	/* background-color: #ff791c; */
+}
+.blue_label{
+	color: rgb(255 82 0);
+}
+.blue_line{
+  background-color: rgb(239 55 0);
+  height: 5rpx;
+}

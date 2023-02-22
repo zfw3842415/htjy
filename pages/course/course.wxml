@@ -1,0 +1,39 @@
+<view class="title">
+    <view class="titleContent">
+      <block wx:for="{{Channel}}">
+          <view bindtap="switchTab" data-index="{{index}}" data-typeid="{{item.typeid}}" class="item {{typeid==item.id?'active':''}}">{{item.typename}}</view>
+      </block>
+    </view>
+</view>
+<view class="environment">
+  <block wx:for="{{cotentList}}" wx:if="{{cotentList.length>0}}">
+    <navigator hover-class="none" url="/pages/article/article?aid={{item.aid}}">
+      <view class="item">
+        <view class="pic">
+            <image src="{{item.litpic}}" mode="aspectFill"></image>
+        </view>
+        <view class="text">
+            <text>{{item.title}}</text>
+        </view>
+      </view>
+    </navigator>
+  </block>
+  <block  wx:if="{{cotentList==false}}">
+    <view style="text-align: center;width: 100%;">
+        <view class="curriculum_p" >
+          <text>暂无数据</text>
+        </view>
+        </view>
+  </block>
+  <block wx:if="{{content!=undefined}}">
+    <rich-text nodes="{{content}}"></rich-text>
+  </block>
+</view>
+
+
+
+
+
+
+
+

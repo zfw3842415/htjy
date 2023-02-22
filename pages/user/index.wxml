@@ -1,0 +1,275 @@
+<view class="container">
+	<!-- 用户信息 -->
+	<view class="user">
+		<view class="user-header" style="background-color: #108DEE;">
+			<!-- 已登录 -->
+			<view wx:if="{{ isLogin }}" class="user-header-cont">
+				<view class="user-header-avatar">
+					<!-- 微信头像 -->
+					<image style="width: 120rpx;height: 120rpx;border-radius: 50%;" src="{{userInfo.head_pic}}"></image>
+					<!-- <open-data class="" lang="zh_CN" type="userAvatarUrl"></open-data> -->
+				</view>
+				<view class="user-header-con">
+					<!-- 微信昵称 -->
+					<view>
+						<view class="dis-flex flex-dir-row flex-y-center" wx:if="{{userInfo.nickname == '微信用户'}}" bindtap="showLoginPopup" >
+							<text class="f-32 col-f">点击显示微信头像</text>
+							<!-- <open-data class="user-header-cont-name" lang="zh_CN" type="userNickName"></open-data> -->
+							<text catchtap="navtoGoPage" data-url="/pages/user/edit/index"  class="iconfont col-f sm-edit2 f-38 m-l-8"></text>		
+						</view>
+						<view class="dis-flex flex-dir-row flex-y-center" wx:else catchtap='edit'>
+							<text class="f-32 col-f">{{userInfo.nickname}}</text>
+							<!-- <open-data class="user-header-cont-name" lang="zh_CN" type="userNickName"></open-data> -->
+							<text catchtap="navtoGoPage" data-url="/pages/user/edit/index"  class="iconfont col-f sm-edit2 f-38 m-l-8"></text>		
+						</view>
+					</view>
+					<!-- 会员等级 -->
+					<view wx:if="{{ userInfo.level > 0 }}" catchtap='edit' class="user-header-grade m-t-15  dis-flex flex-y-center">
+						<view class="user-grade_name m-top20">
+							<text>{{ userInfo.level_name }}</text>
+						</view>
+					</view>
+				</view>
+        <view class="user-header-right" catchtap='edit'>
+          <text class="iconfont sm-you"></text>
+        </view>
+			</view>
+			<!-- 未登录 -->
+			<view wx:else class="user-header-cont" catchtap="onLogin">
+				<view class="user-header-avatar">
+					<image src="/static/images/default-avatar.jpg"></image>
+				</view>
+				<view class="user-header-cont-name">点击登录</view>
+        
+      <view class="user-header-right">
+        <text class="iconfont sm-you"></text>
+			</view>
+			</view>
+		</view>
+		<!-- <view class="b-f navList dis-flex f-36 flex-x-center col-f0670c flex-dir-row pt-30 flex-x-around">
+			<view class="dis-flex flex-y-center flex-dir-column" catchtap="navtoGoPage"  data-url="/pages/balance/recharge">
+				<text>{{userInfo.users_money || '0'}}</text>
+				<text class="f-30 m-top10 col-656565">余额</text>
+			</view>
+			<view class="dis-flex flex-y-center flex-dir-column" data-url="/pages/user/coupon/index"  catchtap="navtoGoPage">
+				<text>{{coupon || '0'}}</text>
+				<text  class="f-30 m-top10 col-656565">优惠卷</text>
+			</view>
+			<view class="dis-flex flex-y-center flex-dir-column" catchtap="navLink" data-url="/pages/user/point/index">
+				<text>0</text>
+				<text  class="f-30 m-top10 col-656565">积分</text>
+			</view>
+		</view> -->
+		<!-- 订单导航栏 -->
+		<view class="order-navbar" wx:if="{{shop_open == 1}}">
+			<form bindsubmit="onTargetOrder" data-type="all" >
+				<button formType="submit"  style="background-color: #fff;line-height: normal;">
+					<view class="order-navbar-header dis-flex">
+						<text class="f-30">我的订单</text>
+						<view class="dis-flex flex-y-center">
+							<text class="f-24 col-6">全部订单</text>
+							<text class="iconfont sm-you user-orderJtou"></text>
+						</view>
+					</view>
+				</button>
+			</form>
+			<view class="order-navbar-footer dis-flex m-top10">
+				<!-- <view class="order-navbar-item flex-box">
+					<form bindsubmit="onTargetOrder" data-type="all" report-submit="true">
+						<button formType="submit" class="btn-normal">
+							<text class="order-navbar__icon iconfont sm-form"></text>
+							<text class="order-navbar__name">全部订单</text>
+						</button>
+					</form>
+				</view> -->
+				<view class="order-navbar-item flex-box">
+					<form bindsubmit="onTargetOrder" data-type="payment">
+						<button formType="submit" class=" flex-dir-column flex-y-center" style="background-color: #fff;line-height: normal;">
+							<text class="order-navbar__icon p-12 f-56 iconfont sm-daifukuan1"></text>
+							<text class="order-navbar__name">待付款</text>
+							<text class="order-badge" wx:if="{{orderCount.payment > 0}}">{{orderCount.payment}}</text>
+						</button>
+					</form>
+				</view>
+				<!-- <view class="order-navbar-item flex-box">
+					<form bindsubmit="onTargetOrder" data-type="received" report-submit="true">
+						<button formType="submit" class=" dis-flex flex-dir-column flex-y-center" style="background-color: #fff;line-height: normal;">
+							<text class="order-navbar__icon p-12 f-56 iconfont sm-daifahuo1"></text>
+							<text class="order-navbar__name">待发货</text>
+							<text class="order-badge" wx:if="{{orderCount.delivery > 0}}">{{orderCount.delivery}}</text>
+						</button>
+					</form>
+				</view> -->
+				<view class="order-navbar-item flex-box">
+					<form bindsubmit="onTargetOrder" data-type="received" >
+						<button formType="submit" class="  flex-dir-column flex-y-center"  style="background-color: #fff;line-height: normal;">
+							<text class="order-navbar__icon f-66 iconfont sm-yifahuo"></text>
+							<text class="order-navbar__name pr-9 m-top5">待收货</text>
+							<text class="order-badge" wx:if="{{orderCount.received > 0}}">{{orderCount.received}}</text>
+						</button>
+					</form>
+				</view>
+				<view class="order-navbar-item flex-box">
+					<form bindsubmit="onTargetOrder" data-type="complete">
+						<button formType="submit" class=" flex-dir-column flex-y-center" style="background-color: #fff;line-height: normal;">
+							<text class="order-navbar__icon p-12 f-56 iconfont sm-daipingjia"></text>
+							<text class="order-navbar__name">待评价</text>
+						</button>
+					</form>
+				</view>
+				<view class="order-navbar-item flex-box">
+					<form bindsubmit="jumpSpecifyUrl" data-url="/pages/order/service/index" >
+						<button formType="submit" class=" flex-dir-column flex-y-center" style="background-color: #fff;line-height: normal;">
+							<text class="order-navbar__icon p-12 f-56 iconfont sm-shouhou"></text>
+							<text class="order-navbar__name">售后</text>
+						</button>
+					</form>
+				</view>
+			</view>
+		</view>
+	</view>
+	<!-- 我的订单 -->
+	<view class="menus-list" >
+    <form catchtap="navtoGoPage" data-url="/pages/user/edit/index" >
+      <button formType="submit" class="btn-normal">
+        <view class="menus-item dis-flex b-f">
+          <view class="menus-item__left flex-box dis-flex flex-y-center">
+            <!-- <text class="iconfont sm-gerenxinxi f-38"></text>w； -->
+            <text class="menus-item__name col-0e0e0e f-33">个人信息</text>
+          </view>
+          <view class="menus-item__right flex-box dis-flex flex-x-end flex-y-center">
+            <text class="iconfont sm-you f-36 col-7"></text>
+          </view>
+        </view>
+      </button>
+    </form>
+		<!-- 列表 -->
+		<!-- <form catchtap="navtoGoPage" data-url="/pages/user/point/index" report-submit="true">
+      <button formType="submit" class="btn-normal">
+        <view class="menus-item dis-flex b-f">
+          <view class="menus-item__left flex-box dis-flex flex-y-center">
+            <text class="iconfont sm-wodejifen f-38"></text>
+            <text class="menus-item__name col-0e0e0e f-33">我的积分</text>
+          </view>
+          <view class="menus-item__right flex-box dis-flex flex-x-end flex-y-center">
+            <text class="iconfont sm-you f-36 col-7"></text>
+          </view>
+        </view>
+      </button>
+    </form> -->
+		<!-- 列表 -->
+		<!-- <form catchtap="navtoGoPage" wx:if="{{shop_open == 1}}" data-url="/pages/balance/index">
+      <button formType="submit" class="btn-normal">
+        <view class="menus-item dis-flex b-f">
+          <view class="menus-item__left flex-box dis-flex flex-y-center">
+            <text class="iconfont sm-wodejifen f-38"></text> 
+            <text class="menus-item__name col-0e0e0e f-33">我的余额</text>
+          </view>
+          <view class="menus-item__right flex-box dis-flex flex-x-end flex-y-center">
+            <text class="iconfont sm-you f-36 col-7"></text>
+          </view>
+        </view>
+      </button>
+    </form> -->
+    <form catchtap="navtoGoPage"  data-url="/pages/user/collect/index" >
+      <button formType="submit" class="btn-normal">
+        <view class="menus-item dis-flex b-f">
+          <view class="menus-item__left flex-box dis-flex flex-y-center">
+            <!-- <text class="iconfont sm-wodejifen f-38"></text> -->
+            <text class="menus-item__name col-0e0e0e f-33">我的收藏</text>
+          </view>
+          <view class="menus-item__right flex-box dis-flex flex-x-end flex-y-center">
+            <text class="iconfont sm-you f-36 col-7"></text>
+          </view>
+        </view>
+      </button>
+    </form>
+    <!-- <form catchtap="navtoGoPage" wx:if="{{shop_open ==  0}}" data-url="/pages/user/subscribe/index" >
+      <button formType="submit" class="btn-normal">
+        <view class="menus-item dis-flex b-f">
+          <view class="menus-item__left flex-box dis-flex flex-y-center">
+            < <text class="iconfont sm-wodejifen f-38"></text> 
+            <text class="menus-item__name col-0e0e0e f-33">我的预约</text>
+          </view>
+          <view class="menus-item__right flex-box dis-flex flex-x-end flex-y-center">
+            <text class="iconfont sm-you f-36 col-7"></text>
+          </view>
+        </view>
+      </button>
+    </form> -->
+		<!-- <form bindsubmit="navtoGoPage" data-url="/pages/user/coupon/index" >
+      <button formType="submit" class="btn-normal">
+        <view class="menus-item dis-flex b-f">
+          <view class="menus-item__left flex-box dis-flex flex-y-center">
+           <text class="iconfont sm-wodeyouhuijuan f-38"></text> 
+            <text class="menus-item__name col-0e0e0e f-33">我的优惠券</text>
+          </view>
+          <view class="menus-item__right flex-box dis-flex flex-x-end flex-y-center">
+            <text class="iconfont sm-you f-36 col-7"></text>
+          </view>
+        </view>
+      </button>
+    </form> -->
+		<form bindsubmit="navtoGoPage" data-url="/pages/address/index">
+      <button formType="submit" class="btn-normal">
+        <view class="menus-item dis-flex b-f">
+          <view class="menus-item__left flex-box dis-flex flex-y-center">
+            <!-- <text class="iconfont sm-shouhuodizhi f-38"></text> -->
+            <text class="menus-item__name col-0e0e0e f-33">收货人地址</text>
+          </view>
+          <view class="menus-item__right flex-box dis-flex flex-x-end flex-y-center">
+            <text class="iconfont sm-you f-36 col-7"></text>
+          </view>
+        </view>
+      </button>
+    </form>
+	<form bindsubmit="onLogout" data-url="/pages/user/index">
+      <button formType="submit" class="btn-normal">
+        <view class="menus-item dis-flex b-f">
+          <view class="menus-item__left flex-box dis-flex flex-y-center">
+            <!-- <text class="iconfont sm-tuichudenglu f-38"></text> -->
+            <text class="menus-item__name col-0e0e0e  f-33">退出登录</text>
+          </view>
+          <view class="menus-item__right flex-box dis-flex flex-x-end flex-y-center">
+            <text class="iconfont sm-you f-36 col-7"></text>
+          </view>
+        </view>
+      </button>
+    </form>
+
+  </view>
+  
+<tabbar type='default'></tabbar>
+</view>
+<!--会员中心 end-->
+<zan-popup type="bottom" show="{{Login}}" bindclose="showLoginPopup" >
+        <form bindsubmit="saveData">
+            <view class="popup flex-dir-column">
+                <view class="close p-a" bindtap="showLoginPopup">
+                    <text class="iconfont2 eyou-delete4 col-a4a4a4 f-56"></text>
+                </view>
+                <view class="f-33 m-t-30">获取您的昵称、头像</view>
+                <view class="f-27 p-b-30 m-t-15 b-b col-6">获取用户头像、昵称，主要用于向用户提供具有辨识度的用户中心界面</view>
+                <button  open-type="chooseAvatar"   bindchooseavatar="onChooseAvatar"  class="btn-normal">
+                    <view class=" p-tb-30 b-b  flex-dir-row flex-y-center flex-x-between">
+                        <view  class="  flex-dir-row flex-y-center ">
+                            <view class="f-32 nowrap col-0 m-r-40">头像</view>
+                            <image src="{{avatarUrl || '/static/images/default-avatar.jpg'}}" class="avatar_popup"></image>
+                        </view>
+                        <ey-icon name="arrowright"  size="{{39}}" unit="rpx" color="#999"></ey-icon>
+                    </view>
+                </button>
+                <view class="list_item b-b f-32  flex-dir-row flex-y-center p-r-60"  >
+    				<view class=" col-0 nowrap m-r-40">昵称</view>
+                    <input type="nickname" style="{{Login ?  '' : 'display:none'}}"   name="name" value="{{nickname}}" placeholder="请输入昵称" data-name="nickname" bindinput="inputValue" class="f-30   col-6 "/>
+                    <!-- <text wx:else class="f-30   col-6 ">请输入昵称</text> -->
+                </view>
+             
+                <button formType="submit" wx:if="{{nickname}}"  class="btn-normal" >
+                    <view   class=" btn_active">保存</view>
+                </button>
+                <view  wx:else class=" btn">保存</view>
+            </view>
+        </form>
+</zan-popup>
+<!--这里是底部  -->

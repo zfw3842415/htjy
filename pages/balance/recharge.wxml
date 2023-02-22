@@ -1,0 +1,43 @@
+<view class="container">
+	<view class="m-tl-20 p-r  dis-flex flex-dir-row flex-y-center flex-x-center">
+		<image src="/static/images/jiaoyimingxi.png" class="img_bg "></image>
+		<view class="dis-flex flex-dir-column flex-y-center p-a pt-10 c-f " >
+			<view class="f-70">{{usersData.users_money}}<text class="iconfont f-40">元</text> </view>
+			<view class="link_btn f-30" bindtap="link" data-url="/pages/balance/index">查看交易明细 <text class="iconfont sm-you "></text> </view>
+		</view>
+	</view>
+	<view class="view-header">
+		<radio-group bindchange="radioChange">
+			<view class='label'>
+				<label class="ui-radio {{item.checked==true ? 'active' : ''}}" wx:for="{{MoneyList}}" wx:key="{{item.value}}">
+					<radio value="{{item.value}}" checked="{{item.checked}}" />
+					<text class="text f-36 col-252525 f-w-600">{{item.label}}元</text>
+				</label>
+			</view>
+		</radio-group>
+		<view>
+			<view catchtap="showPopup" class="other_btn col-252525 {{showPopup ? 'active' : ''}}" >其他金额</view>
+      		<input bindinput="InputMoney" class="show_input" wx:if="{{showPopup}}" type="digit" placeholder="请输入充值金额，最低50元" value="{{usersMoney}}"/>
+		</view>
+		<view class="line"></view>
+		<view class="welfare">
+			<view class="welfare_center f-26">
+				<view class="f-30 m-20 col-252525">充值说明</view>
+				<view class="m-top6">1、退款说明</view>
+				<view class="m-top10">①根据《单用途商业预付卡管理办法》等规定及相关章程的要求，不记名预付卡(包括绑定到会员钱包的余额）不得退卡、退款(不包括因商品问题产生的退款)。</view>
+				<view class="m-top6"><text class="f-27">②</text>如有****公司审核并同意的情况，会员可向****公司提出退卡、退款申请，经****公司审核并同意后，对卡内实际充值金额的余额做退卡或退款处理，优惠、赠送的金额予以取消，不在退还范围内，且****公司有权根据情况要求会员退还已经消费完成的优惠、赠送的部分对应的商品价款。</view>
+				<view class="m-top6"><text class="f-27">③</text>对于会员的退卡、退款申请，****公司将在15个工作日内完成审核及处理。</view>
+				<view class="m-top10">2、使用说明:会员钱包余额可在全国****线下门店、****App、****+微信小程序使用。</view>
+				<view class="m-top10">3、发票说明:购买预付卡(包括充值钱包余额）只可开具预付卡类发票。使用预付卡(含会员钱包余额)支付的消费订单不可开具发票。</view>
+				<view class="m-top10">4、客服热线:***-****-****</view>
+			</view>
+		</view> 
+	</view>
+	<view class="dis-flex flex-dir-column  btn_footer">
+		<view class="dis-flex flex-dir-row flex-y-center f-27 col-727272" >
+		  <view><radio bindtap="ChangeExplain"  value="r1" checked="{{choose}}"/></view>	
+			<view  catchtap="link" data-url="/pages/balance/withdrawal"> 我已阅读并同意<text class="col-ff8d00">《****预付卡管理章程》</text></view>
+		</view>
+		<view catchtap="onSubmitOrder" class="btn_recharge  f-34 col-8b8b8b {{choose ? 'active' : ''}}" style="background:{{choose ? '#ff791c' : '#eee'}}">立即充值</view>
+	</view>
+</view>

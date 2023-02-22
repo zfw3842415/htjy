@@ -1,0 +1,69 @@
+<view class="container">
+ <!-- 顶部选项卡 -->
+  <view class="header f-32">
+		<view catchtap="swichNav" class="{{coupon_type==='3'?'active':''}}" data-current="3">
+			<view class="flex-y-center flex-dir-column dis-flex">
+				<text>指定分类</text>
+				<text class="line" wx:if="{{coupon_type=='3'}}"></text>
+			</view>
+		</view>
+		<view bindtap="swichNav" class="{{coupon_type==='1' ? 'active' : ''}}" data-current="1">
+			<view class="flex-y-center flex-dir-column dis-flex">
+				<text>通用</text>
+				<text class="line" wx:if="{{coupon_type=='1'}}"></text>
+			</view>	
+		</view>
+		<view bindtap="swichNav" class="{{coupon_type==='2' ? 'active' : ''}}" data-current="2">
+			<view class="flex-y-center flex-dir-column dis-flex">
+				<text>指定商品</text>
+				<text class="line" wx:if="{{coupon_type=='2'}}"></text>
+			</view>	
+		</view>
+	</view>
+  <!-- 优惠券列表 -->
+  <view class="coupon-list" wx:if="{{ list.data.length }}">
+    <view class="coupon-item" wx:for="{{ list.data }}" wx:key="this">
+      <view class="item-wrapper dis-flex flex-dir-column">
+        <view class="dis-flex flex-dir-row b-f border-20 " >
+          <view class="content dis-flex flex-dir-column flex-x-between pt-20  ">
+            <view class="title col-252525 twolist-hidden" >
+              <text class="card f-20"  wx:if="{{coupon_type=='3'}}">指定分类</text>
+              <text class="card f-20"  wx:if="{{coupon_type=='1'}}">全站通用</text>
+              <text class="card f-20"  wx:if="{{coupon_type=='2'}}">指定商品</text>
+              <text class="f-32 tips m-l-115">{{item.coupon_name}}</text> 
+            </view>
+            <view class="bottom pl-20 pr-20 dis-flex  " >
+              <view class="time flex-box m-top6 m-l-5 col-7 f-23 ">
+                <text class="col-393939 ">{{item.use_type_name}}</text>
+                <view class="dis-flex flex-dir-row flex-x-between m-top15 ">
+                  <text>使用规则</text> 
+                  <text class="iconfont col-d1d1d1 f-30 {{item.show == 'false' ? 'sm-up' : 'sm-down'}}"  bindtap="showList" data-index="{{index}}"></text>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class="split-line"></view>
+          <view class="tip dis-flex flex-dir-column  flex-y-center">
+            <view  class="m-top15">
+              <text class="f-30 ">￥</text>
+              <text class="money f-74 f-w">{{item.coupon_price}}</text>
+            </view>
+            <text class="pay-line f-22 warp f-w">满{{ item.conditions_use }}元可用</text>
+            <view class="make-sure  m-20">
+              <text class="b-f f-20 col-ff791c" catchtap="receiveTap" data-index="{{ index }}" data-couponid="{{ item.coupon_id }}">立即领取</text>
+            </view>
+          </view>
+        </view>
+        <view class="moreList m-top10 col-252525 dis-flex flex-dir-column"  wx:if="{{item.show}}">
+          <text class="screen">品类：仅可购买{{item.coupon_type_info ? item.coupon_type_info :item.coupon_type_name}}可用</text>
+          <text class="m-top10">劵编号：{{item.coupon_code}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view wx:if="{{ no_more }}" class="no-more">亲, 没有更多了</view>
+  <view class="yoshop-notcont" wx:if="{{ !isLoading && !list.data.length }}">
+    <image src="/static/images/no_empty.png" mode="aspectFill"></image>
+    <text class="cont">亲，暂无优惠券哦</text>
+  </view>
+</view>

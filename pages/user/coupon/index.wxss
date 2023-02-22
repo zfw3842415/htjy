@@ -1,0 +1,242 @@
+@charset "UTF-8";
+
+page{
+  padding-bottom:80rpx;
+  background-color: #f9f9f9;
+}
+/* 选项卡 */
+
+.header {
+  width: 750rpx;
+  height: 83rpx;
+  display: flex;
+  background: #fff;
+  line-height: 78rpx;
+  position: fixed;
+  top: 0;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+  justify-content: space-between;
+  flex-direction: row;
+  color: #646464;
+  z-index: 1000000;
+}
+
+.header view.active {
+  color: #108DEE;
+}
+
+.header .line {
+  background-color: #108DEE;
+  width: 34rpx;
+  height: 7rpx;
+}
+.swiper-tab {
+  width: 100%;
+  text-align: center;
+  height: 80rpx;
+  background-color: #fff;
+  border-bottom: 1px solid #eee;
+}
+
+.swiper-tab .swiper-tab-item {
+  width: 33.333333%;
+  height: 100%;
+  font-size: 28rpx;
+  color: #777;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  border-bottom: 2px solid #ffffff00;
+}
+.bottom{
+  padding-left: 20rpx;
+}
+.swiper-tab .on {
+  color: #ff7600;
+  /* border-bottom: 2px solid #ff7600; */
+}
+.line{
+  width: 30rpx;
+  height: 5rpx;
+  background-color:#ff7600 ;
+}
+/* 设置scroll-view容器高度 */
+
+.coupon-list, .yoshop-notcont {
+  height: 100.1%;
+  margin-top: 100rpx;
+}
+
+/* 评论列表 */
+
+.coupon-list {
+  padding:10rpx 20rpx;
+  box-sizing: border-box;
+}
+
+.coupon-list .coupon-item {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 22rpx;
+}
+
+.coupon-list .coupon-item .item-wrapper {
+  width: 100%;
+  display: flex;
+  color: #fff;
+  border-radius: 20rpx;
+  border-radius: 8rpx;
+}
+.item-wrapper2{
+  width: 100%;
+  display: flex;
+  color: #fff;
+}
+.img-logo image{
+  width: 155rpx;
+  height: 155rpx;
+  /* border: 1px solid #eee; */
+  margin: 20rpx 10rpx 0 20rpx;
+}
+.title{
+  padding-left: 20rpx;
+  height: 80rpx;
+  z-index: 1000;
+}
+.title2{
+  width: 502rpx;
+  box-sizing: border-box;
+  height: 95rpx;
+}
+
+.bainjc2{
+  margin-top: 30rpx;
+}
+.card{
+  color: #fff;
+  padding: 0 10rpx ;
+  border-radius: 20rpx;
+  white-space: nowrap;
+  background-color: #ff791c;
+}
+.coupon-list .coupon-type {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 10;
+  width: 115rpx;
+  padding: 3px 0;
+  background: #0e9ef1;
+  font-size: 20rpx;
+  text-align: center;
+  color: #ffffff;
+  transform: rotate(45deg);
+  /* transform: scale(0.7); */
+  transform-origin: 64rpx 64rpx; }
+.content {
+  flex: 1;
+  box-sizing: border-box;
+  padding: 35rpx 10rpx 30rpx 5rpx;
+  border-radius: 8px 0 0 8px;
+}
+.content_two{
+  margin-top: 10rpx;
+}
+.tips{
+  color: #161616;
+  margin-top: 20rpx;
+  font-weight: 600;
+  z-index: 10000;
+}
+
+.tip {
+  position: relative;
+  padding: 0 50rpx ;
+  text-align: center;
+  border-radius: 0 8px 8px 0;
+  background:linear-gradient(-45deg, #fd6303 0%, #ff9e1f 100%);
+  
+}
+.sm-bg{
+  position: absolute;
+  top: 33rpx;
+  left: 380rpx;
+  font-size: 140rpx;
+  z-index: 1;
+  color: #b7b7b7;
+}
+
+ /* .split-line {
+  position: relative;
+  flex: 0 0 0;
+  border-left: 4rpx solid #fff;
+}
+  .split-line:before,
+  .split-line:after {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 6px;
+    background: #f7f7f7;
+    left: -7px;
+    z-index: 1;
+  }
+
+.split-line:before {
+  border-radius: 0 0 8px 8px;
+  top: 0;
+}
+
+.split-line:after {
+  border-radius: 8px 8px 0 0;
+  bottom: 0;
+} */
+.make-sure {
+  margin-top: 10rpx;
+
+}
+.make-sure text{
+  border-radius: 20rpx;
+  padding: 5rpx 20rpx 5rpx 18rpx;
+  font-size: 22rpx;
+}
+/* 没有更多 */
+
+.no-more {
+  text-align: center;
+  color: #737373;
+  padding: 10px 0;
+  font-size: 24rpx;
+}
+
+.menus-list{
+  position: fixed;
+  bottom: 0;
+  z-index: 1000000;
+  width: 100%;
+  height:95rpx;
+  background-color: #fff;
+  box-shadow: 0 1px 4px 0 rgba(0,0,0,.15);
+}
+.menus-list .iconfont{
+  font-size:40rpx;
+  margin-right:10rpx;
+}
+.menus-list .btn-normal{
+  display: flex;
+  align-items: center;
+}
+.menus-list text{
+  color:#ff7600;
+  
+}
+.moreList{
+  width: 710rpx;
+  margin-top: 3rpx;
+  background-color: #fff;
+  font-size: 23rpx;
+  color: #777;
+  padding: 20rpx;
+}

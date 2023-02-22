@@ -1,0 +1,184 @@
+.index-search-box {
+  background: #fff;
+  padding: 13rpx 13rpx 18rpx 13rpx;
+  border-bottom: 2rpx solid #eee;
+}
+
+.index-search {
+  border-bottom: 0;
+  background: #fff;
+  border-radius: 50rpx;
+  overflow: hidden;
+  position: relative;
+  font-size: 28rpx;
+  color: #999;
+  box-sizing: border-box;
+  height: 68rpx;
+  line-height: 68rpx;
+}
+.index-cont-search {
+  width: 100%;
+  font-size: 28rpx;
+  position: relative;
+  background: #f7f7f7;
+  padding-left: 20rpx;
+}
+
+.index-cont-search icon {
+  position: absolute;
+  right: 55rpx;
+  top: 17rpx;
+}
+/* 搜索分类 */
+.header {
+  width: 176rpx;
+  background-color: #f7f7f7;
+  height: 100vh;
+}
+.sw1 {
+  width: 177rpx;
+  /* padding:27rpx 0; */
+  font-size: 28rpx;
+  height: 99rpx;
+  line-height: 99rpx;
+  position: relative;
+}
+.header .active {
+  background-color: #fff;
+  color: #108DEE;
+  font-size: 28rpx;
+}
+.header .line {
+  width: 7rpx;
+  background-color: #ff791c;
+  height: 52rpx;
+  margin-top: 24rpx;
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+.screen_active {
+  color: #ff791c;
+}
+.classification {
+  width: 570rpx;
+  height: 100%;
+  background-color: #fff;
+}
+.classification_container_header {
+  padding: 20rpx 30rpx 0 25.5rpx;
+}
+.classification_header {
+  height:99rpx;
+  line-height: 90rpx;
+  border-bottom: 1rpx dashed #eee;
+}
+.img-logo {
+  width: 162rpx;
+  height: 162rpx;
+  border-radius: 10rpx;
+  border: 1px solid #eee;
+}
+
+/* 右侧分类导航 */
+.sw2 {
+  width: 570rpx;
+}
+.item {
+  padding: 15rpx 10rpx;
+  width: 100rpx;
+}
+.card {
+  font-size: 28rpx;
+  padding: 30rpx 35rpx 0 0;
+  color: rgb(62, 62, 62);
+  padding-right: 55rpx;
+}
+.showDown {
+  width: 25rpx;
+  padding-left: 18rpx;
+  height: 80rpx;
+  /* background: red; */
+  margin-top: -2rpx;
+  line-height: 80rpx;
+  text-align: center;
+  box-shadow: -9px 0 5px -5px rgb(224, 224, 224);
+}
+.sw2 .active2 {
+  color: rgb(253, 72, 0);
+}
+.list {
+  padding-left: 20rpx;
+}
+.title {
+  width: 120rpx;
+}
+.tips {
+  height: 36rpx;
+  line-height: 45rpx;
+}
+.tips text {
+  background-color: #fff2e9;
+  padding: 1rpx 12rpx 5rpx 12rpx;
+}
+.button {
+  width: 45rpx;
+  height: 45rpx;
+  border-radius: 50%;
+  background-color: #ff791c;
+  text-align: center;
+  line-height: 45rpx;
+}
+.popup {
+  width: 575rpx;
+  background-color: #fff;
+padding-bottom: 50rpx;
+}
+.popup_item {
+  padding: 0rpx 20rpx;
+  width: 589rpx;
+  flex-wrap: wrap;
+}
+.popup_item .active2 {
+  color: rgb(253, 72, 0);
+}
+/* .popup_item .card {
+  background-color: red;
+} */
+.no_Produce {
+  font-size: 30rpx;
+  text-align: center;
+  color: #6d6d6d;
+  margin-top: 135rpx;
+}
+
+/* 树形分类 */
+.cate-content-30 .title {
+  height: 65rpx;
+  line-height: 65rpx;
+  background: white;
+  /* border-left: 5px solid #2d7dee; */
+  font-size: 13px;
+  border-bottom: 1px solid #f3f3f3;
+  text-indent: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.cate-content-30 .cate {
+  height: 65rpx;
+  line-height: 65rpx;
+  border-bottom: 1px solid #f3f3f3;
+  display: flex;
+  font-size: 13px;
+  background: white;
+  flex-wrap: wrap;
+  color: #666;
+}
+.flex-item-tit-more{
+  font-size: 28rpx;
+  color: #999;
+  width:100%;
+  display:inline-block;
+  text-align: center;
+}

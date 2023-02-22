@@ -1,0 +1,217 @@
+<view class="container p-bottom" wx:if="{{order.order_id}}">
+
+<import src="../../wxParse/wxParse.wxml"></import>
+
+<scroll-view scroll-y="true">
+
+  <!-- 顶部状态栏 -->
+  <view class="detail-header dis-flex flex-y-center">
+    <view class="header-backdrop" style="background-color: #FF791c;">
+    </view>
+    <view class="header-state flex-dir-row dis-flex flex-y-center f-30 col-f">
+      <view>
+        <text wx:if="{{order.order_status == -1}}" class="iconfont sm-guanbi col-f1f1f193 f-80"></text>
+        <text wx:if="{{order.order_status == 0}}" class="iconfont sm-daifukuan1 col-f1f1f193 f-80"></text>
+        <text wx:if="{{order.order_status == 1}}" class="iconfont sm-daifahuo1 col-f1f1f193 f-80"></text>
+        <text wx:if="{{order.order_status == 2}}" class="iconfont sm-daishouhuo col-f1f1f193 f-80"></text>
+        <text wx:if="{{order.order_status == 3}}" class="iconfont sm-yiwancheng1 col-f1f1f193 f-80"></text>
+      </view>
+      <view class="m-l-20">
+        <view>{{ order.order_status_text }}</view>
+        <view class="f-24" wx:if="{{order.order_status == '0'}}">剩余{{countDownHour}}时{{countDownMinute}}分钟{{countDownSecond}}秒自动取消订单</view>
+      </view>
+    </view>
+  </view>
+  <div class="bg_line"></div>
+  <!-- 快递配送：配送地址 -->
+  <view class="flow-delivery" wx:if="{{ order.prom_type == 0 }}">
+    <view class="flow-delivery__detail dis-flex flex-x-start flex-dir-column flex-y-start">
+      <view class="detail-location f-26 dis-flex flex-y-center flex-x-between flex-dir-row ">
+        <view>
+          <text class="col-ff791c iconfont sm-dingwei"></text>
+          <text class=" m-l-8 f-28">{{ order.consignee }}</text>
+        </view>
+        <view>
+          <text class="detail-content__title-phone  col-2e2e2e f-28">{{ order.mobile }}</text>
+        </view>
+      </view>
+      <view class="detail-content f-26 m-top18 flex-box col-7">
+        {{order.province_text}}{{order.city_text}}{{order.district_text}}{{order.address}}
+      </view>
+    </view>
+  </view>
+
+  <!-- 物流信息 -->
+  <view class="flow-all-money b-f padding-box m-top20" wx:if="{{order.order_status == 2 && order.express_name}}">
+    <view class="flow-all-list dis-flex">
+      <text class="">物流信息</text>
+    </view>
+      <view class="flex-box">
+        <view class="dis-flex flow-all-list-cont">
+          <text class="col-7">物流公司：{{order.express_name}}</text>
+        </view>
+        <view class="dis-flex flow-all-list-cont">
+          <text class="col-7" selectable="{{true}}">物流单号：{{order.express_order}}</text>
+          <text class="col-7 express_copy" catchtap="onCopyOrder" data-code="{{order.express_order}}"> 复制 </text>
+        </view>
+      </view>
+  </view>
+
+
+  <!-- 商品详情 -->
+  <view class="checkoutList padding-box b-f">
+    <view catchtap="onTargetGoods" class="flow-shopList dis-flex b-f" data-id="{{item.product_id}}" wx:for="{{order.goods}}" wx:key="this">
+      <view class="flow-list-left"><image mode="scaleToFill" src="{{item.litpic}}"></image></view>
+      <view class="flow-list-right flex-box">
+        <!-- 商品名称 -->
+        <text class="f-29 col-3 twolist-hidden">{{item.product_name}}</text>
+        <!-- 商品sku信息 -->
+        <text class="f-24 col-7">{{item.new_data}}</text>
+        <!-- 商品数量和单价 -->
+        <view class="flow-list-cont m-top10 dis-flex flex-dir-row flex-x-between flex-y-center">
+          <view>
+            <text class="f-29 col-ff791c">￥{{item.product_price}}</text>
+            <text class="f-28 col-909090 m-l-8">×{{item.num}}</text>
+          </view>
+          <view wx:if="{{order.order_status == 3 && 0 == item.apply_service}}" bindtap="serviceOrder" data-details_id="{{item.details_id}}" data-product_id="{{item.product_id}}"><text class="afterSale">申请售后</text></view>
+          <view wx:if="{{order.order_status == 3 && 1 == item.apply_service}}" bindtap="serviceOrder" data-details_id="{{item.details_id}}" data-product_id="{{item.product_id}}"><text class="afterSale">查看售后</text></view>
+        </view>
+      </view>
+    </view>
+    <view class="CallWX">
+      <button open-type="contact" sessionFrom="weapp" size="27" style="background:none;padding:0;line-height: 1.5;"
+						type="default-light" show-message-card="true" send-message-title="{{order.goods[0].product_name}}"
+						send-message-path="/pages/order/detail?order_id={{order.order_id}}" send-message-img="{{order.goods[0].litpic}}">
+      <text class="iconfont sm-weixin col-38b035 f-34"></text>
+      <text class="col-727272 f-28 m-l-10 ">联系商家</text>
+      </button>
+    </view>
+  </view>
+
+
+  <!-- 买家留言 -->
+
+  <view 	wx:if="{{ order.user_note.length }}" class="flow-all-money b-f m-top20">
+    <view class="dis-flex flow-all-list">
+      <text class="flex-five">买家留言</text>
+    </view>
+    <view class="dis-flex flow-all-list-cont" style="padding: 15rpx 0;">
+      <text class="col-7">{{ order.user_note }}</text>
+    </view>
+  </view>
+
+
+  <!-- 订单金额 -->
+  <view class="flow-all-money b-f padding-box m-top10">
+    <view class="dis-flex flow-all-list-cont pt-10" >
+      <text class="flex-five col-757575 f-26">商品总额：</text>
+      <text class="flex-five t-r f-26">￥{{order.TotalAmount}}</text>
+    </view>
+    <view class="dis-flex flow-all-list-cont pt-20 p-15" wx:if="{{ order.prom_type == 0 }}">
+      <text class="flex-five col-757575 f-26">运费：</text>
+      <text class="flex-five f-26   t-r">￥{{ order.shipping_fee }}</text>
+    </view>
+    <view class="line"></view>
+    <view class="dis-flex flow-all-list-cont pt-20 p-20">
+      <text class="flex-five f-29 col252525">实付款</text>
+      <text class="flex-five f-29 col-ff791c f-26 t-r">￥{{order.order_amount}}</text>
+    </view>
+  </view>
+  <view class="Buyer_message b-f m-top10 " wx:if="{{order.user_note}}">
+    <view class="dis-flex flow-all-list">
+      <text class="flex-five col-252525 f-29 p-left">买家留言</text>
+    </view>
+    <view class="dis-flex flow-all-list-cont" style="width: 710rpx;height: 100rpx; background-color: rgb(248, 248, 248);">
+      <text class="col-7 p-left f-28">{{ order.user_note }}</text>
+    </view>
+  </view>
+  <view class="Pay  p-left b-f padding-box " wx:if="{{order.order_status == 4}}">
+    <view class="dis-flex flow-all-list-cont">
+      <view class="flex-five col-252525 f-29">支付方式</view>
+      <view class="flex-five   t-r" wx:if="{{order.pay_name == 'wechat'}}">
+        <text class="iconfont f-32 sm-weixinzhifu col-38b035 "></text>
+        <text class="m-l-8 f-29" style="padding-top: 100rpx;">微信支付</text>
+      </view>
+    </view>
+  </view>
+  <view class="Pay  p-left b-f padding-box ">
+    <view class="pb-30 pt-10 dis-flex">
+      <view class="flex-five f-24 col-252525">
+        <text class="f-22 col-ff791c points">积分</text>
+        <text class="col-252525 m-l-20">赠送280积分</text>
+      </view>
+    </view>
+    <view class="flow-all-list-cont col-7f7f7f flex-dir-row dis-flex flex-y-center  f-24">
+      <text >订单编号:</text>
+      <text class="m-l-20">{{order.order_code}}</text>
+      <text class="Copy m-l-20" catchtap="Copy" data-text="{{order.order_code}}">复制</text>
+    </view>
+    <view class="flow-all-list-cont f-24 m-top20 m-10  flex-dir-row dis-flex flex-y-center col-7f7f7f">
+      <text class="">交易时间:</text>
+      <text class="m-l-20">{{order.add_time}}</text>
+    </view>
+  </view>
+</scroll-view>
+
+<!-- 操作栏 -->
+<view wx:if="{{ order.order_status >= 0 }}" class="flow-fixed-footer b-f">
+  <view class="dis-flex footer" wx:if="{{order.order_status == 0}}">
+    <!-- 取消订单 -->
+    <view catchtap="cancelOrder" class="cancel btn">取消订单</view>
+    <!-- 订单付款 -->
+    <view catchtap="onPayOrder" class="makesure fr btn">立即支付</view>
+  </view>
+  <!-- 确认收货 -->
+  <view class="flow-btn h3" wx:if="{{order.order_status == 2}}">
+    <view catchtap="receipt">确认收货</view>
+  </view>
+  <!-- 提醒发货 -->
+  <view class="flow-btn h3" wx:if="{{order.order_status == 1}}">
+    <view catchtap="remind">催发货</view>
+  </view>
+</view>
+
+<!-- 支付方式弹窗 -->
+<zan-popup show="{{ showPayPopup }}" bindclose="onTogglePayPopup">
+  <view class="pop-orderPay pop-example__container">
+    <view class="pop-title">
+      <text class="f-30">请选择支付方式</text>
+    </view>
+    <view class="pop-content">
+      <view class="pay-method">
+        <form bindsubmit="onSelectPayType" data-value="{{ PayTypeEnum.WECHAT.value }}" >
+          <button formType="submit" class="btn-normal">
+            <view class="pay-item dis-flex flex-x-between">
+              <view class="item-left dis-flex flex-y-center">
+                <view class="item-left_icon wechat">
+                  <text class="iconfont sm-weixinzhifu"></text>
+                </view>
+                <view class="item-left_text">
+                  <text>{{ PayTypeEnum.WECHAT.name }}</text>
+                </view>
+              </view>
+            </view>
+          </button>
+        </form>
+        <form bindsubmit="onSelectPayType" data-value="{{ PayTypeEnum.BALANCE.value }}" >
+          <button formType="submit" class="btn-normal">
+            <view class="pay-item dis-flex flex-x-between">
+              <view class="item-left dis-flex flex-y-center">
+                <view class="item-left_icon balance">
+                  <text class="iconfont sm-yue"></text>
+                </view>
+                <view class="item-left_text">
+                  <text>{{ PayTypeEnum.BALANCE.name }}</text>
+                </view>
+              </view>
+            </view>
+          </button>
+        </form>
+      </view>
+    </view>
+  </view>
+</zan-popup>
+
+
+
+</view>

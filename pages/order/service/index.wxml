@@ -1,0 +1,49 @@
+<view class="container">
+	<!-- 状态导航栏 -->
+  <view class="header f-32">
+		<view catchtap="switchServiceStatus" style="width: 33%;" class="{{serviceStatus==='0'?'active':''}}" data-type="0">
+			<view class="flex-y-center flex-dir-column dis-flex">
+				<text>全部</text>
+				<text class="line" wx:if="{{serviceStatus=='0'}}"></text>
+			</view>
+		</view>
+		<view bindtap="switchServiceStatus"  style="width: 33%;" class="{{serviceStatus==='1'?'active':''}}" data-type="1">
+			<view class="flex-y-center flex-dir-column dis-flex">
+				<text>处理中</text>
+				<text class="line" wx:if="{{serviceStatus=='1'}}"></text>		
+			</view>
+		</view>
+		<view bindtap="switchServiceStatus"  style="width: 33%;" class="{{serviceStatus==='2'?'active':''}}" data-type="2">
+			<view class="flex-y-center flex-dir-column dis-flex">
+				<text>已完成</text>
+				<text class="line" wx:if="{{serviceStatus=='2'}}"></text>
+			</view>	
+		</view>
+	</view>
+	<view class="goods-detail-box m-top-20">
+		<scroll-view bindscrolltolower="bindDownLoad" scroll-y style="height: {{scrollHeight}}px; width: 750rpx;margin-top:80rpx;">
+			<view class="wrapper" wx:if="{{serviceList.length}}">
+				<view class="list_item flex-dir-row bg-fff flex-y-center" wx:for="{{serviceList}}" wx:key="index" catchtap="navigateToDetail" data-id="{{item.service_id}}">
+					<image src="{{item.product_img}}" class="img-logo"></image>
+					<view class="flex-dir-colum onelist-hidden">
+						<p class="f-29 col-252525 twolist-hidden" style="width: 534rpx;">{{item.product_name}}</p>
+						<p class="flex-dir-row f-29 col-909090  m-top15" >
+							<span class="col-7b7b7b f-24">售后类型：{{item.service_type_name}}</span>
+						</p>
+            <p class="flex-dir-row f-29 col-909090  m-top15" >
+							<span class="col-7b7b7b f-24">售后状态：{{item.status_name}}</span>
+						</p>
+					</view>
+				</view>
+			</view>
+			<view wx:else >
+        <view class="yoshop-notcont" >
+              <image src="/static/images/no_empty.png" mode="aspectFill"></image>
+              <text class="cont" style="top:428rpx;left: 176rpx;">亲，您还没有售后订单信息哦！</text>
+        </view>
+			</view>
+
+			<view wx:if="{{ no_more }}" class="no-more">亲, 没有更多了</view>
+		</scroll-view>
+	</view>
+</view>

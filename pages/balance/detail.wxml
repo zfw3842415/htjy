@@ -1,0 +1,11 @@
+<view class="container">
+	<view class="list" wx:for="{{MoneyRecording}}" wx:key="index">
+		<view class=" flex-dir-row flex-y-center flex-x-between">
+			<span class="col-2d2d2d f-30">{{item.cause}}</span>
+			<span class="col-4a4a4a f-26" wx:if="{{item.cause_type == 0 || item.cause_type == 3}}">-{{item.money}}</span>
+			<span class="col-ff8b0e f-26" wx:else>+{{item.money}}</span>
+		</view>
+		<view class="list_item col-8f8f8f f-24">{{item.add_time}}</view>
+		<view class="col-8f8f8f f-24">订单编号：{{item.order_number}}</view>
+	</view>
+</view>

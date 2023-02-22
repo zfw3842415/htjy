@@ -1,0 +1,350 @@
+/**
+ * 易优CMS
+ * ============================================================================
+ * 版权所有 2016-2028 海南赞赞网络科技有限公司，并保留所有权利。
+ * 网站地址: http://www.eyoucms.com
+ * ----------------------------------------------------------------------------
+ * 如果商业用途务必到官方购买正版授权, 以免引起不必要的法律纠纷.
+ * ============================================================================
+ * Author: 小虎哥 <1105415366@qq.com>
+ * Date: 2020-1-1
+ */
+
+/* common.wxss */
+@import "/static/css/common.wxss";
+
+/*底部更多*/
+.no-more {
+  text-align: center;
+  padding: 20rpx 0;
+  color: #999999;
+  overflow: hidden;
+  font-size: 24rpx;
+}
+/* 提交订单 */
+
+.flow-shopList {
+  padding: 18rpx 0;
+}
+
+.flow-shopList .flow-list-left {
+  margin-right: 20rpx;
+}
+
+.flow-shopList .flow-list-left image {
+  width: 145rpx;
+  height: 145rpx;
+  /* border: 1rpx solid #eee; */
+  /* background: #fff; */
+}
+
+.flow-shopList .flow-list-right .flow-cont {
+  font-size: 28rpx;
+  color: #ff791c;
+}
+
+.flow-shopList .flow-list-right .small {
+  font-size: 26rpx;
+  color: #777;
+}
+
+.flow-shopList .flow-list-right .flow-list-cont {
+  padding-top: 20rpx;
+  padding-right: 3rpx;
+}
+
+.flow-fixed-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #fff;
+  border-top: 1px solid #eee;
+  z-index: 11;
+}
+
+/* 共几件商品 */
+
+.flow-num-box {
+  font-size: 28rpx;
+  color: #777;
+  padding: 30rpx 0;
+  text-align: right;
+}
+
+.flow-all-money {
+  padding:30rpx 30rpx  20rpx 30rpx;
+  color: #444;
+  width: 720rpx;
+  margin: 15rpx;
+  box-sizing: border-box;
+}
+
+.flow-all-money .flow-all-list {
+  font-size: 28rpx;
+  /* padding: 20rpx 0; */
+}
+
+.flow-all-money .flow-all-list:last-child {
+  border-bottom: none;
+}
+
+.flow-all-money .flow-all-list-cont {
+  font-size: 28rpx;
+  /* padding: 10rpx 0; */
+}
+
+.flow-all-money .flow-arrow {
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.flow-fixed-footer .chackout-left {
+  font-size: 30rpx;
+  line-height: 92rpx;
+  color: #252525;
+  flex: 4;
+  padding-left: 12px;
+}
+
+.flow-btn {
+  background-image: linear-gradient(90deg, #fd9710, #f0670c);
+  color: #fff;
+  text-align: center;
+  line-height: 80rpx;
+  display: block;
+  font-size: 30rpx;
+  margin: 20rpx;
+  padding: 0 20px;
+  border-radius: 24rpx;
+}
+
+
+/* 底部操作栏 */
+
+.footer-fixed {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  display: flex;
+  padding-top: 11rpx;
+  height: 102rpx;
+  z-index: 11;
+  box-shadow: 0 -2px 20px 0 rgba(144, 52, 52, 0.1);
+  background: #fff;
+}
+
+/* 底部操作按钮 */
+
+.footer-fixed .opt-btn {
+  display: flex;
+  text-align: center;
+  font-size: 30rpx;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-fixed .opt-btn.btn-main {
+  background-image:linear-gradient(90deg, #fd9710, #f0670c);
+  color: #fff;
+}
+
+.footer-fixed .opt-btn.btn-gray {
+  background-color: #ccc;
+  color: #fff;
+}
+
+/* 底部版权 */
+.footer-copyright {
+  position: relative;
+  z-index: 1;
+  height: 80rpx;
+  line-height: 80rpx;
+  overflow: hidden;
+  color: #888;
+  text-align: center;
+  padding: 0rpx 18rpx;
+  /* background-color: #f7f7f7; */
+}
+
+.footer-copyright .text {
+  padding: 0 12rpx;
+  font-size: 24rpx;
+  z-index: 10;
+  color: #999;
+}
+
+/*没有数据的情况*/
+.ey-notcont {
+  padding: 130rpx 100rpx;
+  box-sizing: border-box;
+}
+
+.ey-notcont .cont {
+  color: #999999;
+  /* margin-top: 10rpx; */
+  display: block;
+  text-align: center;
+  font-size: 24rpx;
+}
+
+.ey-notcont .iconfont {
+  text-align: center;
+  font-size: 150rpx;
+  display: block;
+  margin-bottom: 12rpx;
+  color: #cccccc;
+}
+
+.yoshop-notcont {
+  padding: 130rpx 25rpx;
+  box-sizing: border-box;
+  position: relative;
+}
+.yoshop-notcont image {
+  width: 705rpx;
+  height: 480rpx;
+}
+.yoshop-notcont .cont {
+  display: block;
+  position: absolute;
+  top: 201px;
+  left: 238rpx;
+  text-align: center;
+  font-size: 30rpx;
+  color: #252525;
+  margin-top: 10rpx;
+}
+
+.yoshop-notcont .iconfont {
+  font-size: 150rpx;
+  color: #ccc;
+  text-align: center;
+  display: block;
+  margin-bottom: 12rpx;
+}
+
+.yoshop-notcont .img {
+  width: 200px;
+  height: 120px;
+  margin: 0 auto;
+}
+
+.yoshop-notcont .img image {
+  width: 100%;
+  height: 100%;
+}
+
+.yoshop-notcont .jump {
+  display: block;
+  margin: auto;
+  margin-top: 20rpx;
+  width: 180rpx;
+  line-height: 60rpx;
+  color: #fff;
+  background: #ff5c5c;
+  border-radius: 10rpx;
+  text-align: center;
+  font-size: 30rpx;
+}
+
+.address-box .left-name {
+  width: 95px;
+}
+
+
+.address-box .right-cont input {
+  width: 100%;
+  /* font-size: 30rpx; */
+  /* color: #444;d */
+}
+
+.address-cont-box picker {
+  display: inline-block;
+  margin-right: 15px;
+  width: 100%;
+}
+
+
+/* 教学环境开始 */
+.environment {
+  display: flex;
+  flex-flow: row wrap;
+  padding: 15rpx;
+}
+.environment navigator{
+  width: 50%;
+  padding: 15rpx;
+  box-sizing: border-box;
+}
+.environment .item .pic{
+  width: 100%;
+  height: 250rpx;
+}
+.environment .item .pic image{
+  width: 100%;
+  height: 100%;
+}
+.environment .item .text{
+  margin-top: 10rpx;
+}
+
+/* 教学环境结束 */
+
+
+/* 课程设置开始 */
+.curriculum{
+  padding-bottom: 30rpx;
+}
+.curriculum .item {
+  padding: 30rpx;
+  box-sizing: border-box;
+  border: 1px solid #eee;
+  margin: 30rpx 30rpx;
+  border-radius: 10rpx;
+  box-shadow: 0 10rpx 10rpx rgba(0,0,0,0.02);
+}
+.curriculum .item .pic{
+  width: 210rpx;
+  height: 150rpx;
+  display: inline-block;
+}
+.curriculum .item .pic image{
+  width: 100%;
+  height: 100%;
+  border-radius: 10rpx;
+}
+.curriculum_p{
+  width: 58%;
+  display: inline-block;
+  vertical-align: top;
+  padding: 15rpx;
+  font-size: 28rpx;
+  line-height: 1.5;
+}
+.curriculum_noimg{
+  display: inline-block;
+  vertical-align: top;
+  padding: 15rpx;
+  font-size: 28rpx;
+  line-height: 1.5;
+}
+.table{
+  display: flex;
+  margin: 20rpx 0;
+  padding: 0 20rpx;
+}
+.table .t_item{
+  flex: 1;
+  text-align: center;
+  padding: 10rpx;
+  font-size: 28rpx;
+  margin: 0 20rpx;
+}
+.table .t_item.active{
+  border-bottom: 2px solid #108DEE;
+  color: #108DEE;
+}
+/* 课程设置结束 */

@@ -1,0 +1,70 @@
+/* pages/article/article.wxss */
+.article{
+  font-size: 28rpx;
+  padding: 20rpx;
+  line-height: 1.75;
+  color: #666;
+  text-align: justify;
+}
+
+
+
+
+.prev-next{
+  border-top: 1px solid #eee;
+  margin-top: 50rpx;
+}
+.btn{
+  padding: 10rpx 20rpx;
+  margin: 20rpx 0;
+  box-sizing: border-box;
+  color: #000;
+}
+.title{
+  font-size:34rpx;
+  font-weight: bold;
+}
+.article{
+  margin: 1.5em 0 !important;
+  font-size:12rpx !important;
+  font-family:none !important;
+  text-indent: 0 !important;
+}
+.article_p{
+  margin: 1.5em 0 !important;
+  font-size:20rpx !important;
+  font-family:none !important;
+  text-indent: 0 !important;
+}
+.sp{
+  font-size:35rpx !important;
+  line-height: 1.5 !important;
+  text-indent: 0 !important;
+}
+.image{
+   width: 100% !important;
+   height: auto !important;
+}
+
+.date{
+  display: flex;
+  margin: 30rpx 0;
+}
+.date .title{
+  font-size: 28rpx;
+  font-weight: 500;
+  margin: 0 8rpx;
+  color: #999;
+}
+.date image{
+  width: 50rpx;
+  height: 50rpx;
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 50%;
+}
+.date text{
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 10rpx;
+}

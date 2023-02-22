@@ -1,0 +1,28 @@
+page{
+  background-color: #fff;
+}
+.header{
+  background-color: #ff7214;
+  width: 750rpx;
+  height: 174rpx;
+}
+.navbar{
+  width: 750rpx;
+  height: 86rpx;
+  line-height: 86rpx;
+  padding: 0 50rpx;
+  box-sizing: border-box;
+}
+.active{
+  color:#ff721c ;
+}
+.line{
+  width: 750rpx;
+  height: 10rpx;
+  background-color: #f7f7f7;
+}
+.list{
+  background-color: #fff;
+  width: 750rpx;
+  height: 100%;
+}

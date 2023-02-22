@@ -1,0 +1,166 @@
+.container{
+  background-color:#f9f9f9 ;
+}
+.header {
+  width: 750rpx;
+  height: 70rpx;
+  display: flex;
+  background: #fff;
+  line-height: 78rpx;
+  position: fixed;
+  top: 0;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+  justify-content: space-between;
+  flex-direction: row;
+  color: #646464;
+  z-index: 100;
+}
+
+.header view.active {
+  color: #108DEE;
+}
+
+.header .line {
+  background-color: #108DEE;
+  width: 34rpx;
+  height: 7rpx;
+}
+.bg{
+  width: 750rpx;
+  height: 20rpx;
+  background-color: #f7f7f7;
+}
+.order-box {
+  padding: 25rpx 30rpx;
+}
+
+.order-cont {
+  padding: 15rpx 0;
+  justify-content: space-between;
+}
+
+.order-cont .order-num text, .order-cont .order-time text {
+  color: #777;
+  font-size: 26rpx;
+}
+
+.order-shop {
+  padding: 0rpx 0 35rpx 0;
+
+}
+
+.order-shop .litPic {
+  width: 129rpx;
+  height: 129rpx;
+  margin-right: 15rpx;
+  display: inline-block;
+  background: #fff;
+  border: 1px solid #eee;
+  padding: 5rpx;
+}
+.order-shop .order-list-box{
+  border-bottom: 2rpx solid #f9f9f9;
+  padding-bottom: 20rpx;
+}
+.order-shop .order-list-center{
+  width: 440rpx;
+  margin-left: 10rpx;
+}
+
+.product_name{
+  height: 76rpx;
+}
+.goods-number {
+  font-size: 28rpx;
+  color: #777;
+}
+
+.btn-default {
+  border: 1rpx solid #e4e4e4;
+  padding: 6rpx 20rpx;
+  font-size: 24rpx;
+  color: #444;
+  float: right;
+  border-radius: 12rpx;
+}
+
+.btn-main {
+  border: 1rpx solid #ff7700;
+  padding: 6rpx 20rpx;
+  font-size: 24rpx;
+  color: #ff7700;
+  margin-left: 20rpx;
+  float: right;
+  border-radius: 12rpx;
+}
+
+.user-orderJtou {
+  font-size: 24rpx;
+}
+
+.order-img_list {
+  background: #fff;
+  border-top: 1rpx solid #f9f9f9;
+}
+
+.order-right-name {
+  position: absolute;
+  top: 50%;
+  left: 180rpx;
+  font-size: 30rpx;
+  color: #555;
+  width: 100%;
+  margin-top: -46rpx;
+  line-height: 1.6;
+}
+
+/* 弹出层 */
+
+.pop-example__container {
+  background: #fff;
+  padding: 30rpx 40rpx;
+  border-radius: 10rpx;
+  min-width: 460rpx;
+}
+
+.pop-example__container .pop-title {
+  text-align: center;
+}
+
+.pop-content {
+  margin-top: 30rpx;
+}
+
+/* 弹出层：核销码 */
+
+.pop-qrcode .pop-content image {
+  display: block;
+  width: 460rpx;
+  height: 460rpx;
+}
+
+/* 弹出层：支付方式 */
+
+.pop-orderPay .pop-title {
+  text-align: left;
+}
+
+.pay-method .pay-item {
+  padding: 20rpx 0;
+  font-size: 28rpx;
+  /* border-bottom: 1rpx solid rgb(248, 248, 248); */
+}
+
+.pay-method .pay-item .item-left_icon {
+  margin-right: 20rpx;
+  font-size: 32rpx;
+}
+
+.pay-method .pay-item .item-left_icon.wechat {
+  color: #00c800;
+}
+
+.pay-method .pay-item .item-left_icon.balance {
+  color: #ff9700;
+}

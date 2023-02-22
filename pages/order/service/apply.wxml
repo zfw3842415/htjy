@@ -1,0 +1,88 @@
+<view class="container" wx:if="{{goodsData && !isLoading}}">
+	<!-- 订单信息 -->
+	<view class="order_message bg-fff" style="margin-top: 20rpx;">
+		<view  class="f-36 col-252525">订单信息</view><view class="order_line"></view>
+		<view class="flex-dir-row flex-y-center">
+			<image src="{{goodsData.litpic}}" class="img-logo"></image>
+			<view class="flex-dir-column text-292929 f-28 onelist-hidden" >
+				<p class="onelist-hidden" style="width: 500rpx;" >{{goodsData.product_name}}</p>
+				<p class="col-7b7b7b f-24 m-top20">订单编号：{{goodsData.order_code}}</p>
+				<p class="col-7b7b7b f-24 m-top15">成交时间：{{goodsData.pay_time}}</p>
+			</view>
+		</view>
+	</view>
+
+	<!-- 申请单填写 -->
+	<form>
+		<view class="ptl-30 bg-fff">
+			<view  class="f-36 col-252525">申请单填写</view>
+			<view class="flex-dir-row flex-y-center m-top30">
+				<p class="col-7f7f7f f-28 warp">服务类型：</p>
+				<radio-group bindchange="switchServiceType" class="radio-group">
+					<label class="radio flex-flex-dir-row  flex-y-center" wx:for="{{serviceType}}" wx:key="index">
+						<p><radio value="{{item.id}}" checked='{{item.id == formData.service_type ? true : false}}'></radio></p>
+						<p class="f-26 col-424242 ">{{item.name}}</p>
+					</label>
+				</radio-group>
+			</view>
+
+			<view class="flex-dir-row flex-y-center m-top30">
+				<p class="col-7f7f7f f-28 warp m-right15">商品数量：</p>
+				<view class="addreduceList m-l-10">{{formData.product_num}} 件</view>
+			</view>
+
+			<view class="flex-dir-row m-top30" style="position: relative;" >
+				<p class="col-7f7f7f f-28 warp">问题描述：</p>
+				<textarea bindinput="contentInput" value="{{formData.content}}" placeholder="请描述您的商品问题" class=" textarea f-26" maxlength="300"/>
+				<view class="words f-24">{{contentLength}}/300</view>
+			</view>
+
+			<view class="flex-dir-column justify-start m-top30">
+				<p class="col-7f7f7f f-28">图片说明：最多上传6张图片</p>
+				<view class="imgList_upload flex-dir-row flex-y-center">
+					<view class="pic" wx:for="{{formData.upload_img}}" class=" p-r " wx:for-index="imageIndex" wx:for-item="imagePath" wx:key="this">
+						<image src="{{imagePath}}" data-index="{{imageIndex}}" mode="aspectFill" class="img_logo" bindtap="priviewImg">
+						</image>
+						<view class="del_img" data-index="{{imageIndex}}" bindtap="delImg"><text class="iconfont sm-quxiao2 col-f"></text></view>  
+					</view>
+					<view wx:if="{{formData.upload_img.length < 6}}" bindtap="chooseImage" class="btn_uploader" >
+						<text class="iconfont   sm-xiangji col-6 f-40"></text>
+					</view>
+				</view>
+			</view>
+		</view>
+
+		<view class="ptl-30 m-top20 bg-fff f-28">
+			<view class="f-36 col-252525">商家收货地址</view>
+			<view class="order_line"></view>
+			<view class="flex-dir-row flex-y-center" >
+				<span  class="address-name" >联系人：</span>
+				<span class="m-l-4 address-item">{{goodsData.admin_addr.addr_contact_person}}</span>
+			</view>
+			<view class="flex-dir-row flex-y-center m-top20">
+				<span class="address-name">联系号码：</span>
+				<span class="address-item">{{goodsData.admin_addr.addr_contact_phone}}</span>
+			</view>
+			<view class="flex-dir-row flex-y-center m-top20">
+				<span class="address-name">商家地址：</span>
+				<span class="address-item">{{goodsData.admin_addr.addr_shipping_addr}}</span>
+			</view>
+		</view>
+
+		<view class="ptl-30 m-top20 bg-fff f-28" style="margin-bottom: 40px;padding-bottom: 160rpx;">
+			<view class="f-36 col-252525">我的收货地址</view>
+			<view class="order_line"></view>
+			<view class="flex-dir-row flex-y-center" >
+				<span  class="address-name">联系人：</span><span class="m-l-4 address-item">{{formData.consignee}}</span>
+			</view>
+			<view class="flex-dir-row flex-y-center m-top20">
+				<span  class="address-name">联系号码：</span><span class="address-item">{{formData.mobile}}</span>
+			</view>
+			<view class="flex-dir-row flex-y-center m-top20">
+				<span class="address-name">收货地址：</span><span class="address-item">{{formData.address}}</span>
+			</view>
+		</view>  
+	</form>
+
+	<view class="flow-fixed-footer b-f"><view class="flow-btn f-32"><view catchtap="submitService">确认提交</view></view></view>
+</view>

@@ -1,0 +1,25 @@
+<view class="article">
+    <view class="title">{{title}}</view>
+ <view>
+ <view class="date">
+    <view class="title">
+      <image src="/static/images/view.png"></image>
+      <text>{{click}}</text>
+    </view>
+    <view class="title">
+      <image src="/static/images/auth.png"></image>
+      <text>{{author}}</text>
+    </view>
+    <view class="title">
+      <image src="/static/images/time.png"></image>
+      <text>{{add_time}}</text>
+    </view>
+ </view>
+       <rich-text nodes="{{content}}"></rich-text>
+    </view>
+
+  <!-- <view class="prev-next">
+    <view class="previous btn">上一篇：农耕文化研学</view>
+    <view class="next btn">下一篇：苗医药研学苗医药研学苗医药研学苗医药研学</view>
+  </view> -->
+</view>

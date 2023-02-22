@@ -1,0 +1,66 @@
+/* pages/course/course.wxss */
+page {
+  background-color: #f7f7f7;
+  /* padding-bottom: 100rpx; */
+}
+.title{
+  background-color: #fff;
+  width: 100%;
+  overflow-x: scroll;
+  border-bottom: 1px solid #eee;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+.titleContent {
+  display: flex;
+}
+.titleContent .item{
+  padding: 30rpx 20rpx;
+  font-size: 28rpx;
+  white-space: nowrap;
+}
+.titleContent .item.active{
+  color: #108DEE;
+  position: relative;
+}
+.titleContent .item.active::after{
+  content: "";
+  display: block;
+  position: absolute;
+  width: 60%;
+  height: 4rpx;
+  background-color: #108DEE;
+  left: 50%;
+  transform: translate(-50%,0);
+  bottom: 0;
+}
+
+
+.environment{
+  background-color: #fff;
+  margin-top: 115rpx;
+}
+.environment .text{
+  font-size: 28rpx;
+  color: #4c4d4c;
+}
+.environment image{
+  border-radius: 10rpx;
+}
+.environment .item{
+  margin-bottom: 20rpx;
+}
+.article{
+  margin: 1.5em 0 !important;
+  font-size:12rpx !important;
+  font-family:none !important;
+}
+.sp{
+  font-size:35rpx !important;
+  line-height: 1.5 !important;
+}
+.image{
+   width: 100% !important;
+   height: auto !important;
+}

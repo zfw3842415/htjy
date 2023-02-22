@@ -1,0 +1,61 @@
+<view class="container m-b6 p-bottom">
+  <!-- <view class="address-cont-title b-f b-b">
+    <view class="address-iconbox" catchtap="chooseAddress">
+      <view class="iconfont f-32 sm-weixin"></view>
+      <view class="address-box-text ">从微信获取新地址</view>
+      <view class="iconfont sm-you"></view>
+    </view>
+  </view> -->
+  <!-- <view class="common-header-xian"></view> -->
+  <!-- 地址列表获取 -->
+  <custom-ul class="addres-list" wx:if="{{list.length}}">
+    <custom-li wx:for="{{list}}" wx:for-item="item" wx:key="this">
+      <view class="address-header b-f m-top18">
+        <view class="flow-header-left pl-12">
+          <view class="flow-checkout-admin dis-flex flex-dir-row flex-x-between">
+            <text>{{item.consignee}}</text> 
+            <text>{{item.mobile}}</text>
+          </view>
+          <view class="flow-checkout-address">
+            {{item.provinceName}} {{item.cityName}} {{item.districtName}} {{item.address}}
+          </view>
+        </view>
+      </view>
+      <view class="address-list dis-flex b-f">
+        <view class="list address-left">
+          <radio-group bindchange="setDefault" class="radio-group">
+            <label class="radio" class="flex-dir-row flex-y-center dis-flex">
+              <radio checked="{{item.addr_id == default_id}}" color="#ff791c" value="{{item.addr_id}}"></radio>
+              <text class="cont" wx:if="{{item.addr_id == default_id}}">默认地址</text>
+              <text class="cont" wx:else>选择</text>
+            </label>
+          </radio-group>
+        </view>
+        <view class="list address-right col-7 dis-flex">
+          <view bindtap="editAddress" class="warp flex-dir-row flex-y-center dis-flex" data-id="{{item.addr_id}}">
+            <text class="iconfont f-40 sm-edit2"></text>
+            <text class="title">编辑</text>
+          </view>
+          <view bindtap="removeAddress" class="warp flex-dir-row flex-y-center dis-flex" data-id="{{item.addr_id}}">
+            <text class="iconfont f-40 sm-shanchu"></text>
+            <text class="title">删除</text>
+          </view>
+        </view>
+      </view>
+    </custom-li>
+  </custom-ul>
+  <!-- 地址列表结束 -->
+  <view wx:else>
+    <view class="yoshop-notcont">
+      <image src="/static/images/no.png" mode="aspectFill"></image>
+      <text class="cont">亲，您还没有收货地址呦</text>
+    </view>
+  </view>
+  <view class="footer dis-flex flex-dir-row">
+    <view  catchtap="chooseAddress" class="footer_bg col-f0670c " style="background:none;border:2rpx solid #108DEE;">从微信获取新地址</view>
+    <view bindtap="createAddress" class="footer_bg c-f" >+新增地址</view>
+  </view>
+</view>
+
+<!-- 快捷导航 -->
+<shortcut></shortcut>

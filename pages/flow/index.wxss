@@ -1,0 +1,364 @@
+page{
+  background-color: #f5f5f5;
+  padding-bottom: 96rpx;
+}
+.flow-list{
+  padding-bottom: 90rpx;
+}
+.image {
+  width: 100%;
+  height: 100%;
+}
+
+.cart-edit-wrap {
+  padding: 15rpx;
+}
+
+.cart-tab-item-btn {
+  width: 191rpx;
+  display: block;
+  height: 90rpx;
+  line-height: 90rpx;
+  font-size: 32rpx;
+  background-color: #ff7700;
+  color: #fff;
+  float: right;
+  text-align: center;
+}
+
+.cart-tab-item {
+  width: 75%;
+}
+.cart-tab-item_1{
+  width: 25%;
+}
+.cart-tab-wrp {
+  height: 90rpx;
+  position: fixed;
+  bottom: 94rpx;
+  background: #fff;
+  border-bottom: 1rpx solid rgb(231, 231, 231);
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  z-index: 80;
+  color: black;
+}
+
+.cart-tab-item {
+  overflow: hidden;
+
+}
+
+.cart-item-total {
+  padding-left: 30rpx;
+}
+
+.cart-item-total-price {
+  margin-left: 150rpx;
+}
+
+.cart-item-total-price em {
+  display: block;
+}
+
+.cart-item-sm-wrp {
+  width: 110rpx;
+  height: 90rpx;
+  position: absolute;
+  top: -4rpx;
+}
+
+.cart-item-icon {
+  width: 90rpx;
+  height: 90rpx;
+}
+
+.dish-item {
+  width: 100%;
+  padding: 26rpx 20rpx;
+  border-bottom: 1rpx solid #eee;
+  position: relative;
+  background: #fff;
+  width: 720rpx;
+  margin: 15rpx;
+  box-sizing: border-box;
+}
+.list_bgimg{
+	background-color: rgba(245, 245, 245, 0.5);
+	width: 737rpx;
+	height: 225rpx;
+	text-align: center;
+	line-height: 206rpx;
+	top: 0px;
+	z-index: 1;
+	left: 0px;
+	color: #fff;
+}
+
+radio{
+  transform: scale(0.7); 
+}
+.dish-item-radio {
+  padding: 20rpx 0;
+  z-index: 20;
+}
+
+.dish-item-wrp {
+  width: 500rpx;
+  margin-right: 20rpx;
+  flex-direction: row;
+  box-sizing: border-box;
+}
+
+.dish-item-pic {
+  width: 100%;
+  margin-left: 12rpx;
+}
+
+
+.dish-item-pic image {
+  width: 150rpx;
+  height: 150rpx;
+  margin: 0 auto;
+  background: #fff;
+  border: 1px solid #eee;
+}
+.bg{
+	width: 445rpx;
+	height: 50rpx;
+	line-height: 50rpx;
+	border: 1rpx solid #fce0e1;
+  border-right: 0;
+  border-left: 0;
+	border-radius: 25rpx;
+	font-weight: 700;
+	background: linear-gradient(45deg, #ffdfdf, #fbfbfb);
+	text-align: center;
+}
+.bg1{
+	width: 85rpx;
+	height: 50rpx;
+	line-height: 46rpx;
+	border-radius: 25rpx 0 25rpx 25rpx;
+	background-color: #FFEDED;
+	border: 3rpx solid #FCC4CD;
+	text-align: center;
+}
+.bg .bg-time{
+	background-color: #fff;
+	border: 1rpx solid #FCC4CD;
+	padding: 0rpx 4rpx 0rpx 2rpx;
+	border-radius: 7rpx;
+}
+.timeBg{
+	width: 150rpx;
+	height: 150rpx;
+	text-align: center;
+	line-height:150rpx; 
+	top: 0;
+	left: 0;
+	z-index: 5;
+	color: #fff;
+	font-size: 30rpx;
+}
+.timeCenter{
+	color: #fff;
+	padding: 20rpx 15rpx 20rpx 15rpx;
+	background-color: #6a6a6a;
+	opacity: 0.8;
+	border-radius: 50%;
+}
+.sm-shanchu{
+  position: absolute;
+  right: 20rpx;
+  top: 25rpx;
+}
+.dish-item-info {
+  display: flex;
+  flex-direction: column;
+  padding-left: 16rpx;
+}
+
+.dish-item-info .goods-name {
+  height: 50rpx;
+  width: 450rpx;
+}
+.dish-item-info .goods-name .title{
+  height: 50rpx;
+  width: 380rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dish-item-sales {
+  color: #ccc;
+  font-size: 20rpx;
+  line-height: 50rpx;
+}
+
+.dish-item-money {
+  color: #ff791c;
+  font-size: 31rpx;
+  /* padding: 0 0 10rpx 0; */
+}
+
+.wx-goods_price {
+  overflow: hidden;
+}
+
+.flow-dete {
+  position: absolute;
+  bottom: 25rpx;
+  right: 30rpx;
+}
+
+.flow-dete .sm-lajixiang {
+  color: #777;
+  font-size: 34rpx;
+}
+
+.flow-btn-min {
+  background: #108DEE;
+  /* border: 1rpx solid #ccc; */
+  height: 35px;
+  line-height: 35px;
+  font-size: 28rpx;
+  width: 200rpx;
+  margin: 0 auto;
+  border-radius: 20px;
+  text-align: center;
+  color: #fff;
+  margin-top: 25rpx;
+}
+
+.select-number {
+  width: 165rpx;
+  height: 45rpx;
+  flex-direction: row;
+  border: 1rpx solid rgb(231, 231, 231);
+  border-radius: 5rpx;
+  overflow: hidden;
+}
+
+.select-number .default {
+  float: left;
+  width:48rpx;
+  height: 50rpx;
+  line-height: 40rpx;
+  padding: 0;
+  background: #fff;
+  color: #444;
+  font-size: 40rpx;
+  border-radius: unset;
+}
+
+.select-number .disabled {
+  background: #f7f7f7;
+  color: #ddd;
+}
+
+.select-number button:after {
+  content: none;
+  border: none;
+}
+
+.select-number input {
+  float: left;
+  width: 64rpx;
+  border-right: 1rpx solid #eee;
+  border-left: 1rpx solid #eee;
+  text-align: center;
+  font-size: 28rpx;
+  color: #444;
+}
+.goods-attr{
+	height: 40rpx;
+}
+.goods-attr text{
+  background-color:#f8f8f8 ;
+  color: #7b7b7b;
+  padding: 5rpx 10rpx;
+}
+
+/*商品推荐*/
+.goods-rem{
+  margin-top: 20rpx;
+  padding: 20rpx;
+}
+.goods-rem .title{
+  display: table;
+  width: 100%;
+  font-size: 30rpx;
+  color: #999;
+  white-space: nowrap;
+  border-spacing: 0.5rem 0;
+}
+
+.goods-rem .title::before,.goods-rem .title::after{
+  display: table-cell;
+  content: "";
+  width: 50%;
+  background: linear-gradient(#D8D8D8, #D8D8D8) repeat-x center;
+  background-size: 1px 1px;
+}
+.goods-list{
+  margin-top: 30rpx;
+}
+.goods-list .goods-item{
+   display:inline-block;
+   width:350rpx;
+   background-color: #fff;
+   font-size: 0;
+   overflow: hidden;
+   height: auto;
+   border-radius: 10rpx;
+   margin-right: 10rpx;
+   margin-bottom: 10rpx;
+}
+.goods-list .goods-item:nth-child(even){
+  margin-right: 0;
+}
+.goods-list .goods-item image{
+  width: 350rpx;
+  height: 350rpx;
+}
+.goods-list .goods-item .name{
+  margin: 14rpx 0;
+  height: 76rpx;
+  padding: 0 20rpx;
+  font-size: 28rpx;
+  display: -webkit-box;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.goods-list .goods-item .price{
+  display: flex;
+  padding:0 20rpx 30rpx;
+}
+.goods-list .goods-item .price .price-l{
+  font-size: 32rpx;
+  color: red;
+  flex: 1;
+  font-weight: bold;
+  font-family: Verdana;
+}
+.goods-list .goods-item .price .price-l .font-m{
+   font-size: 24rpx;
+}
+.goods-list .goods-item .price .price-r .buy{
+   background-color: #f2f2f2;
+   border-radius: 50%;
+   padding: 6rpx;
+}
+.goods-list .goods-item .price .price-r .buy .iconfont{
+  font-size:32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+

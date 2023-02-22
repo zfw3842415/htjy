@@ -1,0 +1,316 @@
+<view class="container p-bottom">
+
+<!-- 快递配送：配送地址 -->
+<block wx:if="{{ global_info.PromType == 1 }}">
+  <view class="flow-delivery">
+    <view class="flow-delivery__detail dis-flex flex-y-center">
+      <view class="detail-content flex-box">
+        <view class="detail-content__describe" wx:if="{{ global_info.virtual_text1.length > 0 }}">
+          <text class="col-7">{{global_info.virtual_text1}}</text>
+        </view>
+        <view class="detail-content__describe" wx:if="{{ global_info.virtual_text2.length > 0 }}">
+          <text class="col-7">{{global_info.virtual_text2}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</block>
+<block wx:else>
+  <view catchtap="onSelectAddress" class="flow-delivery">
+    <view class="flow-delivery__detail dis-flex flex-dir-column flex-y-start">
+      <view class="detail-content flex-dir-row flex-x-center dis-flex flex-box">
+        <block wx:if="{{ address.addr_id }}">
+          <view class="detail-location dis-flex">
+            <text class="iconfont sm-dingwei m-top10 f-28  col-ff791c"></text>
+          </view>
+          <view class=" m-l-20 detail-content__title ">
+            <text class="f-32 col-0e0e0e f-w-600">{{ address.address_all }}</text>
+          </view>
+          <text class="iconfont sm-you m-l-20  m-top6 col-909090  f-34 user-orderJtou"></text>
+        </block>
+        <block wx:else>
+          <view class="detail-location dis-flex">
+            <text class="iconfont sm-dingwei f-24 col-ff791c"></text>
+          </view>
+          <view class=" m-l-20 detail-content__describe dis-flex">
+            <text class="col-6">请选择配送地址</text>
+          </view>
+          <text class="iconfont sm-you m-top8 f-30 user-orderJtou"></text>
+        </block>
+      </view>
+      <view  wx:if="{{ address.addr_id }}" class="flex-dir-row m-top10 m-l-50 col-252525 f-29"> 
+        <text class="">{{address.consignee}}</text>
+        <text class="m-l-30">{{address.mobile}}</text>
+      </view>
+    </view>
+  </view>
+</block>
+
+<!-- 商品列表 -->
+<view class="m-top15">
+  <view class="checkout_list" >
+    <form bindsubmit="onTargetGoods" >
+      <button formType="submit" data-id="{{ item.product_id }}" wx:for="{{ product_data }}" wx:key="this" class="btn-normal">
+        <view class="flow-shopList dis-flex" data-index="{{ index }}">
+          <!-- 商品图片 -->
+          <view class="flow-list-left">
+            <image mode="scaleToFill" class="litpic"  src="{{ item.litpic }}"></image>
+          </view>
+          <view class="flow-list-right flex-box">
+            <view class="f-29 col-3 title onelist-hidden" >
+            {{ item.title }}
+            </view>
+            <view class="goods-attr dis-flex flex-dir-row"  >
+              <text class="f-24 m-l-10 " wx:for="{{Spec}}" style="background:{{Spec.length == index+1 ? '#fff': '#f8f8f8'}} ;">{{item}}</text>  
+            </view>
+            <view class="flow-list-cont dis-flex  flex-y-center">
+              <text class="flow-cont f-26 {{ item.old_price > item.users_price ? 'price-delete' : '' }}">￥{{ item.old_price
+                }}</text>
+                <text class="f-25 col-909090 m-l-10">×{{ item.product_num }}</text>
+            </view>
+            <view wx:if="{{ item.old_price > item.users_price }}" class="grade-price">
+              <text>会员折扣价：￥{{ item.users_price }}</text>
+            </view>
+          </view>
+        </view>
+        <view class="line" wx:if="{{product_data.length != index+1}}"></view>
+      </button>
+      <view class="express col-252525 m-top30 f-29">
+        <text>配送方式</text>
+        <text class="fr f-28">快递 ￥0.00</text>
+      </view>
+      <view class="remark f-29 flex-dir-row dis-flex flex-y-center  b-f m-top30">
+        <text class="col-252525 warp">买家留言</text>
+        <input bindinput="bindRemark" placeholder="给卖家留言" value="{{remark}}"></input>
+      </view>
+      <view class="flow-num-box b-f col-727272 f-29 pt-10 mb-10">
+        <span class="f-25">共{{ global_info.TotalNumber }}件</span>
+        <span class="col-252525 m-l-15"> 
+          <text>小计: </text><text class="flow-money col-ff791c">￥{{ global_info.TotalAmount }}</text>
+        </span>
+      </view>
+    </form>
+  </view>
+</view>
+
+<!-- 优惠券 -->
+<view class="flow-all-money b-f m-top20  pt-20">
+  <view class="flow-all-list  dis-flex p-20 pt-15">
+    <view class="flex-five  f-32">优惠券 </view>
+    <view class="flex-five t-r">
+      <view catchtap="onTogglePopupCoupon" class="f-30 col-252525">
+        <block wx:if="{{coupon_list.length>0}}"  >
+          <text class="col-m" wx:if="{{ selectCouponId > 0 }}">-￥{{ coupon_price }}</text>
+          <text class="col-252525" wx:else>{{ coupon_list.length }}张可用</text>
+          <text class="iconfont m-l-10 sm-you user-orderJtou f-26"></text>
+        </block>
+        <block wx:else>
+          <text class="f-29 col-9">无可用</text>
+          <text  class="iconfont  m-l-10 sm-you user-orderJtou f-26" ></text>
+        </block>
+      </view>
+    </view>
+  </view>
+  <!-- 积分相关暂时隐藏 -->
+  <!-- <view class="flow-all-list dis-flex m-top20">
+    <view class="flex-five f-31 col-252525">可用1积分抵扣￥0.10</view>
+    <view class="flex-five t-r">
+      <view  bindtap="changeBg" class="bg-circular {{show == true ? 'changeBg_active' : ''}}" >
+        <text class="iconfont sm-duihao col-f "></text>
+      </view>
+    </view>
+  </view> -->
+  <!-- <view class="pb-20 pt-10 dis-flex m-top20">
+    <view class="flex-five  col-252525">
+      <text class="f-25 col-ff791c points">积分</text>
+      <text class="col-252525 f-31 m-l-20">赠送280积分</text>
+    </view>
+  </view> -->
+</view>
+<!-- 支付方式 -->
+<view class="flow-all-money b-f m-top20  pt-20">
+  <view class="flow-all-list dis-flex pt-15 m-20">
+    <view class="flex-five flex-five-name f-32">支付方式 </view>
+    <view class="flex-five flex-five-con t-r">
+      <view catchtap="onTogglePopupPay" class="f-31 fr flex-dir-row dis-flex flex-y-center flex-x-center">
+        <view class="m-r-20" wx:if="{{curPayType == '1' }}">
+          <text class="iconfont sm-weixinzhifu m-top4 f-36"></text>
+          <text class="m-l-8">微信支付</text>
+        </view>
+        <view wx:else>
+          <text class="iconfont sm-yue col-ff791c m-top4 f-36"></text>
+          <text class="m-l-8">余额支付</text>
+        </view>
+        <view class="iconfont m-top4 m-l-10 sm-you user-orderJtou f-28" ></view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 提交订单 -->
+<view class="flow-fixed-footer b-f m-top10">
+  <view class="dis-flex chackout-box">
+    <view class="chackout-left pl-12">总计：
+      <text class="col-m">￥{{ global_info.PromType == 0 ? (global_info.PayTotalAmount-coupon_price < 0 ?
+          0:global_info.PayTotalAmount-coupon_price) : (global_info.TotalAmount-coupon_price < 0 ?
+          0:global_info.TotalAmount-coupon_price) }}</text>
+    </view>
+    <view catchtap="onSubmitOrder" class="chackout-right">
+      <text class="flow-btn f-32">提交订单</text>
+    </view>
+  </view>
+</view>
+<!-- 支付方式弹窗 -->
+<zan-popup show="{{showPayPopup}}" type="bottom" bindclose="onTogglePopupPay">
+  <view class="popup__pay">
+    <form bindsubmit="onSelectPayType" data-value="1">
+      <button formType="submit" class="btn-normal" >
+        <view class="pay-item dis-flex flex-x-between pt-40">
+          <view class="item-left dis-flex flex-y-center">
+            <view class="item-left_icon wechat">
+              <text class="iconfont sm-weixinzhifu"></text>
+            </view>
+            <view class="item-left_text m-l-15">
+              <text>微信支付</text>
+            </view>
+          </view>
+          <view class="item-right col-m" wx:if="{{ curPayType == 1 }}">
+            <text class="iconfont sm-dui"></text>
+          </view>
+        </view>
+      </button>
+    </form>
+    <form bindsubmit="onSelectPayType" data-value="2">
+      <button formType="submit" class="btn-normal ">
+        <view class="pay-item dis-flex flex-x-between pt-50">
+          <view class="item-left dis-flex flex-y-center">
+            <view class="item-left_icon balance">
+              <text class="iconfont sm-yue col-ff791c"></text>
+            </view>
+            <view class="item-left_text m-l-15">
+              <text>余额支付</text>
+              <text class="f-30 col-3">（余{{UserInfo.users_money}}元）</text>
+            </view>
+          </view>
+          <view class="item-right col-m" wx:if="{{ curPayType == 2 }}">
+            <text class="iconfont sm-dui"></text>
+          </view>
+        </view>
+      </button>
+    </form>
+  </view>
+</zan-popup>
+<!-- 优惠券弹出框 -->
+<zan-popup show="{{ showBottomPopup }}" type="bottom" bindclose="onTogglePopupCoupon">
+  <view class="popup__coupon">
+    <view class="dis-flex flex-dir-row flex-x-center  flex-x-between coupon__title f-32"> 
+      <text class="f-38 f-w-600">优惠券</text>
+      <text class="sm-quxiao iconfont col-252525" catchtap="onTogglePopupCoupon"></text>
+    </view>
+    <view class="coupon__nav dis-flex flex-dir-row flex-x-center  flex-x-around" >
+      <view class="dis-flex flex-dir-column flex-y-center" data-type="Used" catchtap="change_coupon">
+        <text class="f-30  {{CouponType == 'Used' ? 'f-w-600 col-252525' : 'col-3'}} ">可用优惠券({{coupon_list.length}})</text>
+        <text class="{{CouponType == 'Used' ? 'coupon_line' : ''}} "></text>
+      </view>
+      <view  class="dis-flex flex-dir-column flex-y-center" data-type="unUse" catchtap="change_coupon">
+        <text  class="f-30 {{CouponType == 'unUse' ? 'f-w-600 col-252525' : ' col-3'}}">不可用优惠券({{unuse_coupon_list.length}})</text>
+        <text class="{{CouponType == 'unUse' ? 'coupon_line' : 'col-3'}} "></text>
+      </view>
+    </view>
+    <!-- 优惠券列表 -->
+    <view class="coupon-list" wx:if="{{CouponType == 'Used'}}">
+      <scroll-view scroll-y="{{ true }}" style="height: 70vh;">
+        <view class="coupon-item m-top20" wx:for="{{ coupon_list }}" wx:key="this">
+          <view class="item-wrapper dis-flex flex-dir-column"  data-index="{{ index }}" data-id="{{ item.coupon_id }}" catchtap="onSelectCoupon">
+            <view class="dis-flex flex-dir-row b-f border-20 " >
+              <view class="content dis-flex flex-dir-column flex-x-between pt-20  ">
+                <view class="title col-252525 twolist-hidden" >
+                  <text class="card f-20">{{item.coupon_type_name}}</text>
+                  <text class="f-32 tips m-l-115">{{item.coupon_name}}</text> 
+                </view>
+                <view class="bottom dis-flex  " >
+                  <view class="time flex-box m-top15 m-l-5 col-7 f-23 ">
+                    <text class="col-393939 ">{{ item.start_time }}~{{ item.end_time }}</text>
+                    <view class="dis-flex flex-dir-row flex-x-between m-top15 ">
+                      <text>使用规则</text>
+                      <text class="iconfont col-d1d1d1 f-30 {{item.show ? 'sm-up' : 'sm-down'}}"  bindtap="showList" data-index="{{index}}"></text>
+                    </view>
+                  </view>
+                </view>
+              </view>
+              <view class="split-line"></view>
+              <view class="tip dis-flex flex-dir-column  flex-y-center">
+                <view  class="m-top15">
+                  <text class="f-30 ">￥</text>
+                  <text class="money f-74 f-w">{{item.coupon_price}}</text>
+                </view>
+                <text class="pay-line f-22 warp f-w">满{{ item.conditions_use }}元可用</text>
+                <view class="make-sure  m-20">
+                  <text class="b-f f-20 col-ff791c">立即使用</text>
+                </view>
+              </view>
+            </view>
+            <view class="moreList m-top10 col-252525 dis-flex flex-dir-column"  wx:if="{{item.show}}">
+              <text class="screen">品类：仅可购买{{item.coupon_type_name}}可用</text>
+              <text class="m-top10">劵编号：{{item.coupon_code}}</text>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+    <view class="coupon-list" wx:elif="{{CouponType == 'unUse'}}">
+      <scroll-view scroll-y="{{ true }}" style="height: 70vh;">
+        <view class="coupon-item m-top20" wx:for="{{ unuse_coupon_list }}" wx:key="this">
+          <view class="item-wrapper dis-flex flex-dir-column"  data-index="{{ index }}" data-id="{{ item.coupon_id }}" catchtap="onSelectCoupon">
+            <view class="dis-flex flex-dir-row b-f border-20 " >
+              <view class="content dis-flex flex-dir-column flex-x-between pt-20  ">
+                <view class="title col-252525 twolist-hidden" >
+                  <text class="card f-20">{{item.coupon_type_name}}</text>
+                  <text class="f-32 tips m-l-115">{{item.coupon_name}}</text> 
+                </view>
+                <view class="bottom dis-flex  " >
+                  <view class="time flex-box m-top15 m-l-5 col-7 f-23 ">
+                    <text class="col-393939 ">{{ item.start_time }}~{{ item.end_time }}</text>
+                    <view class="dis-flex flex-dir-row flex-x-between m-top15 ">
+                      <text>使用规则</text>
+                      <text class="iconfont col-d1d1d1 f-30 {{item.show ? 'sm-up' : 'sm-down'}}"  bindtap="showList" data-index="{{index}}"></text>
+                    </view>
+                  </view>
+                </view>
+              </view>
+              <view class="split-line"></view>
+              <view class="tip dis-flex flex-dir-column  flex-y-center">
+                <view  class="m-top15">
+                  <text class="f-30 ">￥</text>
+                  <text class="money f-74 f-w">{{item.coupon_price}}</text>
+                </view>
+                <text class="pay-line f-22 warp f-w">满{{ item.conditions_use }}元可用</text>
+                <view class="make-sure  m-20">
+                  <text class="b-f f-20 col-ff791c">立即使用</text>
+                </view>
+              </view>
+            </view>
+            <view class="moreList m-top10 col-252525 dis-flex flex-dir-column"  wx:if="{{item.show}}">
+              <text class="screen">品类：仅可购买{{item.coupon_type_name}}可用</text>
+              <text class="m-top10">劵编号：{{item.coupon_code}}</text>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+    <!-- 不使用优惠券 -->
+    <view class="coupon__do_not dis-flex flex-y-center flex-x-center">
+      <view class="control dis-flex flex-y-center flex-x-center" catchtap="onNotUseCoupon">
+        <text class="f-26">不使用优惠券</text>
+      </view>
+    </view>
+    <!-- <view class="footer-fixed f-32">
+      <view catchtap="onTogglePopupCoupon" class="order-bt" style="width:100%">关闭</view>
+    </view> -->
+  </view>
+</zan-popup>
+
+</view>
+
+<!-- 快捷导航 -->
+<!-- <shortcut></shortcut> -->

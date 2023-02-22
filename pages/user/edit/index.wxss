@@ -1,0 +1,83 @@
+/* pages/userset/index.wxss */
+page{
+  background-color: #f7f7f7;
+}
+.list{
+  background-color: #fff;
+  padding: 10rpx 10rpx 5rpx 10rpx;
+}
+.list_item{
+  width: 691rpx;
+  margin:25rpx 20rpx 30rpx 20rpx;
+}
+.line{
+  width: 690rpx;
+  background-color: rgb(243, 243, 243);
+  height: 2rpx;
+  margin-top: 25rpx;
+  margin-bottom: 20rpx;
+}
+.sm-right{
+  color: #cbcbcb;
+  font-size: 20rpx;
+}
+.list_item_edit{
+  font-size: 28rpx;
+  width: 250rpx;
+  color: #252525;
+  /* font-weight: 550; */
+  text-align: right;
+}
+.img-logo{
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+}
+.signout{
+  margin-top:28rpx;
+  background-color: #fff;
+  color: #ff791c;
+  padding:20rpx 0;
+  text-align: center;
+}
+.editList{
+  background-color: #fff;
+  margin-top: 20rpx;
+  padding: 10rpx 10rpx 15rpx 10rpx;
+}
+.edit_header{
+  font-size: 26rpx;
+  color: #252525;
+  font-weight: 500;
+  width: 691rpx;
+  margin: 15rpx 20rpx;
+}
+.obtain{
+  width: 200rpx;
+  height: 58rpx;
+  border: 1px solid #5fca4c;
+  border-radius: 50rpx;
+  line-height: 58rpx;
+  color: #5fca4c;
+  white-space: nowrap;
+  font-size: 26rpx;
+  background-color: transparent;
+  float: right;
+}
+.btn-normal{
+  position: fixed;
+  bottom: 0;
+  width: 750rpx;
+  background-color: #fff;
+  border: 1px solid #eee;
+}
+.btn-normal .signout{
+  width: 690rpx;
+  margin-left: 30rpx;
+  margin-bottom: 28rpx;
+  background: #108DEE;
+  height: 37rpx;
+  line-height: 37rpx;
+  color: #fff;
+  border-radius: 50rpx;
+}

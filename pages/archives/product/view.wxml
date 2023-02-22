@@ -1,0 +1,533 @@
+<!--**
+ * 易优CMS
+ * ============================================================================
+ * 版权所有 2016-2028 海南赞赞网络科技有限公司，并保留所有权利。
+ * 网站地址: http://www.eyoucms.com
+ * ----------------------------------------------------------------------------
+ * 如果商业用途务必到官方购买正版授权, 以免引起不必要的法律纠纷.
+ * ============================================================================
+ * Author: 小虎哥 <1105415366@qq.com>
+ * Date: 2020-1-1
+ */-->
+
+ <block wx:if="{{ detail.length == 0 }}">
+	<view class="ey-notcont" wx:if="{{ detail.length == 0 }}">
+		<text class="iconfont i sm-empty"></text>
+		<text class="cont">亲，没有符合数据</text>
+	</view>
+</block>
+
+<!--内容模板-->
+<import src="/wxParse/wxParse.wxml"></import>
+<block wx:if="{{ detail.arcrank >= 0 }}">
+	<!--商品模板-->
+	<view class="container">
+		<view>
+			<scroll-view
+		  scroll-y = "true"
+		  class="scroll-view"
+		  scroll-into-view="{{scrollInto}}"
+		  :scroll-top="tabContentScrollTop"
+		  scroll-with-animation ="true"
+		  bindscroll="onTabContentScroll"
+		  bindscrolltolower="loadMore">
+				<!-- 商品轮播图 -->
+			<view id="scroll0" class="tabItem ">
+				<view class="swiper" id="topView" wx:if="{{detail.image_list.length > 0}}">
+					<swiper   bindchange="setCurrent" class="banner-box  swiper-box" duration="{{duration}}"
+						indicator-dots="{{indicatorDots}}" interval="{{interval}}" circular="{{true}}">
+						<swiper-item wx:for="{{detail.image_list}}" wx:key="index" catchtap="onPreviewImages" data-index="{{ index }}">
+							<image class="slide-image" mode="aspectFit"  src="{{item.image_url}}"></image>
+						</swiper-item>
+					</swiper>
+					<view class="banner-num" wx:if="{{detail.image_list.length > 1}}">
+						<text>{{ currentIndex }}</text>
+						<text>/{{detail.image_list.length }}</text>
+					</view>
+				</view>
+				<view class=" b-f">
+					<view class="cont-box dis-flex flex-x-between flex-y-center f-24">
+						<view class="goods-price">
+							<text class="col-m f-26">￥</text>
+							<text class="goods-price_num col-m f-40">{{ detail.users_price }}</text>
+						</view>
+						<view>
+							<text class="col-afafaf">已售{{detail.sales_num}}件</text>
+						</view>
+					</view>
+					<view class=" goods-title dis-flex flex-dir-row flex-y-center flex-x-between">
+						<text class="title f-36 twolist-hidden">{{detail.title}}</text>
+						<view class="goods__share">
+							<form bindsubmit="onClickShare">
+								<button formType="submit" class=" col-afafaf share-btn flex-y-center dis-flex flex-dir-row">
+									<text class="share__icon iconfont f-27 sm-a-ziyuan187"></text>
+									<text class="f-24 m-l-5">分享</text>
+								</button>
+							</form>
+						</view>
+					</view>
+				</view>
+				<!-- 优惠券 -->
+				<form bindsubmit="showCouponPopup" wx:if="{{coupon_list.length > 0}}">
+					<button class="btn-normal" formType="submit">
+						<view class=" cont-box b-f m-top20 dis-flex flex-y-center">
+							<view class="flex-box dis-flex  flex-dir-row f-27">
+								<text class="col-9 m-top8">领券</text>
+								<view class="dis-flex flex-dir-row m-l-18 m-top8">
+									<view class="coupon_bg" wx:for="{{coupon_list}}" wx:key="this">
+										<text class="coupon_name f-23">{{item.coupon_name}}</text>
+										<image src="../../../static/images/youhuijuan_bg.png" class="img-logo"></image>
+									</view>
+								</view>
+							</view>
+							<view class="f-26 col-9 t-r">
+								<text class="iconfont sm-you"></text>
+							</view>
+						</view>
+					</button>
+				</form>
+				<!-- 商品规格 -->
+				<form bindsubmit="onToggleTrade" data-type="specType" wx:if="{{productMultiSpec.spec_data.length}}">
+					<button class="btn-normal" formType="submit">
+						<view class="sku-selector cont-box b-f m-top20 dis-flex flex-y-center">
+							<view class="flex-box f-27" wx:if="{{Spec_value_List.length > 0}}">
+								<text class="col-9 m-r-20" wx:if="{{shop_open == 1}}" >已选择</text>
+								<text class="col-9 m-r-20" wx:else >规格</text>
+								<text wx:for="{{Spec_value_List}}" class="m-r-20" wx:key="index">{{spec_name_List[index]}}:{{item}}</text>
+							</view>
+							<view class="flex-box f-27" wx:else>
+								<text class="col-9 m-r-20">请选择</text>
+								<text wx:for="{{ detail.spec_attr.spec_data }}" wx:key="this">{{ item.spec_name }} </text>
+							</view>
+							<view class="f-26 col-9 t-r">
+								<text class="iconfont sm-you"></text>
+							</view>
+						</view>
+					</button>
+				</form>
+				<!-- 商品说明 -->
+				<form bindsubmit="showservicePopup">
+					<button class="btn-normal" formType="submit">
+						<view class="sku-selector cont-box b-f m-top20 dis-flex flex-y-center">
+							<view class="flex-box f-28 dis-flex flex-dir-row flex-y-center">
+								<view class=" dis-flex flex-dir-row flex-y-center">
+									<text class="iconfont m-r-5 f-30 sm-duihao2 f-w col-ff791c"></text>
+									<text>运费说明</text>
+								</view>
+								<view class="m-l-20  dis-flex flex-dir-row flex-y-center">
+									<text class="iconfont m-r-5 f-30 sm-duihao2 f-w col-ff791c"></text>
+									<text>退货说明</text>
+								</view>
+								<view class="m-l-20  dis-flex flex-dir-row flex-y-center">
+									<text class="iconfont m-r-5 f-30 sm-duihao2 f-w col-ff791c"></text>
+									<text>会员权益</text>
+								</view>
+							</view>
+							<view class="f-26 col-9 t-r">
+								<text class="iconfont sm-you"></text>
+							</view>
+						</view>
+					</button>
+				</form>
+			</view>
+			
+			<!-- 商品评价 -->
+			<block>
+				<view id="scroll1" class="tabItem">
+					<view class="cont-box b-f goods-property-box m-top20" wx:if="{{shop_open == 1}}">
+						<text class="f-w col-252525 f-29 comment-title">商品评论 ({{ detail.comment_data_count}})</text>
+						<text catchtap="navigateToUrl" data-path="/pages/comment/index?aid={{ detail.aid}}" class="comment-more col-252525 f-28">{{ detail.comment_good_per}}好评<text class="iconfont sm-you m-l-10"></text>
+						</text>
+					</view>
+					<view class="goods-comment-box b-f" wx:for="{{ detail.comment_data }}" wx:key="index">
+						<block wx:if="{{index == 0}}">
+							<view class="ptl-25 goods-comment-box b-t b-f b-b">
+								<view class="dis-flex flex-x-between flex-dir-row flex-y-center">
+									<view class="dis-flex">
+										<view class="user dis-flex flex-dir-row flex-y-center">
+											<image src="{{item.head_pic}}" class="eval_img"></image>
+											<text class="user_name m-l-10  col-6 f-26">{{ item.nickname}}</text>
+										</view>
+									</view>
+								</view>
+								<view class="goods-comment-cont m-top20">
+									<text class="f-26 twolist-hidden">{{ item.content }}</text>
+								</view>
+							</view>
+						</block>
+					</view>
+				</view>
+			</block>
+			<!-- 商品评价 end -->
+			
+			<!-- 商品详情 -->
+			<view  id="scroll2" class="m-top20 tabItem">
+        <view class="b-f">
+          <view class="flex-dir-row cont-box dis-flex flex-y-center">
+            <text class="f-w col-252525 m-l-8 f-29">商品参数</text>
+          </view>
+          <view class="m-tl-20 p-20 b-t">
+            <view wx:for="{{detail.attr_list}}" wx:key="index">
+              <view class="flex-box Params b-b col-757575 b-l b-r" >
+                <text class="b-r ptl-20 t-c f-27 " style=" width: 20%;margin: 20px auto;">{{item.attr_name}}</text>
+                <text class=" ptl-20 t-c f-27" style="width: 80%; margin: 2p0x auto;">{{item.attr_value}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="b-f">
+          <view class="flex-dir-row cont-box dis-flex flex-y-center">
+            <text class="f-w col-252525 m-l-8 f-29">商品详情</text>
+          </view>
+          <!-- 频道字段 -->
+          <view class="m-tl-20 b-t">
+            <view class="other-item" wx:for="{{detail.customField}}" wx:key="this">
+              <view class="flex-box Params b-b col-6 b-l b-r" >
+                <text class="b-r ptl-20 t-c f-27 " style=" width: 20%;">{{item.title}}</text>
+                <text class=" ptl-20 t-c f-27" style="width: 80%;">{{item.value}}</text>
+              </view>
+            </view>
+          </view>
+          <scroll-view>
+            <view class="order" hidden="{{hiddenOrder}}">
+              <view wx:if="{{detail.content_1586404997!=''}}">
+                <view class="b-f goods-detail-box">
+                  <!-- <view class="goods-cont-li"> -->
+                  <template is="wxParse" data="{{wxParseData:content.nodes}}"></template>
+                  <!-- </view> -->
+                </view>
+              </view>
+              <view wx:else>
+                <view  class="ey-notcont flex-dir-column flex-y-center flex-x-center">
+					<image src="/static/images/no_cart.png" class="no_cart" mode=""/>
+					<text class="cont m-top40">亲，没有符合数据</text>
+				</view>
+              </view>
+            </view>
+          </scroll-view>
+        </view>
+			</view>
+
+			<!--为您推荐-->
+			<view  id="scroll3" class="goods-rem b-f tabItem" wx:if="{{product.list.length > 0}}">
+				<view class="block-title mt20">
+          <view class="title-box title-box flex-dir-row flex-x-between flex-y-center">
+            <view class="title-box-l"><text>推荐商品</text></view>
+          </view>
+        </view>
+				<view class="goods-list dis-flex flex-dir-row flex-x-between">
+					<view class="goods-item" wx:for="{{product.list}}" wx:key="this" catchtap="jumpView" data-field="{{item}}" data-aid="{{item.aid}}">
+						<view class="img">
+							<image src="{{item.litpic}}" mode="aspectFill" style="width:100%; margin-top: 20rpx; height:310rpx; border-radius:10rpx"></image>
+						</view>
+						<view class="name f-29 twolist-hidden ">
+							{{item.title}}
+						</view>
+						<view class="price dis-flex flex-dir-row flex-y-center flex-x-between">
+							<view >￥{{item.users_price}}</view>
+							<view class="price-r">
+								<!-- <view class="buy" catchtap="addCart" data-aid="{{item.aid}}"> <text class="iconfont sm-shortcutgouwuche"></text>
+								</view> -->
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
+		</scroll-view>
+		</view>
+	</view>
+
+
+	<!-- 滚动到120高度时出现的导航 -->
+	<view class="fixed-tab flex-dir-row flex-x-around dis-flex" wx:if="{{scrollTop >= 30}}">
+			<view bindtap="tabChange" data-opt="{{item.scrollInto}}" data-index="{{index}}" wx:for="{{tabConfig}}" wx:key="index" wx:if="listHeight[index]" class="dis-flex flex-y-center flex-dir-column {{currentTabIndex === index ? 'col-ff791c' : 'col-252525'}}" >
+				<text>{{item.text}}</text>
+				<text class="{{currentTabIndex === index  ? 'coupon_line' : ''}} "></text>
+			</view>
+  </view>
+
+
+
+	<!-- 分享按钮 -->
+	<zan-actionsheet show="{{ share.show }}" actions="{{ share.actions }}" cancel-text="{{ share.cancelText }}"
+		cancel-with-mask="{{ share.cancelWithMask }}" bind:cancel="onCloseShare" bind:actionclick="onClickShareItem"
+		mask-class="tiny" />
+
+
+	<!--这里是底部  -->
+	<import src="/pages/public/foot.wxml" />
+	<view class="mt20">
+		<!-- <template is="copyright" data="{{webconfig:webconfig}}" /> -->
+	</view>
+
+	<!-- 底部操作栏 -->
+	<block>
+		<view wx:if="{{shop_open == 1}}" class="footer-fixed f-30">
+			<!-- 在线客服 - 拨打电话 -->
+			<!-- 在线客服 - 在线聊天 -->
+			<block>
+				<view class="goods-fixed-icon  flex-dir-column col-545454 flex-x-center flex-y-center" catchtap="jumpIndex" >
+					<text class="iconfont f-40 m-3 sm-shouye" style="display: block;"></text>
+					<text class="f-23 m-top4" >首页</text>
+				</view>
+			</block>
+			<!-- 购物车按钮 -->
+			<view catchtap="onTriggerCart" class="m-top2 col-545454  goods-fixed-icon flex-dir-column ">
+				<view class="iconfont  sm-gouwuche41 f-40 "></view>
+				<view class="flow_num " wx:if="{{cart_total_num > 0}}">
+					<text class="">{{cart_total_num}}</text>
+				</view>
+				<text class="f-23 m-top4 ">购物车</text>
+			</view>
+			<view class="goods-fixed-icon m-top2 col-545454  flex-dir-column flex-x-center flex-y-center">
+					<button open-type="contact" sessionFrom="weapp" size="27"
+						style="opacity: 0;position:absolute;top:0px;left:0px;display:block;width:100%;height:100%;"
+						type="default-light" show-message-card="true" send-message-title="{{detail.title}}"
+						send-message-path="/pages/article/view?aid={{detail.aid}}" send-message-img="{{detail.litpic}}"></button>
+					<text class="iconfont m-top4  f-40 sm-kehufuwukefu " style="display: block;"></text>
+					<text class="f-23 m-top4">客服</text>
+			</view>
+			<view class="footer-right">
+				<view class="order-bt1" catchtap="onToggleTrade" data-type='addCart'>加入购物车</view>
+				<view class="order-bt2" catchtap="onToggleTrade" data-type='buyNow'>立即购买</view>
+			</view>
+		</view>
+    <view class="block-footerOper"  wx:else>
+      <view class="footerOper-l">
+        <view class="item" catchtap="goHome">
+          <view class="item-t">
+            <text class="iconfont sm-shouye"></text>
+          </view>
+          <view class="item-b">首页</view>
+        </view>
+        <view class="item" catchtap="collect">
+          <view class="item-t cur" wx:if="{{isCollect == 1}}">
+            <text class="iconfont sm-shoucanghou"></text>
+          </view>
+          <view class="item-t" wx:elif="{{isCollect == 0}}">
+            <text class="iconfont sm-wodeshoucang"></text>
+          </view>
+          <view class="item-b">收藏</view>
+        </view>
+      </view>
+      <view class="footerOper-m">
+        <view class="price"><text>￥</text>{{ detail.users_price }}</view>
+      </view>
+      <view class="footerOper-r">
+        <button class="btn" open-type="contact" type="default-light" show-message-card="true"
+          send-message-title="{{detail.title}}"
+          send-message-path="/pages/archives/product/view?aid={{detail.aid}}&typeid={{detail.typeid}}"
+          send-message-img="{{detail.litpic}}">我要咨询</button>
+      </view>	   
+    </view>
+	</block>
+	<!-- 分享弹窗框 -->
+	<zan-popup show="{{ SharePopup }}" type="bottom" bindclose="onClickShare">
+		<view class="popup__share ptl-25 dis-flex flex-dir-row f-24 col-727272 flex-x-around flex-y-center b-f">
+      <button style="z-index: 10000000000000000;" class="dis-flex flex-dir-column btn-normal flex-y-center" open-type="share">
+				<view style="background-color: #14BE13;" class="Share_item iconfont ">
+					<text class="iconfont f-46 sm-weixin c-f"></text>
+				</view>
+				<text>发送给微信好友</text>
+			</button>
+      <button class="dis-flex flex-dir-column btn-normal flex-y-center"  bindtap="createGoodsShareQrcodePoster" >
+      <!-- bindtap="saveImage" -->
+				<view style="background-color:#F2CA58;" class="Share_item iconfont ">
+					<text class="iconfont f-46 sm-tupian c-f"></text>
+				</view>
+				<text>保存海报至相册</text>
+			</button>
+		</view>
+	</zan-popup>
+
+	<!-- 分享弹窗 -->
+	<zan-popup show="{{ showPopup }}" type="{{center}}" bindclose="closeImg">
+		<view class="b-f show_poster  flex-x-center flex-dir-column flex-y-center">
+			<image src="{{posters.poster}}" data-url="{{posters.poster}}" bindlongpress="saveImage" mode="aspectFill" class="poster_img"></image>
+			<span class="iconfont sm-del delete" catchtap="closePopup"></span>
+      <view bindtap="saveImage" class="col-0 " style="padding: 10rpx 0; ">立即保存</view>
+		</view>
+	</zan-popup>
+
+	<!-- 优惠券弹出框 -->
+	<zan-popup show="{{ showCouponPopup }}" type="bottom" bindclose="showCouponPopup">
+		<view class="popup__coupon">
+			<view class="dis-flex flex-dir-row flex-y-center  flex-x-between coupon__title f-32"> 
+				<text class="f-38 f-w-600">优惠券</text>
+				<text class="sm-qvxiao f-36 iconfont col-767676" catchtap="showCouponPopup"></text>
+			</view>
+			<!-- 优惠券列表 -->
+			<view class="coupon-list">
+				<scroll-view scroll-y="{{ true }}"   style="height: 70vh;">
+					<view class="coupon-item m-top20" wx:for="{{ coupon_list }}" wx:key="this">
+						<view class="item-wrapper dis-flex flex-dir-column"  data-index="{{ index }}" data-id="{{ item.coupon_id }}" catchtap="onSelectCoupon">
+							<view class="dis-flex flex-dir-row b-f border-20 " >
+								<view class="content dis-flex flex-dir-column flex-x-between pt-20  ">
+									<view class="title col-252525 twolist-hidden" >
+										<text class="card f-20">全部商品</text>
+										<text class="f-32 tips m-l-115">{{item.coupon_name}}</text> 
+									</view>
+									<view class="bottom pl-20 pr-20 dis-flex  " >
+										<view class="time flex-box m-top6 m-l-5 col-7 f-23 ">
+											<text class="col-393939 ">{{item.use_type_name}}</text>
+											<view class="dis-flex flex-dir-row flex-x-between m-top15 ">
+												<text>使用规则</text> 
+												<text class="iconfont col-d1d1d1 f-30 {{item.show == 'false' ? 'sm-up' : 'sm-down'}}"  bindtap="showList" data-index="{{index}}"></text>
+											</view>
+										</view>
+									</view>
+								</view>
+								<view class="split-line"></view>
+								<view class="tip dis-flex flex-dir-column  flex-y-center">
+									<view  class="m-top15">
+										<text class="f-30 ">￥</text>
+										<text class="money f-74 f-w">{{item.coupon_price}}</text>
+									</view>
+									<text class="pay-line f-22 warp f-w">满{{ item.conditions_use }}元可用</text>
+									<view class="make-sure  m-20">
+										<text class="b-f f-20 col-ff791c" catchtap="receiveTap" data-index="{{ index }}" data-couponid="{{ item.coupon_id }}">立即领取</text>
+									</view>
+								</view>
+							</view>
+							<view class="moreList m-top10 col-252525 dis-flex flex-dir-column"  wx:if="{{item.show}}">
+								<text class="screen">品类：仅可购买{{item.coupon_type_info ? item.coupon_type_info :item.coupon_type_name}}可用</text>
+								<text class="m-top10">劵编号：{{item.coupon_code}}</text>
+							</view>
+						</view>
+					</view>
+				</scroll-view>
+			</view>
+
+		</view>
+	</zan-popup>
+	<!-- 确认购买弹窗 -->
+	<zan-popup show="{{ showBottomPopup }}" type="bottom" bindclose="onToggleTrade">
+		<view class="service_close dis-flex  flex-x-center flex-y-center flex-dir-column">
+				<text class="iconfont sm-quxiao1 f-60 c-f" bindtap="onToggleTrade"></text>
+				<view style="background-color: #fff; width: 2rpx; margin-top: -6rpx; height: 22rpx;"></view>
+			</view>
+		<view class="popup__trade">
+			<!-- 主体信息 -->
+			<view class="trade-main">
+				<view class="goods-info dis-flex">
+					<!-- 图片名称 -->
+					<view class="goods-image" catchtap="onPreviewSkuImage">
+						<image src="{{ detail.litpic }}">
+						</image>
+					</view>
+					<view class="right flex-box">
+						<view class="money-box dis-flex flex-y-end">
+							<!-- 商品价 -->
+							<view class="goods_title col-252525 twolist-hidden f-30">
+								<text>{{ detail.title }}</text>
+							</view>
+						</view>
+						<view class="Price dis-flex flex-dir-row m-top10 flex-x-baseline">
+							<view class="goods-price">
+								<text class="goods-price_num col-ff791c f-28 f-w">￥{{ detail.users_price }}</text>
+							</view>
+							<!-- 划线价 -->
+							<!-- <view class="line-price m-top10 " wx:if="{{detail.old_price > detail.users_price}}">
+								<text class="">￥{{ detail.old_price }}</text>
+							</view> -->
+							<!-- <text class="flex-box f-26 col-7">库存：{{detail.stock_count}}</text> -->
+						</view>
+					</view>
+				</view>
+
+				<!-- 规格列表 -->
+				<block wx:if="{{productMultiSpec.spec_data.length}}"> 
+					<view class="goods-attr" >
+					<!-- 滚动容器 -->
+						<scroll-view class="goods-attr--scroll" scroll-y="{{ true }}">
+							<view class="group-item m-top10" wx:for="{{ productMultiSpec.spec_data }}" wx:for-item="attr"
+								wx:for-index="attr_idx" wx:key="this">
+								<view class="tips-text" data-id="{{ attr.spec_mark_id }}">{{ attr.spec_name }}</view>
+								<view class="spec-item {{ item.checked == true ? 'cur' : '' }}" wx:for="{{ attr.spec_data_new }}"
+									wx:for-index="item_idx" wx:key="this" data-attr-idx="{{ attr_idx }}" data-item-idx="{{ item_idx }}"
+									data-item-valueid="{{ item.spec_value_id }}" catchtap="onSwitchSpec" >
+									{{ item.spec_value }} </view>
+							</view>
+						</scroll-view>
+				</view>
+				</block>
+		
+
+				<!-- 购买数量 -->
+				<block  wx:if="{{shop_open == 1}}">
+				<view class="buy_number dis-flex flex-x-between flex-y-center flex-dir-row">
+					<view class="buyNumber">
+						<text>购买数量：</text>
+					</view>
+					<view class="select-number">
+						<form bindsubmit="onDecGoodsNumber">
+							<button formType="submit" class="default {{ product_num > 1 ? '' : 'disabled' }}"
+								type="default"> <text class="iconfont sm-jianhao1"></text> </button>
+						</form>
+						<input bindinput="onInputGoodsNum" type="number" value="{{ product_num }}"
+							style="display: {{ showBottomPopup ? '' : 'none' }};"></input>
+						<form bindsubmit="onIncGoodsNumber">
+							<button formType="submit" class="default" type="default"> <text class="iconfont sm-jiahao3 col-252525"></text> </button>
+						</form>
+					</view>
+				</view>
+				<view class="goods-stock-box f-28 dis-flex col-909090">
+					<text class="flex-box num">剩余{{detail.stock_count || '0'}}件</text>
+				</view>
+			</block>
+			</view>
+			<!-- 底部操作栏 -->
+			<block  wx:if="{{shop_open == 1}}">
+			<view class="footer-fixed f-30" style="width: 100%;">
+				<block wx:if="{{detail.stock_count > 0}}">
+					<!-- <view class="footer-right"  catchtap="onConfirmSubmit"> -->
+						<view class="order-bt" catchtap="onConfirmSubmit">确定</view>
+					<!-- </view> -->
+				</block>
+				<view class="default-btn" wx:else>已售罄</view>
+			</view>
+		</block>
+		</view>
+	</zan-popup>
+		<!-- 服务说明弹窗 -->
+	<zan-popup show="{{ showservicePopup }}" type="bottom" bindclose="showservicePopup">
+			<view class="service_close dis-flex  flex-x-center flex-y-center flex-dir-column">
+				<text class="iconfont sm-quxiao1 f-60 c-f" bindtap="showservicePopup"></text>
+				<view style="background-color: #fff; width: 2rpx; margin-top: -6rpx; height: 22rpx;"></view>
+			</view>
+			<view class="service__trade   b-f cont-box ">
+				<!-- 关闭按钮 -->
+				<view class="service_title b-b p-30">
+					<text class="f-34 col-252525 f-w-600">服务说明</text>
+				</view>
+				<view class="m-tl-40 dis-flex flex-dir-column m-top40">
+					<view class="dis-flex flex-dir-column">
+						<view class="dis-flex flex-dir-row flex-y-center"> 
+							<text class="iconfont col-9  f-36 sm-shuoming"></text>
+							<text class="col-4c4c4c f-w f-30">运费说明</text>
+						</view>
+						<text class="f-30 m-l-56 col-6 f-28">商城在售商品满60包邮，特殊商品除外，具体见详情说明；部分商品，新疆西藏青海内蒙甘肃宁夏不发货；</text>
+					</view>
+				</view>
+				<view class="m-tl-40 dis-flex flex-dir-column m-top40">
+					<view class="dis-flex flex-dir-column">
+						<view class="dis-flex flex-dir-row flex-y-center"> 
+							<text class="iconfont col-9  f-36 sm-shuoming"></text>
+							<text class="col-4c4c4c f-w f-30">退货说明</text>
+						</view>
+						<text class="f-30 m-l-56 col-6 f-28">商城在售商品满60包邮，特殊商品除外，具体见详情说明；部分商品，新疆西藏青海内蒙甘肃宁夏不发货；</text>
+					</view>
+				</view>
+				<view class="m-tl-40 dis-flex flex-dir-column m-top40">
+					<view class="dis-flex flex-dir-column">
+						<view class="dis-flex flex-dir-row flex-y-center"> 
+							<text class="iconfont col-9  f-36 sm-shuoming"></text>
+							<text class="col-4c4c4c f-w f-30">会员权益</text>
+						</view>
+						<text class="f-30 m-l-56 col-6 f-25">商城在售商品满60包邮，特殊商品除外，具体见详情说明；部分商品，新疆西藏青海内蒙甘肃宁夏不发货；</text>
+					</view>
+				</view>
+				<!-- 主体信息 -->
+			</view>
+	</zan-popup>
+</block>

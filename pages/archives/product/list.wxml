@@ -1,0 +1,34 @@
+
+<!-- 分类tab -->
+<view class="header" wx:if="{{channelList.length > 1}}">
+	<scroll-view scroll-x scroll-left style="height: 100%;">
+		<view class="cs {{typeid == item.id ? 'active' : ''}}" data-index="{{index}}" catchtap="onSwitchTab" wx:for="{{ channelList }}" wx:key="this" data-field="{{ item }}" data-id="{{ item.id }}">
+			<text>{{ item.typename }}</text>
+		</view>
+	</scroll-view>
+</view>
+
+<!--文档列表 start-->
+<view class="list-body">
+	<view class="block-proList" wx:if="{{archivesList.data}}">
+		<view class="pro-item" wx:for="{{ archivesList.data }}" wx:key="this" catchtap="jumpView" data-field="{{item}}">
+			<view class="img">
+				<image src="{{item.litpic}}"></image>
+			</view>
+			<view class="title">{{item.title}}</view>
+			<view class="price">￥{{ item.users_price }}</view>
+		</view>
+	</view>
+	<view wx:if="{{ no_more }}" class="no-more">亲, 没有更多了</view>
+	<!-- 无数据提供的页面 -->
+	<view wx:if="{{ !isLoading && !archivesList.data.length }}">
+		<view  class="ey-notcont flex-dir-column flex-y-center flex-x-center">
+		<image src="/static/images/no_cart.png" class="no_cart" mode=""/>
+		<text class="cont m-top40">亲，没有符合数据</text>
+	</view>
+	</view>
+</view>
+<!--文档列表 end-->
+
+<!--这里是底部  -->
+<tabbar type='default'></tabbar>

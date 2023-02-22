@@ -1,0 +1,7 @@
+{
+  "navigationBarTextStyle": "black",
+  "navigationBarTitleText": "我的钱包",
+  "usingComponents" :{
+    "zan-popup": "/components/popup/index"
+  }
+}

@@ -1,0 +1,179 @@
+page{
+  background-color: #f4f4f4;
+}
+
+.address-cont-title{
+  width: 720rpx;
+  box-sizing: border-box;
+  margin: 20rpx 15rpx;
+}
+.address-iconbox{
+  display: flex;
+  padding:20rpx 24rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+}
+.address-iconbox .right-cont input {
+  width: 100%;
+  font-size: 30rpx;
+  color: #444;
+}
+.address-iconbox .sm-weixin{
+  color: #46bb36;
+  font-size: 35rpx;
+  margin-right: 18rpx;
+}
+.address-iconbox .address-box-text{
+  flex: 1;
+  font-size: 29rpx;
+}
+.address-iconbox .sm-eright{
+  font-size: 40rpx;
+  color: #999;
+}
+
+.address-list {
+  border-bottom: 1px solid #f6f6f9;
+  width: 720rpx;
+  margin: 0 15rpx 20rpx 15rpx;
+}
+.addres-list-item {
+  width: 690rpx;
+  margin: 30rpx;
+  background-color: #fff;
+  box-sizing: border-box;
+}
+.address-list .list {
+  padding: 15rpx;
+}
+
+.address-list .list .title {
+  font-size:30rpx;
+  padding: 0 24rpx 0 6rpx;
+  color: #666;
+}
+
+.address-list .list .cont {
+  font-size: 31rpx;
+  color: #777;
+}
+
+.address-list .list navigator {
+  display: inline-block;
+}
+
+.address-list .list image {
+  width: 28rpx;
+  height: 28rpx;
+}
+
+.address-left {
+  flex: 6;
+}
+
+.address-right {
+  flex: 3.2;
+}
+
+
+.flow-fixed-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #f42424;
+  z-index: 4999;
+}
+
+.flow-fixed-footer .chackout-left {
+  font-size: 32rpx;
+  line-height: 44px;
+  color: #777;
+}
+
+.flow-fixed-footer .chackout-right {
+  font-size: 34rpx;
+}
+
+.address-header {
+  padding: 28rpx 6rpx;
+  margin: 20rpx 15rpx 0 15rpx;
+  background-size: 120rpx auto;
+  font-size: 1.7rem;
+  width: 720rpx;
+  box-sizing: border-box;
+
+}
+radio {
+  transform:scale(0.8);
+}
+.flow-header-left {
+  flex: 14;
+  padding:0rpx 20rpx;
+}
+
+.flow-header-right {
+  flex: 1;
+}
+
+.flow-header-right image {
+  width: 34rpx;
+  height: 34rpx;
+  margin-top: 20rpx;
+  float: right;
+}
+
+.address-header .flow-checkout-admin {
+  font-size: 30rpx;
+  color: #252525;
+}
+
+
+.address-header .flow-checkout-address {
+  font-size: 28rpx;
+  color: #777;
+  margin-top: 26rpx;
+  width: 660rpx;
+}
+.card-default{
+  /* width: 46rpx; */
+  height: 20rpx;
+  margin-bottom: 2rpx;
+  line-height: 20rpx;
+  background-color: #ff791c;
+  color: #fff;
+  text-align: center;
+  padding: 5rpx 6rpx 5rpx 8rpx;
+}
+.card-tag{
+  height: 20rpx;
+  margin-bottom: 2rpx;
+  line-height: 20rpx;
+  background-color: #fdece0;
+  color: red;
+  text-align: center;
+  padding: 5rpx 9rpx 4rpx 7rpx;
+}
+.line{
+  width: 750rpx;
+  background-color: #f4f4f4;
+  height: 20rpx;
+}
+.footer {
+  position: fixed;
+  bottom: 0;
+  color: #fff;
+  background-color: #fff;
+  text-align: center;
+  font-size: 30rpx;
+  border: 1px solid #eee;
+  width: 100%;
+}
+.footer_bg {
+  background: #108DEE;
+  width: 92%;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  border-radius: 10rpx;
+  margin: 26rpx 28rpx;
+}

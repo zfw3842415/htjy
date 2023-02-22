@@ -1,0 +1,350 @@
+<!--**
+ * 易优CMS
+ * ============================================================================
+ * 版权所有 2016-2028 海南赞赞网络科技有限公司，并保留所有权利。
+ * 网站地址: http://www.eyoucms.com
+ * ----------------------------------------------------------------------------
+ * 如果商业用途务必到官方购买正版授权, 以免引起不必要的法律纠纷.
+ * ============================================================================
+ * Author: 小虎哥 <1105415366@qq.com>
+ * Date: 2020-1-1
+ */-->
+
+<import src="../../wxParse/wxParse.wxml"></import>
+<block wx:if="{{isApiLoaded}}">
+
+  <!-- 搜索框 start-->
+ 
+  <view class="Header  col-f"> </view>
+  <!--搜索框 end-->
+  <!--轮播图 start-->
+  <block wx:if="{{ adv_1.data }}">
+    <view class="block-swiper">
+      <view class="swiper-box">
+        <swiper indicator-color="rgb(255,255,255,0.8)" indicator-active-color="#108DEE" indicator-dots="{{true}}" class='swipers' autoplay="true" current="{{currentSwiper}}">
+          <block wx:for="{{adv_1.data}}" wx:key="index">
+            <swiper-item>
+              <image class="swiper-image" src="{{item.litpic}}" lazy-load="true" catchtap="navigationTo" data-url="{{ item.links }}" />
+            </swiper-item>
+          </block>
+        </swiper>
+      </view>
+    </view>
+  </block>
+  <!--轮播图 end-->
+  <block>
+    <view class="nav-first">
+      <view class="nav b-f ptl-20  flex-dir-row flex-x-start">
+        <block  wx:for="{{channel}}" data-item="{{item}}" wx:key="this">
+          <navigator hover-class="none" url="/pages/course/course?typeid={{item.typeid}}">
+        <view class="nav-item  flex-dir-column flex-y-center" >
+          <!-- <view style="border-radius:50%;height:90rpx;width:90rpx;text-align:center;line-height:104rpx; background:{{item.color}}">
+                 <image src="{{item.img}}" mode="" style="height:{{item.height}};width:{{item.width}};margin-top:{{item.top}}"></image> 
+              </view>-->
+          <text class="f-24 m-top20">{{ item.typename }}</text>
+        </view>
+        </navigator>
+        </block>
+      </view>
+    </view>
+  </block>
+  <!-- 模块导航结束 -->
+
+  <!-- 师资力量开始 -->
+  <!-- <view class="setion">
+      <navigator hover-class="none">
+        <view class="title">
+          <text>新闻资讯</text>
+          <image class="titleimg" src="/static/images/right.png"></image>
+        </view>
+      </navigator>
+      <view class="Teachers">
+        <view class="teacherContent">
+          <block wx:for="{{teachers}}">
+              <view class="item">
+                <navigator hover-class="none">
+                  <view class="pic">
+                    <image src="{{item.img}}" mode="aspectFill"></image>
+                  </view>
+                  <view class="teacherTitle">{{item.title}}</view>
+                  <view class="teacherCon">{{item.content}}</view>
+                </navigator>
+              </view>
+          </block>
+        </view>
+      </view>
+  </view> -->
+  <!-- 师资力量结束 -->
+  <!-- 广告位-->
+  <block>
+    <view style="padding-top:30rpx">
+      <image src="{{adv_2.litpic}}" style="width:100%;height:60rpx;" mode="aspectFill" />
+    </view>
+  </block>
+  <!-- 广告位-->
+  <!-- 课程设置开始 -->
+  <view class="setion">
+    <navigator hover-class="none" url="/pages/course/course?typeid=72">
+      <view class="title">
+        <text>新闻资讯</text>
+        <image class="titleimg" src="/static/images/right.png"></image>
+      </view>
+    </navigator>
+    <view class="table">
+      <view bindtap="switchTab" class="t_item {{typeid==item.id?'active':''}}" data-index="{{index}}" wx:for="{{newChannel}}">{{item.typename}}</view>
+    </view>
+    <view class="curriculum" style="text-align: center;">
+      <block wx:for="{{cotentList}}" wx:if="{{cotentList.length>0}}">
+        <view class="item">
+          <navigator hover-class="none" open-type="navigate" url="/pages/article/article?aid={{item.aid}}">
+            <view class="pic" wx:if="{{item.litpic!=''}}">
+              <image src="{{item.litpic}}" mode="aspectFill"></image>
+            </view>
+            <view class="{{item.litpic!=''?'curriculum_p':'curriculum_noimg'}}">
+              <text>{{item.title}}</text>
+            </view>
+          </navigator>
+        </view>
+      </block>
+      <block wx:if="{{cotentList==false}}">
+        <view class="curriculum_p">
+          <text> 暂无数据</text>
+        </view>
+      </block>
+    </view>
+  </view>
+  <!-- 课程设置结束 -->
+  <!-- 广告位-->
+  <block>
+    <view style="padding-top:30rpx">
+      <image src="{{adv_3.litpic}}" style="width:100%;height:60rpx;" mode="aspectFill" />
+    </view>
+  </block>
+  <!-- 广告位-->
+  <!-- 教学环境开始 -->
+  <view class="setion">
+    <navigator hover-class="none" url="/pages/course/course?typeid=80">
+      <view class="title">
+        <text>鸿途研学</text>
+        <image class="titleimg" src="/static/images/right.png"></image>
+      </view>
+    </navigator>
+    <view class="table">
+      <view bindtap="switchTabOne" class="t_item {{typeTwoid==item.id?'active':''}}" data-index="{{index}}" wx:for="{{newTwoChannel}}">{{item.typename}}</view>
+    </view>
+    <view class="environment" style="text-align: center;">
+      <block wx:for="{{cotentTwoList}}" wx:if="{{cotentTwoList.length>0}}">
+        <navigator hover-class="none" url="/pages/article/article?aid={{item.aid}}">
+          <view class="item">
+            <view class="pic">
+              <image src="{{item.litpic}}" mode="aspectFill"></image>
+            </view>
+            <view class="text" style="text-align: center;">
+              <text style="text-align: center;">{{item.title}}</text>
+            </view>
+          </view>
+        </navigator>
+      </block>
+      <block wx:if="{{cotentTwoList==false}}" >
+      <view style="text-align: center;width: 100%;">
+        <view class="curriculum_p" >
+          <text>暂无数据</text>
+        </view>
+        </view>
+      </block>
+    </view>
+  </view>
+<!-- 广告位-->
+<block>
+    <view style="padding-top:30rpx">
+      <image src="{{adv_4.litpic}}" style="width:100%;height:60rpx;" mode="aspectFill" />
+    </view>
+  </block>
+  <!-- 广告位-->
+  <!-- 教学环境结束 -->
+<!-- 课程设置开始 -->
+<view class="setion">
+    <navigator hover-class="none" url="/pages/course/course?typeid=82">
+      <view class="title">
+        <text>鸿途党建</text>
+        <image class="titleimg" src="/static/images/right.png"></image>
+      </view>
+    </navigator>
+    <view class="table">
+      <view bindtap="switchTabThree" class="t_item {{typeThreeid==item.id?'active':''}}" data-index="{{index}}" wx:for="{{newThreeChannel}}">{{item.typename}}</view>
+    </view>
+    <view class="curriculum" style="text-align: center;">
+      <block wx:for="{{cotentThreeList}}" wx:if="{{cotentThreeList.length>0}}">
+        <view class="item">
+          <navigator hover-class="none" open-type="navigate" url="/pages/article/article?aid={{item.aid}}">
+            <view class="pic" wx:if="{{item.litpic!=''}}">
+              <image src="{{item.litpic}}" mode="aspectFill"></image>
+            </view>
+            <view class="{{item.litpic!=''?'curriculum_p':'curriculum_noimg'}}">
+              <text>{{item.title}}</text>
+            </view>
+          </navigator>
+        </view>
+      </block>
+      <block wx:if="{{cotentThreeList==false}}">
+        <view class="curriculum_p">
+          <text> 暂无数据</text>
+        </view>
+      </block>
+    </view>
+  </view>
+
+<!-- 课程设置开始 -->
+<view class="setion">
+    <navigator hover-class="none" url="/pages/course/course?typeid=83">
+      <view class="title">
+        <text>鸿途公益</text>
+        <image class="titleimg" src="/static/images/right.png"></image>
+      </view>
+    </navigator>
+    <view class="table">
+      <view bindtap="switchTabFour" class="t_item {{typeFourid==item.id?'active':''}}" data-index="{{index}}" wx:for="{{newFourChannel}}">{{item.typename}}</view>
+    </view>
+    <view class="curriculum" style="text-align: center;">
+      <block wx:for="{{cotentFourList}}" wx:if="{{cotentFourList.length>0}}">
+        <view class="item">
+          <navigator hover-class="none" open-type="navigate" url="/pages/article/article?aid={{item.aid}}">
+            <view class="pic" wx:if="{{item.litpic!=''}}">
+              <image src="{{item.litpic}}" mode="aspectFill"></image>
+            </view>
+            <view class="{{item.litpic!=''?'curriculum_p':'curriculum_noimg'}}">
+              <text>{{item.title}}</text>
+            </view>
+          </navigator>
+        </view>
+      </block>
+      <block wx:if="{{cotentFourList==false}}">
+        <view class="curriculum_p">
+          <text> 暂无数据</text>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <!-- 师资力量开始 -->
+  <view class="setion">
+      <navigator hover-class="none">
+        <view class="title">
+          <text>鸿途合作</text>
+        </view>
+      </navigator>
+      <view class="Teachers">
+        <view class="teacherContent" style="text-align: center;">
+          <block wx:for="{{Flink}}">
+              <view class="item">
+                <navigator hover-class="none" url="{{item.url}}">
+                  <view class="pic">
+                    <image src="{{item.logo}}" mode="aspectFill"></image>
+                  </view>
+                  <view class="teacherTitle">{{item.title}}</view>
+                </navigator>
+              </view>
+          </block>
+        </view>
+      </view>
+  </view>
+  <!-- 师资力量结束 -->
+
+
+  <!-- <block >
+    <view class="coupon_img b-f p-r">
+      <image src="https://demo.eyoucms.com/mall/uploads/allimg/20220412/3-220412093331531.png" mode=""></image>
+    </view>
+  </block> -->
+  <!-- 购物狂欢 -->
+  <!-- <block>
+    <view class="b-f module pt-20 dis-flex flex-dir-row flex-x-center flex-y-center">
+      <view class="p-r">
+        <image class="module_img1" src="https://28323801.s61i.faiusr.com/4/AD0I2d-ADRAEGAAg5uqcjQYojO6J7AcwygI46QI.png"></image>
+        <view style="top: 44rpx; left: 34rpx" class="p-a dis-flex flex-dir-column">
+          <text class="f-32" style="color: rgb(197, 139, 71)">好货随心购</text>
+          <text class="f-24 m-top18" style="color: rgb(188, 161, 129)">秒着买更省钱</text>
+        </view>
+      </view>
+      <view class="dis-flex m-l-20 flex-dir-column">
+        <view class="p-r">
+          <view style="top: 20px; left: 10px" class="p-a dis-flex flex-dir-column">
+            <text class="f-32" style="color: rgb(83, 125, 160)">新品推荐</text>
+            <text class="f-24 m-top10" style="color: rgb(132, 168, 198)">更多新品来尝</text>
+          </view>
+          <image class="module_img2" src="https://28323801.s61i.faiusr.com/4/AD0I2d-ADRAEGAAg-OycjQYol8mT_AUw1AI4qwE.png"></image>
+        </view>
+        <view class="m-top13 p-r">
+          <view style="top: 17px; left: 10px" class="p-a dis-flex flex-dir-column">
+            <text class="f-32" style="color: rgb(170, 113, 72)">新品推荐</text>
+            <text class="f-24 m-top10" style="color: rgb(202, 163, 134)">特惠购</text>
+          </view>
+          <image class="module_img2" src="https://28323801.s61i.faiusr.com/4/AD0I2d-ADRAEGAAg__6cjQYooKDD6wMw1AI4qwE.png"></image>
+        </view>
+      </view>
+    </view>
+  </block> -->
+  <!-- <block >
+    <view class="seckill b-f">
+      <view class="title">精品优惠</view>
+      <view class="dis-flex flex-dir-row" bindtap="jumpView" data-url="/pages/coupon/index">
+          <view class="seckill_item">
+            <view class="pt-30 pl-40 dis-flex warp flex-dir-column c-f flex-y-center">
+              <view class="">
+                <text>￥</text>
+                <text class="f-50">10</text>
+              </view>
+              <view class="f-24">满100可用</view>
+            </view>
+            <view class="seckill_item_list">
+              <view class="dis-flex flex-dir-column seckill_btn f-24">
+                <text>立即</text>
+                <text>领取</text>
+              </view>
+            </view>
+          </view>
+          <view class="seckill_item">
+            <view class="pt-30 pl-40 dis-flex warp flex-dir-column c-f flex-y-center">
+              <view class="">
+                <text>￥</text>
+                <text class="f-50">200</text>
+              </view>
+              <view class="f-24">满2000可用</view>
+            </view>
+            <view class="seckill_item_list">
+              <view class="dis-flex flex-dir-column seckill_btn f-24">
+                <text>立即</text>
+                <text>领取</text>
+              </view>
+            </view>
+          </view>
+      </view>
+    </view>
+  </block> -->
+  <!--产品模块 start-->
+  <!-- <block wx:if="{{ arclist_1.data }}">
+		<view class="block-title mt20">
+			<view class="title-box flex-dir-row flex-x-between flex-y-center">
+				<view class="title-box-l"><text>推荐产品</text></view>
+				<view class="title-box-r" catchtap="jumproductList" ><text>更多</text><text class="iconfont sm-you"></text></view>
+			</view>
+		</view>
+		<view class="block-proList">
+			<view class="pro-item" wx:for="{{ arclist_1.data }}" wx:key="this" catchtap="jumpView" data-field="{{item}}">
+				<view class="img">
+					<image src="{{item.litpic}}"></image>
+				</view>
+				<view class="title">{{item.title}}</view>
+				<view class="price">￥{{item.users_price}}</view>
+			</view>
+		</view>
+	</block> -->
+  <!--产品模块 end-->
+
+
+  <view style="height: 144rpx;display: block;"></view>
+  <!--联系我们 end-->
+</block>
+
+<!--这里是底部  -->
+<tabbar type='default'></tabbar>

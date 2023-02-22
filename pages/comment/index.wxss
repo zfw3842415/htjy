@@ -1,0 +1,58 @@
+
+page{
+  background-color: #f7f7f7;
+}
+.screen{
+  padding: 45rpx 20rpx 40rpx 20rpx ;
+}
+.screen-item{
+  background-color: #f3f3f3;
+  margin-right: 20rpx;
+  font-size: 28rpx;
+  padding: 10rpx 20rpx;
+}
+.active{
+  border:2rpx solid #ff5d2a;
+  color: #ff440b;
+  padding: 8rpx 20rpx;
+  background-color: #fff6ed;
+}
+.goods-comment-box{
+  padding: 35rpx 20rpx 50rpx 20rpx;
+}
+.goods-comment-box .comment_btn {
+  width: 220rpx;
+  margin: 0 auto;
+  padding: 20rpx 0;
+}
+
+.goods-comment-box .comment_btn text {
+  display: block;
+  padding: 5rpx 0;
+  color: #ff495e;
+  font-size: 26rpx;
+  text-align: center;
+  border: 1px solid #ff495e;
+  border-radius: 30rpx;
+}
+.goods-comment-box .com_xing .active{
+  color:#f4a213;
+  border-bottom: none;
+  font-size: 26rpx;
+  font-weight:normal;
+  padding-right: 6rpx;
+}
+
+/* 商品评论 */
+.eval_img{
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+}
+.comment_img{
+  width: 213rpx;
+  height: 222rpx;
+  margin-right: 20rpx;
+  border-radius: 5rpx;
+  margin-bottom: 24rpx;
+}

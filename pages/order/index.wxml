@@ -1,0 +1,151 @@
+<view class="container">
+	<!-- tab栏 -->
+	<view class="header f-32">
+		<view catchtap="bindHeaderTap" class="{{dataType==='all'?'active':''}}" data-type="all">
+			<view class="flex-y-center flex-dir-column dis-flex">
+				<text>全部</text>
+				<text class="line" wx:if="{{dataType=='all'}}"></text>
+			</view>
+		</view>
+		<view bindtap="bindHeaderTap" class="{{dataType==='payment'?'active':''}}" data-type="payment">
+			<view class="flex-y-center flex-dir-column dis-flex">
+				<text>待付款</text>
+				<text class="line" wx:if="{{dataType=='payment'}}"></text>		
+			</view>
+		</view>
+		<!-- <view bindtap="bindHeaderTap" class="{{dataType==='delivery'?'active':''}}" data-type="delivery">
+			<view class="flex-y-center flex-dir-column dis-flex">
+				<text>待发货</text>
+				<text class="line" wx:if="{{dataType=='delivery'}}"></text>
+			</view>	
+		</view> -->
+		<view bindtap="bindHeaderTap" class="{{dataType==='received'?'active':''}}" data-type="received">
+			<view class="flex-y-center flex-dir-column dis-flex">
+				<text>待收货</text>
+				<text class="line" wx:if="{{dataType=='received'}}"></text>
+			</view>	
+		</view>
+		<view bindtap="bindHeaderTap" class="{{dataType==='complete'?'active':''}}" data-type="complete">
+			<view class="flex-y-center flex-dir-column dis-flex">
+				<text>已完成</text>
+				<text class="line" wx:if="{{dataType=='complete'}}"></text>
+			</view>	
+		</view>
+		<view bindtap="bindHeaderTap" class="{{dataType==='close'?'active':''}}" data-type="close">
+			<view class="flex-y-center flex-dir-column dis-flex">
+				<text>订单关闭</text>
+				<text class="line" wx:if="{{dataType=='close'}}"></text>
+			</view>	
+		</view>
+	</view>
+
+	<!-- 订单列表 -->
+	<view class="goods-detail-box">
+		<scroll-view bindscrolltolower="bindDownLoad" scroll-y style="height: {{scrollHeight}}px; width: 750rpx;margin-top:88rpx;">
+			<view class="wrapper" wx:if="{{list.data.length > 0}}">
+				<view class="m-top20" wx:for="{{list.data}}" wx:key="this" catchtap="navigateToDetail" data-id="{{item.order_id}}">
+					<view class="order-box b-f">
+						<view class="order-header  dis-flex flex-x-center flex-x-between">
+							<text class=" col-8b8b8b f-26 flex-dir-row">订单号：{{item.order_code}}</text>
+							<text class="col-393939 f-29" wx:if="{{item.order_status == -1}}">订单关闭</text>
+							<text class="col-393939 f-29" wx:else>{{item.order_status_text}}</text>
+						</view>
+					</view>
+					<view class="order-box order-img_list">
+						<view class="order-shop">
+							<view class="order-list-box m-20 dis-flex" wx:for="{{item.goods}}" wx:key="index">
+								<image class="litPic" src="{{item.litpic}}"></image>
+								<view class="order-list-center flex-dir-column flex-x-start dis-flex" >
+									<view class=" col-252525 f-29 product_name  twolist-hidden ">{{item.product_name}}</view>
+									<view class="flex-dir-row m-top30  dis-flex">
+										<text class="f-29 col-ff791c">￥{{item.product_price}}</text>
+										<text class="f-27 col-909090 m-l-15">x{{item.num}}</text>
+									</view>
+								</view>
+							</view>
+							<view class="f-29 col-252525 fr">合计：￥{{item.order_amount}} <text class="col-909090">(含运费：￥0.00)</text></view>
+						</view>
+					</view>
+					<view class="order-box b-f">
+						<view class="order-btn dis-flex flex-x-end" >
+							<view class="btn-group">
+								<!-- 待支付 -->
+								<view wx:if="{{ item.order_status == 0 }}">
+									<view catchtap="onPayOrder" class="btn-main" data-id="{{item.order_id}}" data-code="{{item.order_code}}">立即付款</view>
+									<view catchtap="cancelOrder" class="btn-default" data-id="{{item.order_id}}">取消订单</view>
+								</view>
+								<!-- 待发货 -->
+								<view wx:if="{{ item.order_status == 1 }}">
+									<view catchtap="remind" class="btn-main" data-id="{{item.order_id}}" data-code="{{item.order_code}}">提醒发货</view>
+									<view catchtap="navigateToDetail" class="btn-default" data-id="{{item.order_id}}">订单详情</view>
+								</view>
+								<!-- 待收货 -->
+								<view wx:if="{{item.order_status == 2}}">
+									<view catchtap="receipt" class="btn-main" data-id="{{item.order_id}}">确认收货</view>
+									<view catchtap="navigateToDetail" class="btn-default" data-id="{{item.order_id}}">订单详情</view>
+								</view>
+								<!-- 待评价 -->
+								<view wx:if="{{item.order_status == 3 && item.is_comment == 0}}">
+									<view catchtap="comment" class="btn-main" data-id="{{item.order_id}}">发表评价</view>
+									<view catchtap="navigateToDetail" class="btn-default" data-id="{{item.order_id}}">订单详情</view>
+								</view>
+								<!-- 订单关闭 -->
+								<view wx:if="{{item.order_status == -1}}">
+									<view catchtap="navigateToDetail" class="btn-default" data-id="{{item.order_id}}">订单详情</view>
+								</view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
+			<view wx:if="{{ no_more }}" class="no-more">亲, 没有更多了</view>
+			<view wx:if="{{ !isLoading && !list.data.length }}">
+				<view class="yoshop-notcont">
+					<image src="/static/images/no_empty.png" mode="aspectFill"></image>
+					<text class="cont">亲，您还没有订单信息哦！</text>
+				</view>
+			</view>
+		</scroll-view>
+	</view>
+
+	<!-- 支付方式弹窗 -->
+	<zan-popup show="{{ showPayPopup }}" bindclose="onTogglePayPopup">
+		<view class="pop-orderPay pop-example__container">
+			<view class="pop-title">
+				<text class="f-30">请选择支付方式</text>
+			</view>
+			<view class="pop-content">
+				<view class="pay-method">
+					<form bindsubmit="onSelectPayType" data-value="{{ PayTypeEnum.WECHAT.value }}" >
+						<button formType="submit" class="btn-normal">
+							<view class="pay-item dis-flex flex-x-between">
+								<view class="item-left dis-flex flex-y-center">
+									<view class="item-left_icon wechat">
+										<text class="iconfont sm-weixinzhifu"></text>
+									</view>
+									<view class="item-left_text">
+										<text>{{ PayTypeEnum.WECHAT.name }}</text>
+									</view>
+								</view>
+							</view>
+						</button>
+					</form>
+					<form bindsubmit="onSelectPayType" data-value="{{ PayTypeEnum.BALANCE.value }}" >
+						<button formType="submit" class="btn-normal">
+							<view class="pay-item dis-flex flex-x-between">
+								<view class="item-left dis-flex flex-y-center">
+									<view class="item-left_icon balance">
+										<text class="iconfont sm-yue"></text>
+									</view>
+									<view class="item-left_text">
+										<text>{{ PayTypeEnum.BALANCE.name }}</text>
+									</view>
+								</view>
+							</view>
+						</button>
+					</form>
+				</view>
+			</view>
+		</view>
+	</zan-popup>
+</view>

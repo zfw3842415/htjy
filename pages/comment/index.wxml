@@ -1,0 +1,31 @@
+<view class="container">
+  <!-- 评价列表筛选 -->
+  <view class="screen b-f">
+    <text bindtap="change" class="screen-item {{type == 'all' ? 'active' : ''}}" data-type="all">全部</text>
+    <text bindtap="change" class="screen-item {{type == 'img' ? 'active' : ''}}" data-type="img">有图/视频({{have_img_count}})</text>
+  </view>
+  <!-- 评价列表     循环 -->
+  <view class="b-f m-top15" wx:for="{{ list }}" wx:key="index">
+    <view class="goods-comment-box  b-f">
+      <view class="dis-flex flex-x-between flex-dir-row flex-y-center">
+        <view class="dis-flex">
+          <view class="user dis-flex flex-dir-row flex-y-center flex-x-center">
+            <image src="{{item.head_pic}}" class="eval_img"></image>
+            <text class="user_name m-l-10  col-252525 f-28">{{ item.nickname}}</text>
+          </view>
+        </view>
+        <view class="f-22 col-9">{{item.add_time}}</view>
+      </view>
+      <view class="goods-comment-cont m-top20">
+        <text class="f-27 col-252525">{{ item.content }}</text>
+      </view>
+      <view  class="dis-flex m-top30 flex-dir-row f-wrap flex-y-center" wx:if="{{item.upload_img.length > 0}}">
+        <block wx:key="index" wx:for="{{item.upload_img}}" wx:for-item="items" wx:for-index="imgIndex">
+          <block   wx:if="{{index < 4}}">
+            <image src="{{items}}" class="comment_img" mode="aspectFill" data-comment-index="{{ index }}" data-img-index="{{ imgIndex }}" catchtap="previewImages"></image>
+          </block>
+        </block>
+      </view>
+    </view>
+  </view>
+</view>

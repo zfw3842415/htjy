@@ -1,0 +1,98 @@
+<view class="container">
+	<view class="flow-list m-top20">
+		<view wx:if="{{cart_list.length}}">
+			<view wx:for="{{cart_list}}" class="p-r" wx:key="this">
+				<view class="dish-item dis-flex flex-y-center" data-index="{{index}}" style="{{item.txtStyle}}">
+					<!-- 选择框 -->
+					<view class="dish-item-radio" catchtap="onChecked" data-index="{{ index }}"
+						wx:if="{{ action === 'complete' }}">
+						<label class="radio" >
+							<radio checked="{{ item.selected }}" disabled="{{item.disable}}" color="#f87408"></radio>
+						</label>
+					</view>
+				
+					<view class="dish-item-wrp flex-x-between dis-flex flex-box">
+						<!-- 商品图片 -->
+						<navigator hover-class="none" catchtap="jumpToView" data-aid="{{item}}">
+							<view class="dish-item-pic p-r" >
+								<image mode="aspectFill" class="image" src="{{ item.litpic }}"></image>
+							</view>
+						</navigator>
+						<!-- 商品信息 -->
+            <view class="dish-item-info flex-box " >
+              <navigator hover-class="none" catchtap="jumpToView" data-aid="{{item}}">
+                <view class="goods-name flex-x-between  flex-dir-row dis-flex">
+                  <text class="onelist-hidden title f-30 col-252525">{{item.title}}</text>
+                </view>
+              </navigator>
+              <view class="goods-attr dis-flex" wx:if="{{item.product_spec}}">
+                <text class="col-7 f-25 m-r-10" wx:for="{{item.product_spec}}" wx:key="this">{{item}}</text>
+              </view>
+              <view class="dis-flex flex-x-between m-top10">
+              <!-- 商品价格 -->
+                <view class="wx-goods_price dis-flex flex-y-center">
+                  <text wx:if="{{ item.users_price }}"
+                    class="dish-item-money">￥{{ item.users_price }}</text>
+                  <text wx:else class="dish-item-money">￥{{ item.spec_price }}</text>
+                </view>
+              <!-- 数量选择器 -->
+                <view class="select-number">
+                  <button catchtap="onSubCount"
+                    class="default {{ item.product_num > 1 ? '' : 'disabled' }}"
+                    data-index="{{index}}" data-sku-id="{{item.spec_value_id}}"
+                    type="default">-</button>
+                  <input bindinput="import" disabled="{{true}}" type="number"
+                    value="{{item.product_num}}"></input>
+                  <button catchtap="onAddCount" class="default" data-index="{{index}}"
+                    data-sku-id="{{item.spec_value_id}}" type="default">+</button>
+                </view>
+              <!-- 限时秒杀商品 -->
+              </view>
+            
+                
+						</view>
+			    </view>
+				</view>
+        <text class="t-r m-r-10 f-38 iconfont sm-shanchu m-top3" style="z-index: 20;" catchtap="onDelete"  data-aid="{{item.cart_id}}"></text>
+			</view>
+			<!-- 底部操作栏 -->
+			<view class="cart-tab-wrp">
+				<view class="cart-item-total cart-tab-item dis-flex flex-y-center">
+					<view class="checked-all" wx:if="{{ action === 'complete' }}">
+						<label catchtap="onCheckedAll" class="radio dis-flex flex-y-center">
+							<radio class="margin-right: 10rpx;" checked="{{ checkedAll }}" color="#ff7700"></radio>
+							<text class="f-30">全选</text>
+						</label>
+					</view>
+					<view class="checked-all" wx:if="{{ action === 'edit' }}">
+						<label catchtap="onDelCheckedAll" class="radio dis-flex flex-y-center">
+							<radio class="margin-right: 10rpx;" checked="{{ delCheckedAll }}" color="#ff7700"></radio>
+							<text class="f-30">全选</text>
+						</label>
+					</view>
+					<view wx:if="{{ action === 'complete' }}" class="cart-item-total-price dis-flex">
+						<text class="f-30">合计：</text>
+						<text class="f-28 col-ff791c">￥{{cartTotalPrice}}</text>
+					</view>
+				</view>
+				<view class="cart-tab-item_1">
+					<view catchtap="submit" class="cart-tab-item-btn">结算</view>
+					<!-- <view wx:if="{{ action === 'edit' }}" catchtap="onDelete" class="cart-tab-item-btn">删除</view> -->
+				</view>
+			</view>
+		</view>
+		<view wx:else>
+			<view class="yoshop-notcont">	
+			<image src="/static/images/wodedingdan.png" style="margin-left: -3rpx;"  mode="aspectFill"></image>
+				<!-- <text class="iconfont sm-empty"></text> -->
+				<text class="cont col-252525" style="top:520rpx;left: 193rpx;">亲， 你的购物车还空空的呦</text>
+				<view catchtap="goShopping" class="flow-btn-min">去购物</view>
+			</view>
+		</view>
+	</view>
+
+</view>
+<!--这里是底部-->
+<import src="../public/foot.wxml" />
+<!-- <template is="copyright" data="{{webconfig:webconfig}}" /> -->
+<tabbar type='default'></tabbar>

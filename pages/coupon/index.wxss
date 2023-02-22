@@ -1,0 +1,137 @@
+.container, page {
+  background: #f9f9f9; }
+
+.header {
+  width: 750rpx;
+  height: 83rpx;
+  display: flex;
+  background: #fff;
+  line-height: 78rpx;
+  position: fixed;
+  top: 0;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+  justify-content: space-between;
+  flex-direction: row;
+  color: #646464;
+  z-index: 100;
+}
+  
+.header view.active {
+  color: #ff791c;
+}
+  
+.header .line {
+  background-color: #ff791c;
+  border-radius: 20rpx;
+  width: 34rpx;
+  height: 7rpx;
+}
+  
+.coupon-list {
+  padding: 20rpx; 
+  margin-top:85rpx
+}
+
+
+.coupon-list .coupon-item .item-wrapper {
+  display: flex;
+  background: #fff;
+  border-radius: 8rpx;
+  color: #fff;
+  overflow: hidden;
+  position: relative;
+  /* background-image: radial-gradient(red 25%, yellow 50%, green 75%); */
+}
+.item-wrapper:before, .item-wrapper:after {
+  content: ' ';
+  width: 0;
+  height: 100%;
+  /* 绝对定位进行偏移 */
+  position: absolute;
+  top: 10px;
+}
+
+.item-wrapper:before {
+  /* 圆点型的border */
+  border-right: 5px dotted white;
+  /* 偏移一个半径，让圆点的一半覆盖div */
+  left: -2px;
+}
+
+.item-wrapper:after {
+  /* 圆点型的border */
+  border-left: 5px dotted #f6f5f5;
+  /* 偏移一个半径，让圆点的一半覆盖div */
+  right: -2px;
+}
+
+
+.coupon-list .coupon-item {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 22rpx;
+}
+.item-wrapper .title {
+  position: relative;
+  padding-left: 20rpx;
+  height: 80rpx;
+}
+.item-wrapper .title  .card {
+  color: #fff;
+  padding: 2rpx 10rpx 4rpx 10rpx;
+  border-radius: 20rpx;
+  white-space: nowrap;
+  background-color: #ff791c;
+  position: absolute;
+  top: 6rpx;
+  left: 20rpx;
+}
+.content {
+  flex: 1;
+  box-sizing: border-box;
+  padding: 35rpx 10rpx 30rpx 5rpx;
+  border-radius: 8px 0 0 8px;
+}
+.tip {
+  position: relative;
+  padding: 0 5rpx ;
+  text-align: center;
+  border-radius: 0 8px 8px 0;
+  background:linear-gradient(-45deg, #fd6303 0%, #ff9e1f 100%);
+  
+}
+.pay-line{
+  width: 225rpx;
+}
+.coupon-list .coupon-type {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 10;
+  width: 115rpx;
+  padding: 3px 0;
+  background: #0e9ef1;
+  font-size: 20rpx;
+  text-align: center;
+  color: #ffffff;
+  transform: rotate(45deg);
+  /* transform: scale(0.7); */
+  transform-origin: 64rpx 64rpx; }
+.moreList{
+  width: 710rpx;
+  margin-top: 3rpx;
+  background-color: #fff;
+  font-size: 23rpx;
+  color: #777;
+  padding: 20rpx;
+}
+.make-sure {
+  margin-top: 10rpx;
+
+}
+.make-sure text{
+  border-radius: 20rpx;
+  padding: 1rpx 20rpx 5rpx 18rpx;
+  font-size: 22rpx;
+}

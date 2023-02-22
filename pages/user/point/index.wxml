@@ -1,0 +1,24 @@
+<view class="container">
+  <view class="header  c-f dis-flex flex-dir-column  flex-y-center">
+    <text class="f-74 m-top15">10</text>
+    <text class="f-24 m-top6">累计获得积分</text>
+  </view>
+  <view class="navbar flex-x-between dis-flex flex-dir-row b-f">
+    <view wx:for="{{navList}}" wx:key="index"  bindtap="changValue" data-value="{{item.value}}" class="navbar_item {{item.value == ChangeType ? 'active' : ''}}">
+      <text class="f-32">{{item.label}}</text>
+    </view>
+  </view>
+  <view class="line"></view>
+  <view class="list">
+    <view wx:for="{{List}}" wx:key="index">
+      <view class="dis-flex m-tl p-30 b-b flex-dir-row flex-x-between flex-y-center">
+        <view class="col-363636 f-32 dis-flex flex-dir-column flex-x-center">
+          <text >{{item.label}}</text>
+          <text class="f-22 col-8b8a8a">{{item.time}}</text>
+        </view>
+        <view class="col-ff7214">{{item.num}}</view>
+      </view>
+      
+    </view>
+  </view>
+</view>

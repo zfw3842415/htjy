@@ -1,0 +1,27 @@
+<block>
+  <view class="block-subscribeList">
+    <!-- 数据列表 -->
+      <view class="subscribe-item" bindtap="jumpView" data-aid="{{item.aid}}" wx:for="{{list.data}}" wx:key="index">
+        <view class="subscribe-item-m">
+          <view class="title">预约表单{{index+1}}</view>
+        </view>
+        <view class="subscribe-item-r">
+					<view class="cancel-btn" bindtap="cancelsubscribe" data-aid="{{item.aid}}" data-index="{{index}}">
+						取消
+					</view>
+          <view class="del-btn" bindtap="jumpView" data-aid="{{item.aid}}" data-index="{{index}}">
+						查看详情
+					</view>
+        </view>
+      </view>
+  </view>
+  <view wx:if="{{list.data.length > 0 && list.last_page == list.current_page}}" class="no-more">亲, 没有更多了</view>
+  <!-- 无数据提供的页面 -->
+  <view wx:if="{{!isLoading && !list.data.length}}">
+      <view   class="ey-notcont flex-dir-column flex-y-center flex-x-center">
+				<image src="/static/images/no_cart.png" class="no_cart" mode=""/>
+				<text class="cont m-top40">亲，没有符合数据</text>
+			</view>
+  </view>
+  <!-- 会员中心 end -->
+</block>

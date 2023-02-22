@@ -1,0 +1,12 @@
+<view class="flex-dir-column flex-x-start " style="padding: 0 30rpx;">
+		<view wx:for="{{list}}" wx:key='index'>
+				<view class="list_item ">
+					<text>{{item.attr_name}}：</text>
+					<text>{{item.attr_value || '未填写'}}</text>
+				</view>
+		</view>
+		<view class="list_item">
+			<text>填写时间：</text>
+			<text>{{add_time}}</text>
+		</view> 
+	</view>

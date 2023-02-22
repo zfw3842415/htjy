@@ -1,0 +1,105 @@
+<view class="container">
+    <!-- 搜索框 -->
+    <view class="index-search-box">
+        <navigator class="index-search" hover-class="none" openType="navigate" url="../search/index">
+            <view class="index-cont-search flex-dir-row flex-y-center dis-flex">
+              <icon class="t-r" color="rgba(166, 166, 166, 0.4)" size="14"  type="search"></icon>
+              <text class="f-24 m-l-50" style="text-indent: 10rpx;" wx:if="{{shop_open == 1}}">请搜索您想要的商品</text>
+              <text class="f-24 m-l-50" wx:else>请输入关键词搜索</text>
+            </view>
+        </navigator>
+    </view>
+    <view class="dis-flex flex-dir-row" >
+      <!-- 左边一级导航 -->
+      <view class="header" wx:if="{{channelListMall.length > 0}}">
+        <scroll-view scroll-y scroll-left >
+          <view class="sw1 dis-flex flex-dir-row flex-x-center {{f_cur == index ? 'active' : ''}}" catchtap="onSwitchTab" wx:for="{{ channelListMall }}" wx:key="index" data-id="{{ item.id }}" data-index="{{index}}">
+            <text class=" {{typeid == item.id ? 'line' : ''}}" wx:if="{{typeid == item.id}}"></text>
+            <text class="{{typeid == item.id ? '' : ''}}">{{ item.typename }}</text>
+          </view>
+        </scroll-view>
+      </view>
+      <view class="classification" >
+          <view class="dis-flex flex-dir-row flex-y-center flex-x-center classification_header">
+              <!-- 右上二级导航 -->
+              <scroll-view scroll-x scroll-left="0"  class="sw2 dis-flex flex-dir-row">
+                  <view class="item warp dis-flex flex-dir-row">
+                      <view bindtap="onSwitchTwo" data-id="{{item.id}}" data-index="{{index}}" wx:for="{{channelList2}}" wx:key="index">
+                          <text class="card  {{typeid == item.id ? 'active2' : ''}}">{{ item.typename }}</text>
+                      </view>
+                  </view>
+              </scroll-view>
+          </view>
+          <!-- 商品数据列表 -->
+          <scroll-view scroll-y>
+              <view class="classification_container" style="height: 94vh">
+                  <view
+                      class="f-28 classification_container_header dis-flex flex-dir-row flex-x-between  {{typeid == item.id ? 'active' : ''}}"      data-id="{{item.id}}"  wx:for="{{channelList2}}" wx:key="index"  wx:if="{{typeid == item.id}}">
+                      <text class="m-30">{{ channelList2[index].typename }}</text>
+                      <view class="dis-flex flex-dir-row f-26 col-6 m-top4"  wx:if="{{typeid == item.id}}">
+                          <view class="{{orderby == 'sales_num' ? 'screen_active' : ''}}" bindtap="orderbyClick" data-orderby="sales_num" data-orderway="desc">销量</view>
+                          <view class="m-l-30 dis-flex flex-dir-row" bindtap="orderbyClick" data-orderby="users_price">
+                              <text class="{{orderby == 'users_price' ? 'screen_active' : ''}}"  data-orderby="users_price" data-orderway="asc">价格</text>
+                              <view class="dis-flex m-l-10 flex-dir-column">
+                                  <text
+                                      class="iconfont  f-22 sm-xiangshang1  {{orderway == 'asc' && orderby == 'users_price' ? 'screen_active f-w' : ''}} "
+                                      data-orderway="asc"
+                                  ></text>
+                                  <text
+                                      class="iconfont  f-22 sm-xiangxia2 m-top_8  {{orderway == 'desc' && orderby == 'users_price' ? 'screen_active f-w' : ''}}"
+                                      data-orderby="users_price"
+                                      data-orderway="desc"
+                                  ></text>
+                              </view>
+                          </view>
+                      </view>
+                  </view>
+                  <view style="padding-bottom:180rpx" wx:if="{{archivesList.length}}">
+                    <view
+                        class="list dis-flex flex-dir-row flex-y-center"
+                        bindtap="jumpView"
+                        data-field="{{item}}"
+                        wx:for="{{archivesList}}"
+                        wx:key="this"
+                    >
+                        <view>
+                            <image class="img-logo" mode="aspectFill" src="{{item.litpic}}"></image>
+                        </view>
+
+                        <view class="dis-flex flex-dir-column m-l-20">
+                            <view class="title col-252525 onelist-hidden m-top15 f-26">{{ item.title }}</view>
+                            <view class="tips">
+                              
+                            </view>
+                            <view class="f-23 col-a4a4a4 m-top15">已售{{ item.sales_num }}件</view>
+                            <view class="dis-flex f-w-600 flex-dir-row flex-x-between flex-y-center f-22 col-ff791c m-top8 p-15">
+                                <view>
+                                    ￥
+                                    <text class="m-l_5 f-32">{{ item.users_price }}</text>
+                                </view>
+                                <view class="button">
+                                    <text class="sm-jiahao3 f-28 iconfont c-f"></text>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                    <view style="background-color: #fff; margin-bottom: 20rpx"  class="no-more f-30">亲, 没有更多了</view>
+                  </view>
+                  <block wx:if="{{!archivesList.length}}">
+                      <view class="no_Produce">亲 暂无产品哦~</view>
+                  </block>
+              </view>
+          </scroll-view>
+      </view>
+      <view  wx:if="{{!channelList.length && notcont}}">
+          <view class="yoshop-notcont">
+              <text class="iconfont icon-wushuju"></text>
+              <text class="cont">亲，暂无分类哦</text>
+          </view>
+      </view>
+  </view>
+</view>
+
+<view style="height: 114rpx;display: block;"></view>
+  <!--这里是底部  -->
+  <tabbar type='default'></tabbar>

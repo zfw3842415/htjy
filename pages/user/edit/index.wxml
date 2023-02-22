@@ -1,0 +1,97 @@
+<view class="container">
+	<view class="list">
+		<view class="list_item">
+			<view class="flex-dir-row flex-x-between dis-flex flex-y-center">
+				<view class="col-6 f-30">我的头像</view>
+				<view class="flex-dir-row flex-y-center dis-flex" bindtap="chooseImage">
+					<image class="img-logo" src="{{userInfo.head_pic}}"></image>
+					<!-- <p class="iconfont sm-you m-l-10"></p> -->
+				</view>
+			</view>
+			<view class="line"></view>
+		</view>
+		<view class="list_item ">
+			<view class="flex-dir-row flex-x-between dis-flex flex-y-center">
+				<view class="col-6 f-30">我的昵称</view>
+				<view class="flex-dir-row flex-y-center dis-flex">
+					<p class="list_item_edit">
+						{{userInfo.nickname}}
+					</p>
+				</view>
+			</view>
+			<view class="line"></view>
+		</view>
+		<view class="list_item">
+			<view class="flex-dir-row flex-x-between flex-y-center dis-flex">
+				<view class="col-6 f-30">客户编号</view>
+				<view class="flex-dir-row flex-y-center dis-flex">
+					<p class="list_item_edit">
+						{{userInfo.users_id}}
+					</p>
+				</view>
+			</view>
+		</view>
+		<view class="list_item">
+			<view class="line"></view>
+			<view class="flex-dir-row flex-x-between flex-y-center dis-flex">
+				<view class="col-6  f-30">客户名称</view>
+				<view class="flex-dir-row flex-y-center dis-flex">
+					<p class="list_item_edit">
+						{{userInfo.username}}
+					</p>
+				</view>
+			</view>
+		</view>
+		<view class="list_item" wx:if="{{userInfo.mobile}}">
+			<view class="line"></view>
+			<view class="flex-dir-row flex-x-between dis-flex flex-y-center">
+				<view class="col-6 f-30">手机号</view>
+				<view class="flex-dir-row dis-flex flex-y-center">
+					<p class="list_item_edit">
+						<text>{{userInfo.mobile}}</text>
+					</p>
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class="editList" wx:if="{{!userInfo.mobile}}">
+		<view class="edit_header dis-flex flex-dir-row flex-y-center">
+			<text class="iconfont sm-jichuxinxi f-38 col-ff7214"></text>
+			<text class="m-l-10">基础信息</text>
+		</view>
+		<view class="list_item">
+			<view class="line"></view>
+			<view class="flex-dir-row flex-x-between dis-flex flex-y-center">
+				<view class="col-6 f-30">手机号 <text class="col-m f-w-600">*</text> </view>
+				<view class="flex-dir-row dis-flex flex-y-center">
+					<p class="list_item_edit">
+						<button class="obtain dis-flex flex-dir-row flex-y-center flex-x-center"
+							open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">
+							<text class="iconfont f-38 sm-weixin "></text>
+							<text class="m-l-12">一键获取</text>
+						</button>
+					</p>
+					<!-- <p class="iconfont sm-you m-l-10"></p> -->
+				</view>
+			</view>
+		</view>
+		<!-- <view class="list_item">
+			<view class="line"></view>
+			<view class="flex-dir-row flex-x-between flex-y-center dis-flex">
+				<view class="col-6 f-26">姓名</view>
+				<view class="flex-dir-row flex-y-center dis-flex">
+					<p class="list_item_edit">
+						<input name="text" placeholder="请填写姓名" type="text" value="{{Name}}"></input>
+					</p>
+				</view>
+			</view>
+		</view> -->
+	</view>
+	<form bindsubmit="submitUpNickname">
+		<button formType="submit" class="btn-normal">
+			<view class="signout f-28">
+				<text>保存修改</text>
+			</view>
+		</button>
+	</form>
+</view>

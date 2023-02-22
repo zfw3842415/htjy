@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "shortcut": "/components/shortcut/shortcut",
+    "zan-popup": "/components/popup/index"
+  }
+}

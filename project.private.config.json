@@ -1,0 +1,78 @@
+{
+  "description": "项目私有配置文件。此文件中的内容将覆盖 project.config.json 中的相同字段。项目的改动优先同步到此文件中。详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
+  "setting": {
+    "urlCheck": false,
+    "compileHotReLoad": true
+  },
+  "projectname": "%E7%BA%BF%E4%B8%8A%E7%BB%BC%E5%90%88%E7%89%88%E5%8E%9F%E7%94%9F%E5%95%86%E5%9F%8E%E5%B0%8F%E7%A8%8B%E5%BA%8F",
+  "libVersion": "2.10.4",
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "name": "",
+          "pathName": "pages/address/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/category/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/archives/product/list",
+          "query": "typeid=3",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/course/course",
+          "query": "typeid=68",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/course/course",
+          "query": "typeid=72",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/article/article",
+          "query": "aid=116",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/article/article",
+          "query": "aid=113",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/article/article",
+          "query": "aid=124",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/article/article",
+          "query": "aid=116",
+          "launchMode": "default",
+          "scene": null
+        }
+      ]
+    }
+  }
+}

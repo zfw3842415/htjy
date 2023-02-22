@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "会员中心",
+  "navigationBarBackgroundColor": "#108DEE",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "zan-popup":"/components/popup/index",
+    "tabbar": "/components/tabbar/index"
+  }
+}

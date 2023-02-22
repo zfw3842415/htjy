@@ -1,0 +1,168 @@
+<view class="container" >
+	<view class="bg-fff">
+		<view style="margin-top: 5px; height: 50px; line-height: 50px; background-color: #ff791c;" wx:if="{{serviceData.service.status == 3}}">
+			<view class="m-top20 container_list m-l-20 flex-dir-row col-f f-26"><text class="iconfont sm-jvjue m-r-10"></text> 商家拒绝申请，请联系商家处理...</view>
+		</view>
+		<view style="margin-top: 5px; height: 50px; line-height: 50px; background-color: #ff791c;" wx:elif="{{serviceData.service.status == 8}}">
+			<view class="m-top20 container_list m-l-20 flex-dir-row col-f f-26">服务单被取消，服务结束，可重新申请...</view>
+		</view>
+		<view class="flowChart" style="margin-top: 5px;" wx:else>
+			<view class="m-top20 container_list flex-dir-row col-f f-26">
+				<view class="flex-dir-row"> 
+					<view class="sm-yiwancheng  iconfont {{serviceData.service.status > 1 ? 'blue_label' : ''}}"></view>
+					<view class="container_line {{serviceData.service.status > 1 ? '' : 'blue_line'}}"></view>
+				</view>
+				<view class="flex-dir-row">
+					<view class="sm-yiwancheng iconfont {{serviceData.service.status > 3 ? 'blue_label' : ''}}"></view>
+					<view class="container_line {{serviceData.service.status > 3 ? '' : 'blue_line'}}"></view>
+				</view>
+				<view class="flex-dir-row">
+					<view class="sm-yiwancheng iconfont {{serviceData.service.status >  4 ? 'blue_label' : ''}}"></view>
+					<view class="container_line {{serviceData.service.status > 4 ? 'blue_line' : ''}}"></view>
+				</view>
+				<view class="flex-dir-row">
+					<view class="sm-yiwancheng iconfont {{serviceData.service.status > 5 ? 'blue_label' : ''}}"></view>
+					<view class="container_line {{serviceData.service.status > 5 ? 'blue_line' : ''}}"></view>
+				</view>
+			</view>
+			<view class="container_list_item flex-dir-row col-f f-26 flex-x-between">
+				<span style="margin-left: 10px;">{{serviceData.service.status == 1 ? '待审核' : '已审核'}}</span>
+				<span>{{serviceData.service.status  < 4 ? '待邮寄' : '已邮寄'}}</span>
+				<span>{{serviceData.service.status  < 5 ? '待受理' : '已受理'}}</span>
+				<span style="margin-right: 12px;">已完成</span>
+			</view>
+		</view>
+		<view class="f-26 col-a5a5a5 ptl-30">
+			<view class="m-top15" wx:for="{{serviceData.service_log}}" wx:key="index">{{item.add_time}} {{item.log_note}}</view>
+		</view>
+	</view>
+
+	<view class="ptl-30 m-top20 bg-fff f-26" wx:if="{{serviceData.service.status == 2}}">
+		<view class="flex-dir-row flex-y-center"><span class="f-32 col-2b2b2b">会员填写物流信息</span></view>
+		<!-- <view class="order_line"></view> -->
+		<view class="flex-dir-row m-top30 flex-y-center">
+			<span class="address-name">物流公司</span>
+			<span class="m-l-10 col-868686">
+				<picker mode="selector" bindchange="bindRegionChange" value="{{index}}" range="{{serviceData.express}}" range-key="express_name">
+					<text wx:if="{{usersDelivery.name}}" class="f-30">{{usersDelivery.name}}</text>
+					<text wx:else class="f-30 col-7">请选择物流公司</text>
+				</picker>
+			</span>
+		</view>
+		<view class="order_line"></view>
+		<view class="flex-dir-row flex-y-center">
+			<span class="address-name">物流单号</span>
+			<span class="m-l-10 col-868686">
+				<input type="text" bindinput="contentInput" placeholder="请填写物流单号" value="{{usersDelivery.code}}"/>
+			</span>
+		</view>
+		<view class="order_line"></view>
+		<view class="flex-dir-row flex-y-center">
+			<span class="address-name">商家地址</span>
+			<span class="m-l-20 col-868686">
+				{{serviceData.admin_addr.addr_contact_person}} {{serviceData.admin_addr.addr_contact_phone}} {{serviceData.admin_addr.addr_shipping_addr}}
+			</span>
+		</view>
+		<view class="order_line"></view>
+		<view class="flex-dir-row btn-footer m-top40">
+			<button class="submit col-f f-30" catchtap="submitExpress" style="width: 295px; margin: 0rpx 50rpx 0rpx 50rpx;">提交物流信息</button>
+		</view>
+	</view>
+
+	<view class="ptl-30 m-top20 bg-fff f-26" wx:if="{{serviceData.service.users_delivery}}">
+ 		<view class="flex-dir-row flex-y-center"><span class="f-26 col-2b2b2b">会员发货物流信息</span></view>
+		<view class="order_line"></view>
+		<view class="flex-dir-row flex-y-center">
+			<span class="address-name">物流公司</span><span class="m-l-4 col-868686">{{serviceData.service.users_delivery.name}}</span>
+		</view>
+		<view class="order_line"></view>
+		<view class="flex-dir-row flex-y-center">
+			<span class="address-name">物流单号</span><span class="m-l-4 col-868686">{{serviceData.service.users_delivery.code}}</span>
+			<span bindtap="copytext" data-text="{{serviceData.service.users_delivery.code}}" class="copy_btn col-868686">复制</span>
+		</view>
+		<view class="order_line"></view>
+		<view class="flex-dir-row flex-y-center">
+			<span class="address-name">商家地址</span>
+			<span class="m-l-4 col-868686">
+				{{serviceData.admin_addr.addr_contact_person}} {{serviceData.admin_addr.addr_contact_phone}} {{serviceData.admin_addr.addr_shipping_addr}}
+			</span>
+		</view>
+	</view>
+
+ 	<view class="ptl-30 m-top20 bg-fff f-26" wx:if="{{serviceData.service.admin_delivery}}">
+ 		<view class="flex-dir-row flex-y-center"><span class="f-26 col-2b2b2b">商家发货物流信息</span></view>
+		<view class="order_line"></view>
+		<view class="flex-dir-row flex-y-center">
+			<span class="address-name">物流公司</span><span class="m-l-10 col-868686">{{serviceData.service.admin_delivery.name}}</span>
+		</view>
+		<view class="order_line"></view>
+		<view class="flex-dir-row flex-y-center">
+			<span class="address-name">物流单号</span><span class="m-l-10 col-868686">{{serviceData.service.admin_delivery.code}}</span>
+			<span bindtap="copytext" data-text="{{serviceData.service.admin_delivery.code}}" class="copy_btn col-868686">复制</span>
+		</view>
+		<view class="order_line"></view>
+		<view class="flex-dir-row flex-y-center">
+			<span class="address-name">我的地址</span>
+			<span class="m-l-4 col-868686">
+				{{serviceData.service.consignee}} {{serviceData.service.mobile}} {{serviceData.service.address}}
+			</span>
+		</view>
+	</view>
+
+	<!-- 订单信息 -->
+	<view class="order_message bg-fff">
+		<view  class="f-32 col-252525">商品信息</view>
+		<view class="flex-dir-row flex-y-center m-top20">
+			<image src="{{serviceData.litpic}}" class="img-logo"></image>
+			<view class="flex-dir-column text-292929 f-32 onelist-hidden" >
+				<p class="onelist-hidden" style="width: 500rpx;">{{serviceData.product_name}}</p>
+				<p class="col-7b7b7b f-22 m-top60 flex-dir-row flex-y-center flex-x-between" style="width: 476rpx;">
+					<span class="col-ff4e00 f-28"> ￥<text class="f-30">{{serviceData.product_price}}</text></span>
+					<span>x{{serviceData.product_num}}</span>
+				</p>
+			</view>
+		</view>
+	</view>
+
+	<view class="ptl-30 m-top20 bg-fff f-28" style="{{serviceData.service.status == 1 || serviceData.service.status == 2 ? 'margin-bottom: 60px;' : 'margin-bottom: 5px;'}}">
+		<view class="flex-dir-row flex-y-center">
+			<span class="address-name">售后进度</span><span class="m-l-15 col-868686">{{serviceData.service.status_name}}</span>
+		</view>
+		<view class="order_line"></view>
+		<view class="flex-dir-row flex-y-center">
+			<span class="address-name">售后工单</span><span class="m-l-15 col-868686">{{serviceData.service.refund_code}}</span>
+			<span bindtap="copytext" data-text="{{serviceData.service.refund_code}}" class="copy_btn col-868686">复制</span>
+		</view>
+		<view class="order_line"></view>
+		<view class="flex-dir-row flex-y-center">
+			<span class="address-name">服务类型</span><span class="m-l-15 col-868686">{{serviceData.service.service_type_name}}</span>
+		</view>
+		<view class="order_line"></view>
+		<view class="flex-dir-row flex-y-center">
+			<span class="address-name">问题描述</span><span class="m-l-15 col-868686">{{serviceData.service.content}}</span>
+		</view>
+		<view class="order_line" wx:if="{{serviceData.service.upload_img}}"></view>
+		<view class="flex-dir-row flex-y-center" wx:if="{{serviceData.service.upload_img}}">
+			<span class="address-name">图片说明</span>
+			<span class="m-l-25 col-868686">
+				<image wx:for="{{serviceData.service.upload_img}}" wx:key="index" src="{{item}}" catchtap="priviewImg" data-index="{{index}}" class="img-logo"></image>
+			</span>
+		</view>
+		<view class="order_line"></view>
+		<view class="flex-dir-row flex-y-center">
+			<span class="address-name">联系人</span><span class="m-l-15 col-868686">{{serviceData.service.consignee}}</span>
+		</view>
+		<view class="order_line"></view>
+		<view class="flex-dir-row flex-y-center">
+			<span class="address-name">联系电话</span><span class="m-l-15 col-868686">{{serviceData.service.mobile}}</span>
+		</view>
+		<view class="order_line"></view>
+		<view class="flex-dir-row flex-y-center m-20">
+			<span class="address-name">收货地址</span><span class="m-l-20 col-868686">{{serviceData.service.address}}</span>
+		</view>
+	</view>
+
+	<view class="flow-fixed-footer b-f" wx:if="{{serviceData.service.status == 1 || serviceData.service.status == 2}}">
+		<view class="flow-btn f-32"><view catchtap="cancelService">取消售后</view></view>
+	</view>
+</view>
