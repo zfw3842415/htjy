@@ -235,11 +235,11 @@
       </navigator>
       <view class="Teachers">
         <view class="teacherContent" style="text-align: center;">
-          <block wx:for="{{Flink}}">
+          <block wx:for="{{cotentFiveList}}">
               <view class="item">
-                <navigator hover-class="none" url="{{item.url}}">
+                <navigator hover-class="none" url="/pages/article/article?aid={{item.aid}}">
                   <view class="pic">
-                    <image src="{{item.logo}}" mode="aspectFill"></image>
+                    <image src="{{item.litpic}}" mode="aspectFill"></image>
                   </view>
                   <view class="teacherTitle">{{item.title}}</view>
                 </navigator>

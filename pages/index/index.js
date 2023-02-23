@@ -98,7 +98,6 @@ Page({
       apiGlobal: `ekey=1`, // 全局配置变量标签global
       // 这里可以根据需求填写更多的api标签
       apiChannel:`ekey=1&type=top&currentstyle=active&showalltext=on`,
-      apiFlink:`ekey=1&type=image`,
     }, function (res) {
       console.log(res)
       // 特别说明：中括号[1]的数字必须与api标签的参数ekey=1值对应，否则数据对不上。
@@ -109,7 +108,6 @@ Page({
         type_1 = res.data.apiType[1], // type指定栏目数据
         shop_open = res.data.usersConf.shop_open,
         global = res.data.apiGlobal[1], // global全局配置变量数据
-        Flink = res.data.apiFlink[1].data,
         channel = res.data.apiChannel[1].data;
         channel = channel.filter((value)=>{
           if(value.id!=81){
@@ -132,8 +130,7 @@ Page({
         type_1,
         shop_open,
         global,
-        channel,
-        Flink
+        channel
       });
     });
     App._requestApi(_this, App.globalData.config.apiIndexUrl, {
@@ -236,7 +233,6 @@ Page({
       typeid: 83,
       apiChannel: `ekey=1&type=sonself&currentstyle=active&showalltext=on`,
     },function(res){
-     
       res.data.apiChannel[1].data  = res.data.apiChannel[1].data.filter(res=>{
         if(res.id!=83){
           return res;
@@ -251,6 +247,15 @@ Page({
           cotentFourList:Contentres.data.apiList[1].data,
           newFourChannel:res.data.apiChannel[1].data,
           typeFourid:res.data.apiChannel[1].data[_this.data.indexFour].typeid
+        })
+      })
+      App._requestApi(_this, App.globalData.config.apiListUrl, {
+        typeid:103,
+        apiList:'ekey=1&page=1'
+      },function(Contentres){
+        console.log(Contentres)
+        _this.setData({
+          cotentFiveList:Contentres.data.apiList[1].data,
         })
       })
     });
