@@ -348,3 +348,10 @@
   color: #108DEE;
 }
 /* 课程设置结束 */
+
+::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+  color: transparent;
+}
