@@ -102,7 +102,7 @@ Page({
       return false;
     }
     // 加载下一页列表
-    _this.getArchivesList(true, ++_this.data.page,index);
+    _this.getArchivesList(true, ++_this.data.page);
   },
   /**
    * 获取页面数据
@@ -116,7 +116,6 @@ Page({
   getArchivesList(isPage, page) {
     let _this = this;
     page = page || 1;
-    console.log(_this.data.typeid)
     App._requestApi(_this, App.globalData.config.apiListUrl, {
       channelid: _this.data.channelid, // 模型ID
       typeid: _this.data.typeid, // 栏目ID
@@ -125,12 +124,12 @@ Page({
       apiChannel: `ekey=1&type=sonself&currentstyle=active&showalltext=on`, // 栏目列表标签channel
       // 这里可以根据需求填写更多的api标签
     }, function (res) {
-     
-      res.data.apiChannel[1].data = res.data.apiChannel[1].data.filter(value=>{
-        if(value.id!=81){
-          return value;
-        }
-      })
+      console.log(res)
+      // res.data.apiChannel[1].data = res.data.apiChannel[1].data.filter(value=>{
+      //   if(value.id!=81){
+      //     return value;
+      //   }
+      // })
       // 特别说明：中括号[1]的数字必须与api标签的参数ekey=1值对应，否则数据对不上。
       let resList = res.data.apiList[1], // list文档列表分页数据
         type_1 = res.data.apiType[1], // type指定栏目数据
@@ -141,7 +140,6 @@ Page({
           'archivesList.data': dataList.data.concat(resList.data),
           isLoading: false,
         });
-
       } else {
         let arctypeInfo = type_1.data;
         let channelList = _this.data.channelList;
