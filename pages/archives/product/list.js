@@ -354,4 +354,9 @@ Page({
   jumpView(e) {
     func.jumpView(e)
   },
+  jumpToSearch() {
+    wx.navigateTo({
+        url: `/pages/search/index`
+    });
+  },
 })

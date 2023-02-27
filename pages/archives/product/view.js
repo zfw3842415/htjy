@@ -142,13 +142,14 @@ Page({
       apiPrenext: `ekey=1&get=all`, // 文档上下篇标签prenext
 			// 这里可以根据需求填写更多的api标签
 		}, function (res) {
+      console.log(res)
 			let detail = res.data.detail.data, // 文档详情页数据
 				product = res.data.product,
 				coupon_list = res.data.coupon_list,
 				isCollect = res.data.apiCollect[1].is_collect, // 文档是否被收藏，1：已收藏，0：未收藏
 				preDetail = res.data.apiPrenext[1].preDetail , // 上一篇文档的数据
 				nextDetail = res.data.apiPrenext[1].nextDetail; // 下一篇文档的数据
-				let shop_open = res.data.usersConf.shop_open;
+				 let shop_open = 1;
 				if(coupon_list) {
 					coupon_list.forEach((value, index) => {
 						value["coupon_price"] = parseInt(value["coupon_price"])

@@ -75,7 +75,8 @@ Page({
 	getUserDetail() {
 		let _this = this;
 		App._requestApi(_this, App.globalData.config.apiUsersdetailUrl, {}, function (result) {
-			let shop_open = result.data.usersConf.shop_open
+      console.log(result)
+      let shop_open = 1
 			if (!result.data.userInfo) {
 				result.data.isLogin = false;
 				// 移除token users_id

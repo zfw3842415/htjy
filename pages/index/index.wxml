@@ -14,7 +14,15 @@
 <block wx:if="{{isApiLoaded}}">
 
   <!-- 搜索框 start-->
- 
+ <!-- 搜索框 start-->
+ <!-- <view class="index-search-box">
+    <view class="index-search "   bindtap="jumpToSearch" style="z-index: 40;" >
+      <view class="index-cont-search">
+        <text class="col-DECAB1 f-26" >请输入关键词搜索</text>
+        <icon class="t-r" color="rgba(166, 166, 166, 0.4)" size="18" type="search"></icon>
+      </view>
+    </view>
+  </view> -->
   <view class="Header  col-f"> </view>
   <!--搜索框 end-->
   <!--轮播图 start-->

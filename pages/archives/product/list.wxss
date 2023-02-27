@@ -173,3 +173,35 @@ page {
   font-size: 24rpx;
   color: #ff7600;
 }
+.index-cont-search {
+  width: 100%;
+  font-size: 28rpx;
+  position: relative;
+}
+.index-cont-search icon {
+  position: absolute;
+  right: 50rpx;
+  top: 16rpx;
+}
+.index-cont-search text {
+  margin-left: 35rpx;
+}
+.index-search-box {
+   padding: 22rpx 20rpx 25rpx 20rpx;
+ /* background: url(https://demo.eyoucms.com/mall/uploads/allimg/20220408/3-22040Q14635256.jpg); */
+ background: #108DEE;
+ z-index: 300;
+}
+.index-search {
+  border-bottom: 0;
+  background: #ffffff;
+  border-radius: 50rpx;
+  overflow: hidden;
+  position: relative;
+  font-size: 28rpx;
+  color: #a1a1a1;
+  padding-left: 20rpx;
+  box-sizing: border-box;
+  height: 68rpx;
+  line-height: 68rpx;
+}
